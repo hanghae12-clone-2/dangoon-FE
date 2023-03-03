@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Img from '../elements/Img';
 
 export default function MainInfo() {
   return (
@@ -143,17 +144,6 @@ const Comment = styled.div`
     props.marginR &&
     css`
       margin-right: 3rem;
-    `}
-`;
-
-const Img = styled.img`
-  width: 40rem;
-  height: 50rem;
-  ${props =>
-    props.small &&
-    css`
-      width: 3rem;
-      height: 3rem;
     `}
 `;
 
