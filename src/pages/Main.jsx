@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MainInfo from '../components/MainIntro';
-import Post from '../components/HotPost';
+import MainPost from '../components/MainPost';
 import Text from '../elements/Text';
 
 export default function Main() {
   return (
     <MainWrapper>
       <MainInfo />
-      <Post />
+      <MainPost />
       <LinkContainer>
         <Link to='/hot_articles'>인기매물 더 보기</Link>
         <Text regular grey>
