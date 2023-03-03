@@ -387,5 +387,15 @@
       "like": "관심 5",
       "chat": "채팅 38"
     }
-  ]
+  ],
+  "detail": {
+    "postId": 1,
+    "title": "맥북팝니다",
+    "content": "맥북내용설명",
+    "price": 50000,
+    "nickName": "닉네임",
+    "wishCount": 0,
+    "location": "강남구",
+    "createdAt": "2022-12-01T12:52:06.729608"
+  }
 }

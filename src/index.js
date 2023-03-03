@@ -10,6 +10,7 @@ import App from './App';
 import Main from './pages/Main';
 import store from './redux/config/configStore';
 import HotArticles from './pages/HotArticles';
+import Detail from './pages/Detail';
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/hot_articles',
         element: <HotArticles />,
+      },
+      {
+        path: '/detail',
+        element: <Detail />,
       },
     ],
   },

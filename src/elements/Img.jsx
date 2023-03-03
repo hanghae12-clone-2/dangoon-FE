@@ -22,4 +22,10 @@ const ImgStyle = styled.img`
       width: 15rem;
       height: 15rem;
     `}
+
+    ${props =>
+    props.fitCover &&
+    css`
+      object-fit: cover;
+    `}
 `;
