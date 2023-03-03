@@ -103,7 +103,7 @@ export default function MainInfo() {
 }
 
 const FirstContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 50rem;
   background-color: ${props => props.theme.color.light_orange};
 `;

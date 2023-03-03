@@ -8,6 +8,14 @@ export default function Text({ ...props }) {
 const TextStyle = styled.p`
   margin: 1rem 0;
   ${props =>
+    props.regular &&
+    css`
+      margin: 1rem 0;
+      font-size: ${props => props.theme.fontSize.regular};
+      font-weight: ${props => props.theme.fontWeight.bold};
+    `}
+
+  ${props =>
     props.large &&
     css`
       margin: 1rem 0;
@@ -22,7 +30,7 @@ const TextStyle = styled.p`
     `}
 
     ${props =>
-    props.gery &&
+    props.grey &&
     css`
       color: ${props => props.theme.color.light_grey};
     `}
