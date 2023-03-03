@@ -20,8 +20,6 @@ export default function HotPost() {
     QUERY.AXIOS_PATH.POST,
     8
   );
-
-  console.log(isFetchingNextPage, hasNextPage);
   return (
     <>
       {isLoading && <p>로딩중</p>}

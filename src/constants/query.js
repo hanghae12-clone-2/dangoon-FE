@@ -23,4 +23,5 @@ const QUERY = {
   STALETIME,
   KEY,
 };
+
 export default QUERY;

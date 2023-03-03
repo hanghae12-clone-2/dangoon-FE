@@ -18,6 +18,7 @@ const color = {
   deep_blue: '#262431',
   yellow: '#fff7d1',
   orange: '#feb546',
+  carrot_orange: '#ff7e36',
   light_orange: '#fbf7f2',
   black: '#000000',
   ligth_black: '#262626',
