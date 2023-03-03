@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
@@ -34,6 +35,7 @@ export default function Detail() {
       {postDetail && (
         <DetailWrapper>
           <PostDetailImg img={img} />
+          <PostDetailContent detail={postDetail} />
         </DetailWrapper>
       )}
     </>
