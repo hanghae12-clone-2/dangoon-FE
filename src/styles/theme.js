@@ -1,5 +1,6 @@
 const color = {
   white: '#ffffff',
+  sky_white: '#f8f9fa',
   light_white: '#eeeeee',
   dark_white: '#bdbdbd',
   apple_white: '#e8e8e8',
@@ -17,6 +18,7 @@ const color = {
   deep_blue: '#262431',
   yellow: '#fff7d1',
   orange: '#feb546',
+  carrot_orange: '#ff7e36',
   light_orange: '#fbf7f2',
   black: '#000000',
   ligth_black: '#262626',

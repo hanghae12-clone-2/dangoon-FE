@@ -30,6 +30,7 @@ export default class Axios {
 
         return response;
       },
+
       error => {
         const errorMessage = error.response.data.errorMessage;
         if (errorMessage === 'Token Error') {
@@ -46,7 +47,7 @@ export default class Axios {
     const cookie = getCookie();
     const option = {
       headers: {
-        Authorization: `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie ? cookie : ''}`,
       },
     };
     return this.instance.get(path, option);
@@ -56,7 +57,7 @@ export default class Axios {
     const cookie = getCookie();
     const option = {
       headers: {
-        Authorization: `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie ? cookie : ''}`,
       },
     };
     return this.instance.post(path, payload, option);
@@ -66,7 +67,7 @@ export default class Axios {
     const cookie = getCookie();
     const option = {
       headers: {
-        Authorization: `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie ? cookie : ''}`,
       },
     };
     return this.instance.delete(`${path}`, option);
@@ -76,7 +77,7 @@ export default class Axios {
     const cookie = getCookie();
     const option = {
       headers: {
-        Authorization: `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie ? cookie : ''}`,
       },
     };
     return this.instance.put(`${path}`, payload, option);
