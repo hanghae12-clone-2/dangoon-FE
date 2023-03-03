@@ -8,6 +8,7 @@ export default function Img({ src, ...props }) {
 const ImgStyle = styled.img`
   width: 40rem;
   height: 50rem;
+  border-radius: ${props => props.theme.borderRadius.small};
   ${props =>
     props.small &&
     css`
@@ -18,7 +19,7 @@ const ImgStyle = styled.img`
   ${props =>
     props.medium &&
     css`
-      width: 10rem;
-      height: 10rem;
+      width: 15rem;
+      height: 15rem;
     `}
 `;
