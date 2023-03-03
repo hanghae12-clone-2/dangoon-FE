@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MainInfo from '../components/MainIntro';
-import Post from '../components/Post';
+import Post from '../components/HotPost';
 import Text from '../elements/Text';
 
 export default function Main() {

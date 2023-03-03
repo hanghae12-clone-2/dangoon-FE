@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Post from '../components/Post';
+import Post from '../components/HotPost';
 
 export default function HotArticles() {
   return (
