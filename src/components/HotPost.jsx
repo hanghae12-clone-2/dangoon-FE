@@ -20,6 +20,8 @@ export default function HotPost() {
     QUERY.AXIOS_PATH.POST,
     8
   );
+
+  console.log(isFetchingNextPage, hasNextPage);
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -36,7 +38,11 @@ export default function HotPost() {
               ))
             )}
           </PostList>
-          {isFetchingNextPage && hasNextPage ? '' : <div ref={ref}></div>}
+          {isFetchingNextPage && hasNextPage ? (
+            ''
+          ) : (
+            <LastPageComment ref={ref}>마지막 페이지 입니다.</LastPageComment>
+          )}
         </PostWrapper>
       )}
     </>
@@ -66,4 +72,8 @@ const PostList = styled.div`
 
 const Li = styled.li`
   margin-bottom: 5rem;
+`;
+
+const LastPageComment = styled.div`
+  margin-bottom: 1rem;
 `;
