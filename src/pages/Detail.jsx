@@ -12,7 +12,7 @@ const img = [
   'https://dnvefa72aowie.cloudfront.net/origin/article/202303/913f839531b16c5dc455d96c3f3b686181fd30c589bc8b717331ded7f0a83b59.webp?q=95&s=1440x1440&t=inside',
 ];
 
-export default function Detail({ detail }) {
+export default function Detail() {
   return (
     <DetailWrapper>
       <PostDetailImg img={img} />

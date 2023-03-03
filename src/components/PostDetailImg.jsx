@@ -21,7 +21,7 @@ export default function PostDetailImg({ img }) {
     <ImgContainer>
       {img.map(url => (
         <Imgs key={uuidv4()} imgPage={imgPage}>
-          <Img fitCover src={url} />
+          <Img large src={url} />
         </Imgs>
       ))}
       <ArrowContainer>
@@ -46,7 +46,7 @@ const ImgContainer = styled.div`
   left: calc(50% - 20rem);
   display: flex;
   width: 40rem;
-  height: 50rem;
+  height: 40rem;
   overflow: hidden;
   transition: all 300ms ease-in-out;
 `;
@@ -68,9 +68,8 @@ const Arrow = styled.div`
 `;
 
 const Imgs = styled.div`
-  width: 40rem;
-  height: 50rem;
   transform: translateX(calc(40rem * ${props => props.imgPage}));
+  transition: all 300ms ease;
 `;
 
 const Dots = styled.ul`
