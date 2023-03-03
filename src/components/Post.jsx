@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import QUERY from '../constants/query';
 import Axios from '../utils/api/axios';
@@ -10,7 +11,7 @@ export default function Post() {
   const {
     isLoading,
     isError,
-    data: { data: posts },
+    data: posts,
   } = useQuery(
     [QUERY.KEY.POSTS],
     async () => axios.get(QUERY.AXIOS_PATH.POST),
@@ -28,10 +29,10 @@ export default function Post() {
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {posts.map(post => (
-              <li>
+            {posts.data.map(post => (
+              <Li key={uuidv4()}>
                 <PostItem post={post} />
-              </li>
+              </Li>
             ))}
           </PostList>
         </PostWrapper>
@@ -46,19 +47,21 @@ const PostWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   background-color: ${props => props.theme.color.sky_white};
 `;
 
 const PostTitle = styled.h1`
-  margin-top: 8rem;
+  margin: 8rem 0;
   font-size: ${props => props.theme.fontSize.large};
 `;
 
 const PostList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   width: 65rem;
-  height: 1rem;
-  background-color: aqua;
+`;
+
+const Li = styled.li`
+  margin-bottom: 5rem;
 `;
