@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Post from '../components/Post';
 
 export default function HotArticles() {
-  return <HotWrapper></HotWrapper>;
+  return (
+    <HotWrapper>
+      <Post />
+    </HotWrapper>
+  );
 }
 
 const HotWrapper = styled.div`

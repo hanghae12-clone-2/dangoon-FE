@@ -1,25 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import QUERY from '../constants/query';
-import Axios from '../utils/api/axios';
 import PostItem from './PostItem';
+import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
+import QUERY from '../constants/query';
 
 export default function Post() {
-  const axios = new Axios(QUERY.AXIOS_PATH.LOCAL);
-  const {
-    isLoading,
-    isError,
-    data: posts,
-  } = useQuery(
-    [QUERY.KEY.POSTS],
-    async () => axios.get(QUERY.AXIOS_PATH.POST),
-    {
-      staleTime: QUERY.STALETIME.FIVE_MIN,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { ref, isLoading, isError, isFetchingNextPage, posts } =
+    useInfiniteScrollQuery(
+      [QUERY.KEY.POSTS],
+      QUERY.AXIOS_PATH.LOCAL,
+      QUERY.AXIOS_PATH.POST,
+      8
+    );
+  // const {
+  //   isLoading,
+  //   isError,
+  //   data: posts,
+  // } = useQuery(
+  //   [QUERY.KEY.POSTS],
+  //   async () => axios.get(`${QUERY.AXIOS_PATH.POST}?_page=${1}&_limit=8`),
+  //   {
+  //     staleTime: QUERY.STALETIME.FIVE_MIN,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   return (
     <>
@@ -29,12 +35,15 @@ export default function Post() {
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {posts.data.map(post => (
-              <Li key={uuidv4()}>
-                <PostItem post={post} />
-              </Li>
-            ))}
+            {posts?.pages.map(post =>
+              post.data.map(data => (
+                <Li key={uuidv4()}>
+                  <PostItem post={data} />
+                </Li>
+              ))
+            )}
           </PostList>
+          {isFetchingNextPage ? '' : <div ref={ref}></div>}
         </PostWrapper>
       )}
     </>
