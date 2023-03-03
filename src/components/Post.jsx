@@ -3,13 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 import QUERY from '../constants/query';
 import Axios from '../utils/api/axios';
+import PostItem from './PostItem';
 
 export default function Post() {
   const axios = new Axios(QUERY.AXIOS_PATH.LOCAL);
   const {
     isLoading,
     isError,
-    data: posts,
+    data: { data: posts },
   } = useQuery(
     [QUERY.KEY.POSTS],
     async () => axios.get(QUERY.AXIOS_PATH.POST),
@@ -26,7 +27,13 @@ export default function Post() {
       {posts && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
-          <PostList></PostList>
+          <PostList>
+            {posts.map(post => (
+              <li>
+                <PostItem post={post} />
+              </li>
+            ))}
+          </PostList>
         </PostWrapper>
       )}
     </>
@@ -49,6 +56,8 @@ const PostTitle = styled.h1`
 `;
 
 const PostList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   width: 65rem;
   height: 1rem;
   background-color: aqua;
