@@ -3,7 +3,9 @@ const PATH = {
   MY: '/my',
   ADD: '/add',
   LIKE: '/like',
-  HOME: '/',
+  DETAIL: '/detail',
+  HOT_ARTICLES: '/hot_articles',
+  MAIN: '/',
   BACK: -1,
   FRONT: 1,
 };

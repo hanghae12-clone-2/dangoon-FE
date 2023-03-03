@@ -11,12 +11,13 @@ import Main from './pages/Main';
 import store from './redux/config/configStore';
 import HotArticles from './pages/HotArticles';
 import Detail from './pages/Detail';
+import ROUTER from './constants/router';
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTER.PATH.MAIN,
     element: <App />,
     children: [
       {
@@ -24,11 +25,11 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: '/hot_articles',
+        path: ROUTER.PATH.HOT_ARTICLES,
         element: <HotArticles />,
       },
       {
-        path: '/detail',
+        path: ROUTER.PATH.DETAIL,
         element: <Detail />,
       },
     ],
