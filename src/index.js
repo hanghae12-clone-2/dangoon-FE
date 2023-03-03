@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Main from './pages/Main';
 import store from './redux/config/configStore';
+import HotArticles from './pages/HotArticles';
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Main />,
+      },
+      {
+        path: '/hot_articles',
+        element: <HotArticles />,
       },
     ],
   },
