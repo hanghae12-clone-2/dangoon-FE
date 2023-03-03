@@ -24,12 +24,27 @@ const TextStyle = styled.p`
     `}
 
   ${props =>
+    props.userTitle &&
+    css`
+      margin: 0.3rem 0;
+      font-size: ${props => props.theme.fontSize.regular};
+      font-weight: ${props => props.theme.fontWeight.semi_bold};
+    `}
+
+  ${props =>
+    props.userLocation &&
+    css`
+      margin: 0.3rem 0;
+      font-size: ${props => props.theme.fontSize.small};
+    `}
+
+  ${props =>
     props.bold &&
     css`
       font-weight: ${props => props.theme.fontWeight.bold};
     `}
 
-    ${props =>
+  ${props =>
     props.grey &&
     css`
       color: ${props => props.theme.color.light_grey};

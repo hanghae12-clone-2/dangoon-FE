@@ -35,7 +35,7 @@ export default function Detail() {
       {postDetail && (
         <DetailWrapper>
           <PostDetailImg img={img} />
-          <PostDetailContent detail={postDetail} />
+          <PostDetailContent detail={postDetail.data} />
         </DetailWrapper>
       )}
     </>
@@ -43,6 +43,7 @@ export default function Detail() {
 }
 
 const DetailWrapper = styled.section`
+  position: relative;
   width: 100%;
   height: 100%;
   overflow-y: auto;
