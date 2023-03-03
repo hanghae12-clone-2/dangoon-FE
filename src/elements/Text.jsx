@@ -14,9 +14,16 @@ const TextStyle = styled.p`
       font-size: ${props => props.theme.fontSize.large};
       font-weight: ${props => props.theme.fontWeight.bold};
     `}
+
   ${props =>
     props.bold &&
     css`
       font-weight: ${props => props.theme.fontWeight.bold};
+    `}
+
+    ${props =>
+    props.gery &&
+    css`
+      color: ${props => props.theme.color.light_grey};
     `}
 `;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Img from '../elements/Img';
+import Text from '../elements/Text';
 
 export default function PostItem({
   post: { img, title, money, address, like, chat },
@@ -9,11 +10,10 @@ export default function PostItem({
     <ItemContainer>
       <Img src={img} medium />
       <Content>
-        <p>{title}</p>
-        <p>{money}</p>
-        <p>{address}</p>
-        <span>{like}</span>
-        <span>{chat}</span>
+        <Text bold>{title}</Text>
+        <Text bold>{money}</Text>
+        <Text>{address}</Text>
+        <Text gery>{`${like} ∙ ${chat}`}</Text>
       </Content>
     </ItemContainer>
   );
