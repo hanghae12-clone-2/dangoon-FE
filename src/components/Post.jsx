@@ -7,35 +7,22 @@ import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
 
 export default function Post() {
-  const { ref, isLoading, isError, isFetchingNextPage, posts } =
+  const { ref, isLoading, isError, isFetchingNextPage, data } =
     useInfiniteScrollQuery(
       [QUERY.KEY.POSTS],
       QUERY.AXIOS_PATH.LOCAL,
       QUERY.AXIOS_PATH.POST,
       8
     );
-  // const {
-  //   isLoading,
-  //   isError,
-  //   data: posts,
-  // } = useQuery(
-  //   [QUERY.KEY.POSTS],
-  //   async () => axios.get(`${QUERY.AXIOS_PATH.POST}?_page=${1}&_limit=8`),
-  //   {
-  //     staleTime: QUERY.STALETIME.FIVE_MIN,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
-
   return (
     <>
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
-      {posts && (
+      {data && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {posts?.pages.map(post =>
+            {data?.pages.map(post =>
               post.data.map(data => (
                 <Li key={uuidv4()}>
                   <PostItem post={data} />
