@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Img from '../elements/Img';
+import Text from '../elements/Text';
 
 export default function MainInfo() {
   return (
@@ -144,22 +145,6 @@ const Comment = styled.div`
     props.marginR &&
     css`
       margin-right: 3rem;
-    `}
-`;
-
-const Text = styled.p`
-  margin: 1rem 0;
-  ${props =>
-    props.large &&
-    css`
-      margin: 1rem 0;
-      font-size: ${props => props.theme.fontSize.large};
-      font-weight: ${props => props.theme.fontWeight.bold};
-    `}
-  ${props =>
-    props.bold &&
-    css`
-      font-weight: ${props => props.theme.fontWeight.bold};
     `}
 `;
 
