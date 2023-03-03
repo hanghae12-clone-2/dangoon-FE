@@ -3,17 +3,15 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import PostItem from './PostItem';
-import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
+import useGetQuery from '../hooks/useGetQuery';
 
-export default function HotPost() {
-  const { ref, isLoading, isError, isFetchingNextPage, data } =
-    useInfiniteScrollQuery(
-      [QUERY.KEY.POSTS],
-      QUERY.AXIOS_PATH.LOCAL,
-      QUERY.AXIOS_PATH.POST,
-      8
-    );
+export default function MainPost() {
+  const { isLoading, isError, data } = useGetQuery(
+    [QUERY.KEY.POSTS],
+    QUERY.AXIOS_PATH.LOCAL,
+    QUERY.AXIOS_PATH.POST
+  );
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -30,7 +28,6 @@ export default function HotPost() {
               ))
             )}
           </PostList>
-          {isFetchingNextPage ? '' : <div ref={ref}></div>}
         </PostWrapper>
       )}
     </>
@@ -47,7 +44,7 @@ const PostWrapper = styled.div`
 `;
 
 const PostTitle = styled.h1`
-  margin: 8rem 0;
+  margin: 128px 0;
   font-size: ${props => props.theme.fontSize.large};
 `;
 
@@ -55,9 +52,9 @@ const PostList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 65rem;
+  width: 1040px;
 `;
 
 const Li = styled.li`
-  margin-bottom: 5rem;
+  margin-bottom: 80px;
 `;
