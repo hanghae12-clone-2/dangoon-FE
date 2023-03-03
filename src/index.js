@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
+import Main from './components/Main';
 import store from './redux/config/configStore';
 
 const queryClient = new QueryClient();
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: '',
+        element: <Main />,
       },
     ],
   },
