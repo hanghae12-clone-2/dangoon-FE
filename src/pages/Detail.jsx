@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import PostDetailImg from '../components/PostDetailImg';
+import QUERY from '../constants/query';
+import useGetQuery from '../hooks/useGetQuery';
 
 const img = [
   'https://dnvefa72aowie.cloudfront.net/origin/article/202303/69cf19b2c2eb5e55fa5d041bf0f87fcb71c1c9763e8f6bcef92a71d5d96a6022.webp?q=95&s=1440x1440&t=inside',
@@ -11,12 +13,30 @@ const img = [
 ];
 
 export default function Detail() {
-  const a = useLocation();
-  console.log(a);
+  const {
+    state: { postId },
+  } = useLocation();
+
+  const {
+    isLoading,
+    isError,
+    data: postDetail,
+  } = useGetQuery(
+    [QUERY.KEY.POSTS, { postId }],
+    QUERY.AXIOS_PATH.LOCAL,
+    '/detail'
+  );
+
   return (
-    <DetailWrapper>
-      <PostDetailImg img={img} />
-    </DetailWrapper>
+    <>
+      {isLoading && <p>로딩중</p>}
+      {isError && <p>에러</p>}
+      {postDetail && (
+        <DetailWrapper>
+          <PostDetailImg img={img} />
+        </DetailWrapper>
+      )}
+    </>
   );
 }
 
