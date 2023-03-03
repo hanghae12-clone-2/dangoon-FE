@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { v4 as uuidv4 } from 'uuid';
-import styled, { css } from 'styled-components';
-import Img from '../elements/Img';
+import React from 'react';
+import styled from 'styled-components';
 import PostDetailImg from '../components/PostDetailImg';
 
 const img = [

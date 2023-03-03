@@ -6,7 +6,8 @@ const COOKIE = {
 const AXIOS_PATH = {
   LOCAL: 'http://localhost:4000',
   HOST: 'http://localhost:4000',
-  POST: '/post',
+  MAIN_POST: '/post?_page=1&_limit=8',
+  HOT_POST: '/post',
 };
 
 const STALETIME = {

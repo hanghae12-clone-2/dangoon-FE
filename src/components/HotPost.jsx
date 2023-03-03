@@ -17,7 +17,7 @@ export default function HotPost() {
   } = useInfiniteScrollQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.LOCAL,
-    QUERY.AXIOS_PATH.POST,
+    QUERY.AXIOS_PATH.HOT_POST,
     8
   );
   return (
