@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import PostItem from './PostItem';
 import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
+import { Link } from 'react-router-dom';
+import ROUTER from '../constants/router';
 
 export default function HotPost() {
   const {
@@ -31,7 +33,9 @@ export default function HotPost() {
             {posts?.pages.map(post =>
               post.data.map(data => (
                 <Li key={uuidv4()}>
-                  <PostItem post={data} />
+                  <Link to={ROUTER.PATH.DETAIL} state={{ postId: data.postId }}>
+                    <PostItem post={data} />
+                  </Link>
                 </Li>
               ))
             )}

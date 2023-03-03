@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import PostDetailImg from '../components/PostDetailImg';
 
@@ -10,6 +11,8 @@ const img = [
 ];
 
 export default function Detail() {
+  const a = useLocation();
+  console.log(a);
   return (
     <DetailWrapper>
       <PostDetailImg img={img} />
