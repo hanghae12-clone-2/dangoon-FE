@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
-import Main from './components/Main';
+import Main from './pages/Main';
 import store from './redux/config/configStore';
 
 const queryClient = new QueryClient();
