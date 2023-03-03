@@ -7,7 +7,11 @@ import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 
 export default function MainPost() {
-  const { isLoading, isError, data } = useGetQuery(
+  const {
+    isLoading,
+    isError,
+    data: posts,
+  } = useGetQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.LOCAL,
     QUERY.AXIOS_PATH.POST
@@ -16,17 +20,15 @@ export default function MainPost() {
     <>
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
-      {data && (
+      {posts && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {data?.pages.map(post =>
-              post.data.map(data => (
-                <Li key={uuidv4()}>
-                  <PostItem post={data} />
-                </Li>
-              ))
-            )}
+            {posts.data.map(data => (
+              <Li key={uuidv4()}>
+                <PostItem post={data} />
+              </Li>
+            ))}
           </PostList>
         </PostWrapper>
       )}

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Post from '../components/HotPost';
+import HotPost from '../components/HotPost';
 
 export default function HotArticles() {
   return (
     <HotWrapper>
-      <Post />
+      <HotPost />
     </HotWrapper>
   );
 }

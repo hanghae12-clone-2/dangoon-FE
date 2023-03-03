@@ -7,22 +7,28 @@ import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
 
 export default function HotPost() {
-  const { ref, isLoading, isError, isFetchingNextPage, data } =
-    useInfiniteScrollQuery(
-      [QUERY.KEY.POSTS],
-      QUERY.AXIOS_PATH.LOCAL,
-      QUERY.AXIOS_PATH.POST,
-      8
-    );
+  const {
+    ref,
+    isLoading,
+    isError,
+    isFetchingNextPage,
+    hasNextPage,
+    data: posts,
+  } = useInfiniteScrollQuery(
+    [QUERY.KEY.POSTS],
+    QUERY.AXIOS_PATH.LOCAL,
+    QUERY.AXIOS_PATH.POST,
+    8
+  );
   return (
     <>
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
-      {data && (
+      {posts && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {data?.pages.map(post =>
+            {posts?.pages.map(post =>
               post.data.map(data => (
                 <Li key={uuidv4()}>
                   <PostItem post={data} />
@@ -30,7 +36,7 @@ export default function HotPost() {
               ))
             )}
           </PostList>
-          {isFetchingNextPage ? '' : <div ref={ref}></div>}
+          {isFetchingNextPage && hasNextPage ? '' : <div ref={ref}></div>}
         </PostWrapper>
       )}
     </>
