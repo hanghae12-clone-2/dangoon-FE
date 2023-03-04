@@ -20,11 +20,11 @@ export default function MainPost() {
     <>
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
-      {posts && (
+      {posts.data.result && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
-            {posts.data.map(data => (
+            {posts.data.result.map(data => (
               <Li key={uuidv4()}>
                 <PostItem post={data} />
               </Li>
