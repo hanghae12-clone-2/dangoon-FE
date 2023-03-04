@@ -5,7 +5,8 @@ import Input from '../elements/Input';
 import Text from '../elements/Text';
 import logo from '../styles/logo';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ROUTER from '../constants/router';
 
 export default function Navbar() {
   const [keyWord, setKeyWord] = useState('');
@@ -32,9 +33,11 @@ export default function Navbar() {
             value={keyWord}
             onChange={e => setKeyWord(e.target.value)}
           />
-          <Button small type='button'>
-            로그인
-          </Button>
+          <Link to={ROUTER.PATH.LOGIN}>
+            <Button small type='button'>
+              로그인
+            </Button>
+          </Link>
         </FormContainer>
       </NavbarContainer>
     </NavbarWrapper>
