@@ -13,6 +13,8 @@ const color = {
   light_grey: '#7c7979',
   dark_blue: '#497da0',
   blue: '#73aace',
+  messenger: '#d1d3da',
+  light_messenger: '#ebebee',
   shark_blue: '#413d53',
   shark_light_blue: '#56516a',
   deep_blue: '#262431',

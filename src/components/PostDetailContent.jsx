@@ -40,9 +40,9 @@ export default function PostDetailContent({ detail }) {
       </UserContent>
       <UserTouch>
         <Button like />
-        <Button outline>
-          <Link to={ROUTER.PATH.MESSENGER}>채팅하기</Link>
-        </Button>
+        <Link to={ROUTER.PATH.MESSENGER}>
+          <Button outline>채팅하기</Button>
+        </Link>
       </UserTouch>
     </DetailContainer>
   );
