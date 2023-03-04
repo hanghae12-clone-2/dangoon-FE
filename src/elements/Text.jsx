@@ -80,4 +80,10 @@ const TextStyle = styled.p`
     css`
       color: ${props => props.theme.color.light_grey};
     `}
+
+    ${props =>
+    props.grey &&
+    css`
+      color: ${props => props.theme.color.light_grey};
+    `}
 `;

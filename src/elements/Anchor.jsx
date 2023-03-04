@@ -1,9 +1,9 @@
 import React from 'react';
 import Text from './Text';
 
-const Anchor = ({ src, children, ...props }) => {
+const Anchor = ({ url, children, ...props }) => {
   return (
-    <a href={src} target='blank'>
+    <a href={url} target='blank'>
       <Text {...props}>{children}</Text>
     </a>
   );
