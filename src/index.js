@@ -13,6 +13,7 @@ import HotArticles from './pages/HotArticles';
 import Detail from './pages/Detail';
 import ROUTER from './constants/router';
 import Messenger from './pages/Messenger';
+import Search from './pages/Search';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: ROUTER.PATH.MESSENGER,
         element: <Messenger />,
+      },
+      {
+        path: `${ROUTER.PATH.SEARCH}/:keyWord`,
+        element: <Search />,
       },
     ],
   },
