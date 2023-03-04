@@ -14,7 +14,6 @@ export default class Axios {
       response => {
         console.log(response);
         const token = response.headers.authorization;
-        const refreshToken = response.headers.refreshtoken;
 
         if (token) {
           const [, parseToken] = token.split(' ');
@@ -24,19 +23,9 @@ export default class Axios {
           Storage.setUserName(userName.sub);
         }
 
-        if (refreshToken) {
-          const [, parseToken] = token.split(' ');
-          setCookie(QUERY.COOKIE.REFRESH_NAME, parseToken);
-        }
-
         return response;
       },
-
       error => {
-        const errorMessage = error.response.data.errorMessage;
-        if (errorMessage === 'Token Error') {
-          alert(errorMessage);
-        }
         console.log(error);
         return Promise.reject(error);
       }
