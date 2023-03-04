@@ -13,6 +13,9 @@ const AXIOS_PATH = {
   DETAIL(postId) {
     return `/api/posts/${postId}`;
   },
+  SERCH(pageNum, keyWord) {
+    return `/api/search/posts?page=${pageNum}&size=10&sortBy=wishCount&keyword=${keyWord}`;
+  },
 };
 
 const STALETIME = {
