@@ -7,6 +7,7 @@ import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
 import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
+import PostScrollEnd from './PostScrollEnd';
 
 export default function HotPost() {
   const {
@@ -43,7 +44,9 @@ export default function HotPost() {
           {isFetchingNextPage && hasNextPage ? (
             ''
           ) : (
-            <LastPageComment ref={ref}>마지막 페이지 입니다.</LastPageComment>
+            <LastPage ref={ref}>
+              <PostScrollEnd />
+            </LastPage>
           )}
         </PostWrapper>
       )}
@@ -57,7 +60,6 @@ const PostWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: ${props => props.theme.color.sky_white};
 `;
 
 const PostTitle = styled.h1`
@@ -76,6 +78,7 @@ const Li = styled.li`
   margin-bottom: 5rem;
 `;
 
-const LastPageComment = styled.div`
+const LastPage = styled.div`
+  width: 100%;
   margin-bottom: 1rem;
 `;

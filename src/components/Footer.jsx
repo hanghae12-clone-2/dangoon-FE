@@ -122,7 +122,7 @@ const FooterContainer = styled.footer`
 
 const QuestionContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 2rem 0;
   border-bottom: 2px solid #f1f3f6;
   gap: 10rem;
