@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
@@ -16,13 +16,19 @@ export default function SearchPost() {
     isError,
     isFetchingNextPage,
     hasNextPage,
+    refetch,
     data: posts,
   } = useInfiniteScrollQuery(
-    [QUERY.KEY.POSTS],
+    [QUERY.KEY.POSTS, keyWord],
     QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.SERCH,
     keyWord
   );
+
+  useEffect(() => {
+    refetch();
+  }, [keyWord, refetch]);
+
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -58,7 +64,6 @@ const PostWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: ${props => props.theme.color.sky_white};
 `;
 
 const PostTitle = styled.h1`

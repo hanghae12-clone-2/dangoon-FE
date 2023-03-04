@@ -13,6 +13,7 @@ export const useInfiniteScrollQuery = (queryKey, baseUrl, path, keyWord) => {
     isError,
     fetchNextPage,
     isFetchingNextPage,
+    refetch,
     hasNextPage,
   } = useInfiniteQuery(
     queryKey,
@@ -33,5 +34,13 @@ export const useInfiniteScrollQuery = (queryKey, baseUrl, path, keyWord) => {
     }
   }, [fetchNextPage, inView]);
 
-  return { ref, isLoading, isError, isFetchingNextPage, hasNextPage, data };
+  return {
+    ref,
+    isLoading,
+    isError,
+    isFetchingNextPage,
+    hasNextPage,
+    refetch,
+    data,
+  };
 };
