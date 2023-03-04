@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Text from '../elements/Text';
 import logo from '../styles/logo';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+  const [keyWord, setKeyWord] = useState('');
+  const navigate = useNavigate();
+
   const handleSubmit = e => {
     e.preventDefault();
+    if (!keyWord) return;
+    navigate(`/search/${keyWord}`);
   };
 
   return (
@@ -23,6 +29,8 @@ export default function Navbar() {
             placeholder='물품이나 동네를 검색해 보세요.'
             inLineLabel
             label={<AiOutlineSearch />}
+            value={keyWord}
+            onChange={e => setKeyWord(e.target.value)}
           />
           <Button small type='button'>
             로그인
