@@ -16,6 +16,14 @@ const TextStyle = styled.p`
     `}
 
   ${props =>
+    props.large_regular &&
+    css`
+      margin: 1rem 0;
+      font-size: ${props => props.theme.fontSize.large_regular};
+      font-weight: ${props => props.theme.fontWeight.bold};
+    `}
+
+  ${props =>
     props.medium &&
     css`
       margin: 1rem 0;

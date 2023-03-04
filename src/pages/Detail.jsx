@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
@@ -14,9 +14,7 @@ const img = [
 ];
 
 export default function Detail() {
-  const {
-    state: { postId },
-  } = useLocation();
+  const { postId } = useParams();
 
   const {
     isLoading,
