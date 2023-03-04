@@ -10,7 +10,6 @@ import ROUTER from '../constants/router';
 
 export default function SearchPost() {
   const { keyWord } = useParams();
-
   const {
     ref,
     isLoading,
@@ -21,8 +20,8 @@ export default function SearchPost() {
   } = useInfiniteScrollQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.HOT_POST,
-    16
+    QUERY.AXIOS_PATH.SERCH,
+    keyWord
   );
   return (
     <>
