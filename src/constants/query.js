@@ -5,9 +5,11 @@ const COOKIE = {
 
 const AXIOS_PATH = {
   LOCAL: 'http://localhost:4000',
-  HOST: 'http://13.209.11.12',
-  MAIN_POST: '/post?_page=1&_limit=8',
-  HOT_POST: '/post',
+  SEVER: 'http://13.209.11.12',
+  MAIN_POST: '/api/posts?page=1&size=8',
+  HOT_POST(pageNum) {
+    return `/api/posts?page=${pageNum}&size=16`;
+  },
 };
 
 const STALETIME = {
