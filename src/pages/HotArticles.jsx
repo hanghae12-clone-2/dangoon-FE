@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../components/Footer';
 import HotPost from '../components/HotPost';
 
 export default function HotArticles() {
   return (
     <HotWrapper>
       <HotPost />
+      <Footer />
     </HotWrapper>
   );
 }

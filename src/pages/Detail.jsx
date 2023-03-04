@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Footer from '../components/Footer';
 import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
@@ -33,6 +34,7 @@ export default function Detail() {
         <DetailWrapper>
           <PostDetailImg img={img} />
           <PostDetailContent detail={postDetail.data.result} />
+          <Footer />
         </DetailWrapper>
       )}
     </>
