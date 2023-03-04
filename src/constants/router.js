@@ -8,6 +8,7 @@ const PATH = {
   MAIN: '/',
   BACK: -1,
   FRONT: 1,
+  SIGNUP: '/signup',
 };
 
 const NAME = {

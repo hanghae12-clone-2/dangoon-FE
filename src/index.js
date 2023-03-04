@@ -12,6 +12,8 @@ import store from './redux/config/configStore';
 import HotArticles from './pages/HotArticles';
 import Detail from './pages/Detail';
 import ROUTER from './constants/router';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,15 @@ const router = createBrowserRouter([
         path: ROUTER.PATH.DETAIL,
         element: <Detail />,
       },
+      {
+        path: ROUTER.PATH.LOGIN,
+        element: <Login/>,
+      },
+      {
+        path: ROUTER.PATH.SIGNUP,
+        element: <Signup/>,
+      }
+      
     ],
   },
 ]);
