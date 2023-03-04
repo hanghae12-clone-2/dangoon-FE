@@ -4,6 +4,8 @@ import { BiUserCircle, BiTimeFive } from 'react-icons/bi';
 import Text from '../elements/Text';
 import formatAgo from '../utils/formatDate';
 import Button from '../elements/Button';
+import { Link } from 'react-router-dom';
+import ROUTER from '../constants/router';
 
 export default function PostDetailContent({ detail }) {
   const { title, content, price, nickName, wishCount, location, createdAt } =
@@ -38,7 +40,9 @@ export default function PostDetailContent({ detail }) {
       </UserContent>
       <UserTouch>
         <Button like />
-        <Button outline>채팅하기</Button>
+        <Button outline>
+          <Link to={ROUTER.PATH.MESSENGER}>채팅하기</Link>
+        </Button>
       </UserTouch>
     </DetailContainer>
   );
