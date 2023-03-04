@@ -24,10 +24,9 @@ export default function Detail() {
     data: postDetail,
   } = useGetQuery(
     [QUERY.KEY.POSTS, { postId }],
-    QUERY.AXIOS_PATH.LOCAL,
-    '/detail'
+    QUERY.AXIOS_PATH.SEVER,
+    QUERY.AXIOS_PATH.DETAIL(postId)
   );
-
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -35,7 +34,7 @@ export default function Detail() {
       {postDetail && (
         <DetailWrapper>
           <PostDetailImg img={img} />
-          <PostDetailContent detail={postDetail.data} />
+          <PostDetailContent detail={postDetail.data.result} />
         </DetailWrapper>
       )}
     </>

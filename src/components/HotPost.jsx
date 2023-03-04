@@ -34,7 +34,7 @@ export default function HotPost() {
               post.data.result.map(data => (
                 <Li key={uuidv4()}>
                   <Link to={ROUTER.PATH.DETAIL} state={{ postId: data.postid }}>
-                    <PostItem />
+                    <PostItem post={data} />
                   </Link>
                 </Li>
               ))

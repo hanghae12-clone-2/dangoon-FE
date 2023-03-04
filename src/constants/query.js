@@ -10,6 +10,9 @@ const AXIOS_PATH = {
   HOT_POST(pageNum) {
     return `/api/posts?page=${pageNum}&size=16`;
   },
+  DETAIL(postId) {
+    return `/api/posts/${postId}`;
+  },
 };
 
 const STALETIME = {
