@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         element: <HotArticles />,
       },
       {
-        path: ROUTER.PATH.DETAIL,
+        path: `${ROUTER.PATH.DETAIL}/:postId`,
         element: <Detail />,
       },
       {
