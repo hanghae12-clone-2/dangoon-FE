@@ -4,16 +4,16 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 export default function PostItem({
-  post: { img, title, money, address, like, chat },
+  post: { img, title, price, location, wishCount, chat },
 }) {
   return (
     <ItemContainer>
       <Img src={img} medium />
       <Content>
         <Text bold>{title}</Text>
-        <Text bold>{money}</Text>
-        <Text>{address}</Text>
-        <Text gery>{`${like} ∙ ${chat}`}</Text>
+        <Text bold>{price}</Text>
+        <Text>{location}</Text>
+        <Text gery>{`관심${wishCount} ∙ 채팅${chat}`}</Text>
       </Content>
     </ItemContainer>
   );
