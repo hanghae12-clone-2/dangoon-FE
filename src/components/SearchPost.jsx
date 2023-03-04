@@ -7,6 +7,7 @@ import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
 import { Link, useParams } from 'react-router-dom';
 import ROUTER from '../constants/router';
+import PostScrollEnd from './PostScrollEnd';
 
 export default function SearchPost() {
   const { keyWord } = useParams();
@@ -50,7 +51,10 @@ export default function SearchPost() {
           {isFetchingNextPage && hasNextPage ? (
             ''
           ) : (
-            <LastPageComment ref={ref}>마지막 페이지 입니다.</LastPageComment>
+            <LastPageComment ref={ref}>
+              {' '}
+              <PostScrollEnd />
+            </LastPageComment>
           )}
         </PostWrapper>
       )}
@@ -83,5 +87,6 @@ const Li = styled.li`
 `;
 
 const LastPageComment = styled.div`
+  width: 100%;
   margin-bottom: 1rem;
 `;
