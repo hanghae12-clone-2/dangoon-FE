@@ -5,6 +5,7 @@ import MainInfo from '../components/MainIntro';
 import MainPost from '../components/MainPost';
 import ROUTER from '../constants/router';
 import Text from '../elements/Text';
+import Footer from '../components/Footer';
 
 export default function Main() {
   return (
@@ -17,6 +18,7 @@ export default function Main() {
           ⓒ 2023 by hanghae99 2jo
         </Text>
       </LinkContainer>
+      <Footer />
     </MainWrapper>
   );
 }
