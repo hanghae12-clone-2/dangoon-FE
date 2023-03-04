@@ -24,6 +24,13 @@ const TextStyle = styled.p`
     `}
 
   ${props =>
+    props.userContent &&
+    css`
+      margin: 0.3rem 0;
+      font-size: ${props => props.theme.fontSize.regular};
+    `}
+
+  ${props =>
     props.userTitle &&
     css`
       margin: 0.3rem 0;

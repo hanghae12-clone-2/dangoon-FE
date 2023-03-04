@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HiOutlineUserCircle } from 'react-icons/hi';
+import { BiUserCircle, BiTimeFive } from 'react-icons/bi';
 import Text from '../elements/Text';
+import formatAgo from '../utils/formatDate';
+import Button from '../elements/Button';
 
 export default function PostDetailContent({ detail }) {
   const { title, content, price, nickName, wishCount, location, createdAt } =
     detail;
 
+  const setFormatDate = date => formatAgo(date);
+
   return (
     <DetailContainer>
       <UserContainer>
         <Icon>
-          <HiOutlineUserCircle />
+          <BiUserCircle />
         </Icon>
         <UserTextContainer>
           <Text userTitle>{nickName}</Text>
@@ -20,7 +24,22 @@ export default function PostDetailContent({ detail }) {
       </UserContainer>
       <UserContent>
         <Text regular>{title}</Text>
+        <Date>
+          <Text userLocation grey>
+            <BiTimeFive />
+          </Text>
+          <Text userLocation grey>
+            {setFormatDate(createdAt)}
+          </Text>
+        </Date>
+        <Text regular>{price}원</Text>
+        <Text userContent>{content}</Text>
+        <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
       </UserContent>
+      <UserTouch>
+        <Button like />
+        <Button outline>채팅하기</Button>
+      </UserTouch>
     </DetailContainer>
   );
 }
@@ -49,4 +68,17 @@ const UserTextContainer = styled.div``;
 
 const UserContent = styled.div`
   margin: 2rem 0;
+  border-bottom: 1px solid ${props => props.theme.color.dark_white};
+`;
+
+const Date = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const UserTouch = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
 `;
