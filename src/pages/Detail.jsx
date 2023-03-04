@@ -1,6 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
+import QUERY from '../constants/query';
+import useGetQuery from '../hooks/useGetQuery';
 
 const img = [
   'https://dnvefa72aowie.cloudfront.net/origin/article/202303/69cf19b2c2eb5e55fa5d041bf0f87fcb71c1c9763e8f6bcef92a71d5d96a6022.webp?q=95&s=1440x1440&t=inside',
@@ -10,14 +14,33 @@ const img = [
 ];
 
 export default function Detail() {
+  const { postId } = useParams();
+
+  const {
+    isLoading,
+    isError,
+    data: postDetail,
+  } = useGetQuery(
+    [QUERY.KEY.POSTS, { postId }],
+    QUERY.AXIOS_PATH.SEVER,
+    QUERY.AXIOS_PATH.DETAIL(postId)
+  );
   return (
-    <DetailWrapper>
-      <PostDetailImg img={img} />
-    </DetailWrapper>
+    <>
+      {isLoading && <p>로딩중</p>}
+      {isError && <p>에러</p>}
+      {postDetail && (
+        <DetailWrapper>
+          <PostDetailImg img={img} />
+          <PostDetailContent detail={postDetail.data.result} />
+        </DetailWrapper>
+      )}
+    </>
   );
 }
 
 const DetailWrapper = styled.section`
+  position: relative;
   width: 100%;
   height: 100%;
   overflow-y: auto;

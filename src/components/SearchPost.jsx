@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import PostItem from './PostItem';
 import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ROUTER from '../constants/router';
 
-export default function HotPost() {
+export default function SearchPost() {
+  const { keyWord } = useParams();
   const {
     ref,
     isLoading,
@@ -19,8 +20,8 @@ export default function HotPost() {
   } = useInfiniteScrollQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.HOT_POST,
-    16
+    QUERY.AXIOS_PATH.SERCH,
+    keyWord
   );
   return (
     <>
@@ -28,7 +29,7 @@ export default function HotPost() {
       {isError && <p>에러</p>}
       {posts && (
         <PostWrapper>
-          <PostTitle>중고거래 인기매물</PostTitle>
+          <PostTitle>{`키워드: ${keyWord}`}</PostTitle>
           <PostList>
             {posts?.pages.map(post =>
               post.data.result.map(data => (

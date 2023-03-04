@@ -5,6 +5,8 @@ const PATH = {
   LIKE: '/like',
   DETAIL: '/detail',
   HOT_ARTICLES: '/hot_articles',
+  MESSENGER: '/messenger',
+  SEARCH: '/search',
   MAIN: '/',
   BACK: -1,
   FRONT: 1,

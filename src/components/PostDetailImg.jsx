@@ -42,11 +42,11 @@ export default function PostDetailImg({ img }) {
 }
 
 const ImgContainer = styled.div`
-  position: absolute;
-  left: calc(50% - 20rem);
+  position: relative;
   display: flex;
   width: 40rem;
   height: 40rem;
+  margin: 0 auto;
   overflow: hidden;
   transition: all 300ms ease-in-out;
 `;
