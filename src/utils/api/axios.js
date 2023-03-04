@@ -9,6 +9,7 @@ export default class Axios {
     this.instance = axios.create({
       baseURL: url,
     });
+    
 
     this.instance.interceptors.response.use(
       response => {
