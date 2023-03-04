@@ -15,12 +15,12 @@ export default function Login() {
   const onSubmit = async e => {
     e.preventDefault();
 
-    await axios.post(QUERY.AXIOS_PATH.LOGIN, {
-      userName,
-      passWord,
-    });
-
-    navigate(ROUTER.PATH.MAIN);
+    axios
+      .post(QUERY.AXIOS_PATH.LOGIN, {
+        userName,
+        passWord,
+      })
+      .then(() => navigate(ROUTER.PATH.MAIN));
   };
 
   return (
