@@ -16,8 +16,7 @@ export const useInfiniteScrollQuery = (queryKey, baseUrl, path, limit) => {
     hasNextPage,
   } = useInfiniteQuery(
     queryKey,
-    async ({ pageParam = 1 }) =>
-      await axios.get(`${path}?_page=${pageParam}&_limit=${limit}`),
+    async ({ pageParam = 1 }) => await axios.get(path(pageParam)),
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;

@@ -18,9 +18,9 @@ export default function HotPost() {
     data: posts,
   } = useInfiniteScrollQuery(
     [QUERY.KEY.POSTS],
-    QUERY.AXIOS_PATH.LOCAL,
+    QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.HOT_POST,
-    8
+    16
   );
   return (
     <>
@@ -31,10 +31,10 @@ export default function HotPost() {
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>
             {posts?.pages.map(post =>
-              post.data.map(data => (
+              post.data.result.map(data => (
                 <Li key={uuidv4()}>
-                  <Link to={ROUTER.PATH.DETAIL} state={{ postId: data.postId }}>
-                    <PostItem post={data} />
+                  <Link to={ROUTER.PATH.DETAIL} state={{ postId: data.postid }}>
+                    <PostItem />
                   </Link>
                 </Li>
               ))

@@ -20,7 +20,7 @@ export default function MainPost() {
     <>
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
-      {posts.data.result && (
+      {posts && (
         <PostWrapper>
           <PostTitle>중고거래 인기매물</PostTitle>
           <PostList>

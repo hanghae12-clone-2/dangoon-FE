@@ -12,6 +12,7 @@ export default class Axios {
 
     this.instance.interceptors.response.use(
       response => {
+        console.log(response);
         const token = response.headers.authorization;
         const refreshToken = response.headers.refreshtoken;
 
@@ -34,10 +35,9 @@ export default class Axios {
       error => {
         const errorMessage = error.response.data.errorMessage;
         if (errorMessage === 'Token Error') {
-        } else {
           alert(errorMessage);
         }
-
+        console.log(error);
         return Promise.reject(error);
       }
     );
