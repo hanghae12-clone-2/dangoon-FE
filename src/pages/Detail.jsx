@@ -91,7 +91,7 @@ const ContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 3rem 0;
+  margin: 2rem 0;
 `;
 
 const Title = styled.div`
