@@ -36,14 +36,16 @@ export default function PostDetailContent({ detail }) {
         </Date>
         <Text regular>{price}원</Text>
         <Text userContent>{content}</Text>
-        <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
+        <LikeAndChat>
+          <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
+          <UserTouch>
+            <Button like />
+            <Link to={ROUTER.PATH.MESSENGER}>
+              <Button outline>채팅하기</Button>
+            </Link>
+          </UserTouch>
+        </LikeAndChat>
       </UserContent>
-      <UserTouch>
-        <Button like />
-        <Link to={ROUTER.PATH.MESSENGER}>
-          <Button outline>채팅하기</Button>
-        </Link>
-      </UserTouch>
     </DetailContainer>
   );
 }
@@ -80,9 +82,14 @@ const Date = styled.div`
   gap: 0.5rem;
 `;
 
-const UserTouch = styled.div`
+const LikeAndChat = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+`;
+
+const UserTouch = styled.div`
+  display: flex;
+  align-items: center;
 `;
