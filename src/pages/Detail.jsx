@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Post from '../components/post/Post';
@@ -50,7 +50,12 @@ export default function Detail() {
             <PostDetailContent detail={postDetail.data.result} />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>
-                당근마켓 인기중고
+                <ContentContainer>
+                  <Title>당근마켓 인기중고</Title>
+                  <Link to={ROUTER.PATH.HOT_ARTICLES}>
+                    <Linkto>더 구경하기</Linkto>
+                  </Link>
+                </ContentContainer>
               </Post>
             </PostContainer>
             <Footer />
@@ -71,7 +76,7 @@ const DetailWrapper = styled.section`
 const DetailContainer = styled.section`
   width: 40rem;
   height: 100%;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 const PostContainer = styled.div`
@@ -79,6 +84,22 @@ const PostContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   width: 40rem;
-  height: 100rem;
-  margin: auto;
+  height: auto;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 3rem 0;
+`;
+
+const Title = styled.div`
+  font-size: ${props => props.theme.fontSize.large_regular};
+  font-weight: ${props => props.theme.fontWeight.semi_bold};
+`;
+
+const Linkto = styled.div`
+  color: ${props => props.theme.color.carrot_orange};
+  font-size: ${props => props.theme.fontSize.regular};
 `;
