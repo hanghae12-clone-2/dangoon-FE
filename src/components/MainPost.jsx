@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import PostItem from './PostItem';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
-import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
 import Post from './post/Post';
 

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Post from '../components/post/Post';
 import PostDetailContent from '../components/PostDetailContent';
-import PostDetailHot from '../components/PostDetailHot';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
