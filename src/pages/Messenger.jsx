@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
-import Text from '../elements/Text';
+import MessengerList from '../components/messenger/MessengerList';
+import MessengerItem from '../components/messenger/MessengerItem';
 
 export default function Messenger() {
   const messege = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
@@ -10,28 +11,8 @@ export default function Messenger() {
       <NavbarContainer>
         <FaUserCircle />
       </NavbarContainer>
-      <MessegeListContainer>
-        <ListTitleContainer>
-          <Text large_regular>{'nickname'}</Text>
-        </ListTitleContainer>
-        <MessengerListContainer>
-          {messege.map(v => (
-            <Li>
-              <Text large_medium>
-                <FaUserCircle />
-              </Text>
-              <Information>
-                <Text small>
-                  <span>성인</span>
-                  {`${'부평'}`}
-                </Text>
-                <Text small>주말에 연락 드릴게요.</Text>
-              </Information>
-            </Li>
-          ))}
-        </MessengerListContainer>
-      </MessegeListContainer>
-      <MessegeContainer></MessegeContainer>
+      <MessengerList list={messege} />
+      <MessengerItem />
     </MessengerWrapper>
   );
 }
@@ -67,47 +48,3 @@ const NavbarContainer = styled.div`
     border-radius: 50%;
   }
 `;
-
-const MessegeListContainer = styled.div`
-  width: 30rem;
-  height: 100%;
-`;
-
-const ListTitleContainer = styled.div`
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-bottom: 2px solid ${props => props.theme.color.light_messenger};
-`;
-
-const MessengerListContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-`;
-
-const Li = styled.li`
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid ${props => props.theme.color.light_messenger};
-  padding: 0.5rem 1rem;
-
-  svg {
-    color: ${props => props.theme.color.messenger};
-  }
-
-  p {
-    margin: 0.2rem;
-  }
-
-  span {
-    font-weight: ${props => props.theme.fontWeight.bold};
-  }
-`;
-
-const MessegeContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: bisque;
-`;
-
-const Information = styled.div``;
