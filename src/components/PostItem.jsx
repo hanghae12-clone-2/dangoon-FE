@@ -5,10 +5,11 @@ import Text from '../elements/Text';
 
 export default function PostItem({
   post: { img, title, price, location, wishCount, chat },
+  imgRegular,
 }) {
   return (
     <ItemContainer>
-      <Img src={img} medium />
+      {imgRegular ? <Img src={img} largeRegular /> : <Img src={img} medium />}
       <Content>
         <Text bold>{title}</Text>
         <Text bold>{price}</Text>

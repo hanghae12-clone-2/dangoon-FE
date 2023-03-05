@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import PostItem from '../PostItem';
 
-export default function Post({ posts, path, children }) {
+export default function Post({ posts, path, imgSize, children }) {
   return (
     <>
       <PostTitle>{children}</PostTitle>
@@ -13,7 +13,7 @@ export default function Post({ posts, path, children }) {
         {posts.data.result.map(data => (
           <Li key={uuidv4()}>
             <Link to={`${path}/${data.postid}`}>
-              <PostItem post={data} />
+              <PostItem post={data} imgSize={imgSize} />
             </Link>
           </Li>
         ))}
