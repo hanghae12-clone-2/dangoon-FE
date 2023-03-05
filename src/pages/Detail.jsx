@@ -2,10 +2,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
+import Post from '../components/post/Post';
 import PostDetailContent from '../components/PostDetailContent';
 import PostDetailHot from '../components/PostDetailHot';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
+import ROUTER from '../constants/router';
 import useGetQuery from '../hooks/useGetQuery';
 
 const img = [
@@ -38,14 +40,6 @@ export default function Detail() {
     QUERY.AXIOS_PATH.MAIN_POST
   );
 
-  // const a = useGetQuerys(
-  //   [QUERY.KEY.POSTS],
-  //   [QUERY.KEY.POSTS, { postId }],
-  //   QUERY.AXIOS_PATH.SEVER,
-  //   QUERY.AXIOS_PATH.MAIN_POST,
-  //   QUERY.AXIOS_PATH.DETAIL(postId)
-  // );
-
   return (
     <>
       {isLoading && isHotLoding && <p>로딩중</p>}
@@ -54,7 +48,7 @@ export default function Detail() {
         <DetailWrapper>
           <PostDetailImg img={img} />
           <PostDetailContent detail={postDetail.data.result} />
-          <PostDetailHot detailHot={postHot.data.result} />
+          <Post posts={postHot} path={ROUTER.PATH.DETAIL} />
           <Footer />
         </DetailWrapper>
       )}

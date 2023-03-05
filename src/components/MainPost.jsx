@@ -7,6 +7,7 @@ import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
+import Post from './post/Post';
 
 export default function MainPost() {
   const {
@@ -24,16 +25,9 @@ export default function MainPost() {
       {isError && <p>에러</p>}
       {posts && (
         <PostWrapper>
-          <PostTitle>중고거래 인기매물</PostTitle>
-          <PostList>
-            {posts.data.result.map(data => (
-              <Li key={uuidv4()}>
-                <Link to={`${ROUTER.PATH.DETAIL}/${data.postid}`}>
-                  <PostItem post={data} />
-                </Link>
-              </Li>
-            ))}
-          </PostList>
+          <Post posts={posts} path={ROUTER.PATH.DETAIL}>
+            중고거래 인기매물
+          </Post>
         </PostWrapper>
       )}
     </>
@@ -47,20 +41,4 @@ const PostWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${props => props.theme.color.sky_white};
-`;
-
-const PostTitle = styled.h1`
-  margin: 128px 0;
-  font-size: ${props => props.theme.fontSize.large};
-`;
-
-const PostList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 1040px;
-`;
-
-const Li = styled.li`
-  margin-bottom: 80px;
 `;
