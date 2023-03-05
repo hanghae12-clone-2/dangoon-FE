@@ -5,15 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 import PostItem from '../PostItem';
 
-export default function Post({ posts, path, imgSize, children }) {
+export default function Post({ posts, path, imgRegular, children }) {
   return (
     <>
-      <PostTitle>{children}</PostTitle>
+      {children}
       <PostList>
         {posts.data.result.map(data => (
           <Li key={uuidv4()}>
             <Link to={`${path}/${data.postid}`}>
-              <PostItem post={data} imgSize={imgSize} />
+              <PostItem post={data} imgRegular={imgRegular} />
             </Link>
           </Li>
         ))}
@@ -21,11 +21,6 @@ export default function Post({ posts, path, imgSize, children }) {
     </>
   );
 }
-
-const PostTitle = styled.h1`
-  margin: 128px 0;
-  font-size: ${props => props.theme.fontSize.large};
-`;
 
 const PostList = styled.div`
   display: flex;

@@ -23,7 +23,7 @@ export default function MainPost() {
       {posts && (
         <PostWrapper>
           <Post posts={posts} path={ROUTER.PATH.DETAIL}>
-            중고거래 인기매물
+            <PostTitle>중고거래 인기매물</PostTitle>
           </Post>
         </PostWrapper>
       )}
@@ -38,4 +38,9 @@ const PostWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${props => props.theme.color.sky_white};
+`;
+
+const PostTitle = styled.h1`
+  margin: 8rem 0;
+  font-size: ${props => props.theme.fontSize.large};
 `;

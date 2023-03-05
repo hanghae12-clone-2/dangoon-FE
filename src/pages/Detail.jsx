@@ -49,7 +49,7 @@ export default function Detail() {
             <PostDetailImg img={img} />
             <PostDetailContent detail={postDetail.data.result} />
             <PostContainer>
-              <Post posts={postHot} path={ROUTER.PATH.DETAIL}>
+              <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>
                 당근마켓 인기중고
               </Post>
             </PostContainer>
