@@ -47,7 +47,9 @@ export default function Detail() {
         <DetailWrapper>
           <PostDetailImg img={img} />
           <PostDetailContent detail={postDetail.data.result} />
-          <Post posts={postHot} path={ROUTER.PATH.DETAIL} />
+          <PostContainer>
+            <Post posts={postHot} path={ROUTER.PATH.DETAIL} />
+          </PostContainer>
           <Footer />
         </DetailWrapper>
       )}
@@ -61,4 +63,9 @@ const DetailWrapper = styled.section`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+`;
+
+const PostContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;

@@ -9,11 +9,21 @@ const ImgStyle = styled.img`
   width: 40rem;
   height: 50rem;
   border-radius: ${props => props.theme.borderRadius.small};
+
   ${props =>
-    props.small &&
+    props.regular &&
     css`
-      width: 3rem;
-      height: 3rem;
+      height: 8rem;
+      width: 8rem;
+      object-fit: cover;
+    `}
+
+  ${props =>
+    props.largeRegular &&
+    css`
+      height: 12rem;
+      width: 12rem;
+      object-fit: cover;
     `}
 
   ${props =>
@@ -28,6 +38,13 @@ const ImgStyle = styled.img`
     css`
       width: 40rem;
       height: 40rem;
+    `}
+
+    ${props =>
+    props.small &&
+    css`
+      width: 3rem;
+      height: 3rem;
     `}
 
     ${props =>
