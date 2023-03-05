@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Axios from '../utils/api/axios';
+import Axios from '../api/axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 import QUERY from '../constants/query';

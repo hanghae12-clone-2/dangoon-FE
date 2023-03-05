@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import Input from '../elements/Input';
-import Axios from '../utils/api/axios';
+import Axios from '../api/axios';
 
 export default function Login() {
   const [userName, setUserName] = useState('');

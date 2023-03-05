@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import QUERY from '../constants/query';
-import Axios from '../utils/api/axios';
+import Axios from '../api/axios';
 
 export const useInfiniteScrollQuery = (queryKey, baseUrl, path, keyWord) => {
   const axios = new Axios(baseUrl);
