@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import PostItem from './PostItem';
 import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
-import { Link, useParams } from 'react-router-dom';
 import ROUTER from '../constants/router';
-import PostScrollEnd from './PostScrollEnd';
+import InfiniteScroll from './post/InfiniteScroll';
+import { useParams } from 'react-router-dom';
 
 export default function SearchPost() {
   const { keyWord } = useParams();
@@ -35,58 +33,26 @@ export default function SearchPost() {
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
       {posts && (
-        <PostWrapper>
-          <PostTitle>{`키워드: ${keyWord}`}</PostTitle>
-          <PostList>
-            {posts?.pages.map(post =>
-              post.data.result.map(data => (
-                <Li key={uuidv4()}>
-                  <Link to={`${ROUTER.PATH.DETAIL}/${data.postid}`}>
-                    <PostItem post={data} />
-                  </Link>
-                </Li>
-              ))
-            )}
-          </PostList>
-          {isFetchingNextPage && hasNextPage ? (
-            ''
-          ) : (
-            <LastPageComment ref={ref}>
-              {' '}
-              <PostScrollEnd />
-            </LastPageComment>
-          )}
-        </PostWrapper>
+        <PostContainer>
+          <InfiniteScroll
+            Ref={ref}
+            posts={posts}
+            path={ROUTER.PATH.DETAIL}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+          >
+            {`서울특별시 ${keyWord} 매물`}
+          </InfiniteScroll>
+        </PostContainer>
       )}
     </>
   );
 }
 
-const PostWrapper = styled.div`
+const PostContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 100%;
-`;
-
-const PostTitle = styled.h1`
-  margin: 8rem 0;
-  font-size: ${props => props.theme.fontSize.large};
-`;
-
-const PostList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 65rem;
-`;
-
-const Li = styled.li`
-  margin-bottom: 5rem;
-`;
-
-const LastPageComment = styled.div`
-  width: 100%;
-  margin-bottom: 1rem;
 `;

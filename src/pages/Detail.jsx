@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import PostDetailContent from '../components/PostDetailContent';
+import PostDetailHot from '../components/PostDetailHot';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
@@ -26,14 +27,34 @@ export default function Detail() {
     QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.DETAIL(postId)
   );
+
+  const {
+    isLoading: isHotLoding,
+    isError: isHotError,
+    data: postHot,
+  } = useGetQuery(
+    [QUERY.KEY.POSTS],
+    QUERY.AXIOS_PATH.SEVER,
+    QUERY.AXIOS_PATH.MAIN_POST
+  );
+
+  // const a = useGetQuerys(
+  //   [QUERY.KEY.POSTS],
+  //   [QUERY.KEY.POSTS, { postId }],
+  //   QUERY.AXIOS_PATH.SEVER,
+  //   QUERY.AXIOS_PATH.MAIN_POST,
+  //   QUERY.AXIOS_PATH.DETAIL(postId)
+  // );
+
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
-      {postDetail && (
+      {isLoading && isHotLoding && <p>로딩중</p>}
+      {isError && isHotError && <p>에러</p>}
+      {postDetail && postHot && (
         <DetailWrapper>
           <PostDetailImg img={img} />
           <PostDetailContent detail={postDetail.data.result} />
+          <PostDetailHot detailHot={postHot.data.result} />
           <Footer />
         </DetailWrapper>
       )}
