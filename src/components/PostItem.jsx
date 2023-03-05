@@ -4,12 +4,16 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 export default function PostItem({
-  post: { img, title, price, location, wishCount, chat },
+  post: { imageUrlList, title, price, location, wishCount, chat },
   imgRegular,
 }) {
   return (
     <ItemContainer>
-      {imgRegular ? <Img src={img} largeRegular /> : <Img src={img} medium />}
+      {imgRegular ? (
+        <Img src={imageUrlList[0]} largeRegular />
+      ) : (
+        <Img src={imageUrlList[0]} medium />
+      )}
       <Content>
         <Text bold>{title}</Text>
         <Text bold>{price}</Text>

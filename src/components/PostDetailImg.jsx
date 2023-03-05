@@ -6,20 +6,24 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Img from '../elements/Img';
 
-export default function PostDetailImg({ img }) {
+export default function PostDetailImg({ imageUrlList }) {
   const [imgPage, setImgPage] = useState(0);
 
   const handleImgNext = () =>
-    setImgPage(state => (Math.abs(state) === img.length - 1 ? 0 : state - 1));
+    setImgPage(state =>
+      Math.abs(state) === imageUrlList.length - 1 ? 0 : state - 1
+    );
 
   const handleImgPrevious = () =>
-    setImgPage(state => (Math.abs(state) === 0 ? 1 - img.length : state + 1));
+    setImgPage(state =>
+      Math.abs(state) === 0 ? 1 - imageUrlList.length : state + 1
+    );
 
   const handleDotClick = index => setImgPage(-index);
 
   return (
     <ImgContainer>
-      {img.map(url => (
+      {imageUrlList.map(url => (
         <Imgs key={uuidv4()} imgPage={imgPage}>
           <Img large src={url} />
         </Imgs>
@@ -33,7 +37,7 @@ export default function PostDetailImg({ img }) {
         </Arrow>
       </ArrowContainer>
       <Dots pageNum={imgPage * -1 + 1}>
-        {img.map((_, index) => (
+        {imageUrlList.map((_, index) => (
           <Dot key={uuidv4()} onClick={() => handleDotClick(index)} />
         ))}
       </Dots>
