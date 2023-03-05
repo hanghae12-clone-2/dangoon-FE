@@ -12,7 +12,7 @@ export default function Messenger() {
       </NavbarContainer>
       <MessegeListContainer>
         <ListTitleContainer>
-          <Text medium>{'nickname'}</Text>
+          <Text large_regular>{'nickname'}</Text>
         </ListTitleContainer>
         <MessengerListContainer>
           {messege.map(v => (
@@ -20,6 +20,13 @@ export default function Messenger() {
               <Text large_medium>
                 <FaUserCircle />
               </Text>
+              <Information>
+                <Text small>
+                  <span>성인</span>
+                  {`${'부평'}`}
+                </Text>
+                <Text small>주말에 연락 드릴게요.</Text>
+              </Information>
             </Li>
           ))}
         </MessengerListContainer>
@@ -62,13 +69,13 @@ const NavbarContainer = styled.div`
 `;
 
 const MessegeListContainer = styled.div`
-  width: 35rem;
+  width: 30rem;
   height: 100%;
 `;
 
 const ListTitleContainer = styled.div`
   width: 100%;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
   border-bottom: 2px solid ${props => props.theme.color.light_messenger};
 `;
 
@@ -79,10 +86,21 @@ const MessengerListContainer = styled.div`
 `;
 
 const Li = styled.li`
+  display: flex;
+  align-items: center;
   border-bottom: 2px solid ${props => props.theme.color.light_messenger};
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
+
   svg {
     color: ${props => props.theme.color.messenger};
+  }
+
+  p {
+    margin: 0.2rem;
+  }
+
+  span {
+    font-weight: ${props => props.theme.fontWeight.bold};
   }
 `;
 
@@ -91,3 +109,5 @@ const MessegeContainer = styled.div`
   height: 100%;
   background-color: bisque;
 `;
+
+const Information = styled.div``;

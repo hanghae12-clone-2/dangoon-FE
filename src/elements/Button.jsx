@@ -39,21 +39,22 @@ const BtnBx = styled.button`
           width: 100px;
         `
       : `width: ${props.width}`};
+
+  border: none;
+
   ${props =>
     props.outline &&
     css`
-      box-shadow: 0px 0px 5px 7px #e7413373;
+      border: 1px solid ${props => props.theme.color.carrot_orange};
       background-color: ${props => props.theme.color.white};
-      color: ${props => props.theme.color.black};
+      color: ${props => props.theme.color.carrot_orange};
       transition: all 0.3s ease-in-out;
       &:hover {
-        box-shadow: 0px 0px 5px 3px #e7413373;
         transform: scale(1.05);
         transition: all 0.3s ease-in-out;
       }
     `};
 
-  border: none;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -64,7 +65,6 @@ const BtnBx = styled.button`
 const LikeBtn = styled.button`
   /* padding: 0 10px 0 10px; */
   border-radius: 10px;
-  box-shadow: 0px 0px 5px 7px #e7413373;
   background-color: #e74133;
   color: white;
   font-size: 17px;
@@ -79,7 +79,6 @@ const LikeBtn = styled.button`
   :hover {
     background-color: #f54d3e;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0px 0px 5px 3px #e7413373;
   }
 
   ::before {
