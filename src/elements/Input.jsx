@@ -17,13 +17,7 @@ const Input = props => {
   if (multiLine) {
     return (
       <React.Fragment>
-        {label && <Text margin='20px 5px 10px 0'>{label}</Text>}
-        <TextArea
-          placeholder={placeholder}
-          rows={20}
-          onChange={onChange}
-          value={value}
-        />
+        <TextArea placeholder={placeholder} onChange={onChange} value={value} />
       </React.Fragment>
     );
   }
@@ -97,8 +91,11 @@ const InLineContainer = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  border: 1px solid #c4c4c4;
-  border-radius: 4px;
+  border-left: 2px solid #c4c4c4;
+  border-right: 2px solid #c4c4c4;
+  border-top: 2px solid #c4c4c4;
+  border-bottom: none;
+  border-radius: 1rem 1rem 0 0;
   width: 100%;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -106,7 +103,9 @@ const TextArea = styled.textarea`
   overflow: auto;
   &:focus {
     outline: none;
-    border: 1px solid ${props => props.theme.color.carrot_orange};
+    border-left: 2px solid ${props => props.theme.color.carrot_orange};
+    border-right: 2px solid ${props => props.theme.color.carrot_orange};
+    border-top: 2px solid ${props => props.theme.color.carrot_orange};
   }
 `;
 

@@ -9,7 +9,7 @@ export default function MessengerList({ list }) {
   return (
     <MessegeListContainer>
       <ListTitleContainer>
-        <Text large_regular>{'nickname'}</Text>
+        <Text regular>{'nickname'}</Text>
       </ListTitleContainer>
       <MessegeList>
         {list.map(v => (
@@ -51,8 +51,9 @@ const MessegeListContainer = styled.div`
 const ListTitleContainer = styled.ul`
   width: 100%;
   height: 10%;
-  padding: 0.5rem 1rem;
-  border-bottom: 2px solid ${props => props.theme.color.light_messenger};
+  padding: 1rem;
+  border-right: 1px solid ${props => props.theme.color.light_messenger};
+  border-bottom: 1px solid ${props => props.theme.color.light_messenger};
 `;
 
 const MessegeList = styled.div`

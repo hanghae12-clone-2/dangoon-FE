@@ -22,6 +22,8 @@ const MessengerWrapper = styled.section`
   width: 70rem;
   height: 100%;
   margin: auto;
+  border: 1px solid ${props => props.theme.color.light_messenger};
+
   animation: enlargement 300ms 1;
   @keyframes enlargement {
     from {
