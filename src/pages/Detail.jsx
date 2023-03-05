@@ -45,12 +45,16 @@ export default function Detail() {
       {isError && isHotError && <p>에러</p>}
       {postDetail && postHot && (
         <DetailWrapper>
-          <PostDetailImg img={img} />
-          <PostDetailContent detail={postDetail.data.result} />
-          <PostContainer>
-            <Post posts={postHot} path={ROUTER.PATH.DETAIL} />
-          </PostContainer>
-          <Footer />
+          <DetailContainer>
+            <PostDetailImg img={img} />
+            <PostDetailContent detail={postDetail.data.result} />
+            <PostContainer>
+              <Post posts={postHot} path={ROUTER.PATH.DETAIL}>
+                당근마켓 인기중고
+              </Post>
+            </PostContainer>
+            <Footer />
+          </DetailContainer>
         </DetailWrapper>
       )}
     </>
@@ -58,14 +62,23 @@ export default function Detail() {
 }
 
 const DetailWrapper = styled.section`
-  position: relative;
   width: 100%;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 `;
 
+const DetailContainer = styled.section`
+  width: 40rem;
+  height: 100%;
+  margin: auto;
+`;
+
 const PostContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  width: 40rem;
+  height: 100rem;
+  margin: auto;
 `;
