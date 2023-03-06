@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import MessengerList from '../components/messenger/MessengerList';
@@ -13,8 +13,11 @@ import Storage from '../utils/localStorage';
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
-  const { postId } = useParams();
   const [createRoomCheck, setCreateRoomCheck] = useState(false);
+  const [HandleQuery, setHandleQuery] = useState(false);
+  const [roomId, setRoomId] = useState(null);
+  const { postId } = useParams();
+  const userName = Storage.getUserName();
 
   useEffect(() => {
     axios.post(`/chat/room/${postId}`).then(() => {
@@ -33,6 +36,22 @@ export default function Messenger() {
     createRoomCheck
   );
 
+  const { data: detailRoom, refetch } = useGetQuery(
+    ['room', roomId],
+    QUERY.AXIOS_PATH.SEVER,
+    `/chat/room/${roomId}`,
+    HandleQuery,
+    data => {
+      console.log(data);
+    }
+  );
+  // todo 클릭할때 roomId에러 해결하기
+  const handleChatRoom = roomId => {
+    setRoomId(roomId);
+    setHandleQuery(true);
+    refetch();
+  };
+
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -43,8 +62,12 @@ export default function Messenger() {
           <NavbarContainer>
             <FaUserCircle />
           </NavbarContainer>
-          <MessengerList rooms={rooms.data.result} />
-          <MessengerItem />
+          <MessengerList
+            rooms={rooms.data.result}
+            userName={userName}
+            onChatRoom={handleChatRoom}
+          />
+          <MessengerItem detailRoom={detailRoom} userName={userName} />
         </MessengerWrapper>
       )}
     </>

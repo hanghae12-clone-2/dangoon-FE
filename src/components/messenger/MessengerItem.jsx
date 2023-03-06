@@ -3,12 +3,34 @@ import styled from 'styled-components';
 import Text from '../../elements/Text';
 import Input from '../../elements/Input';
 
+import { v4 as uuidv4 } from 'uuid';
 import { FaUserCircle } from 'react-icons/fa';
 import { AiFillPicture } from 'react-icons/ai';
+import { IoChatbubblesSharp } from 'react-icons/io5';
+
 import Button from '../../elements/Button';
 
-export default function MessengerItem() {
+export default function MessengerItem({ detailRoom, userName }) {
   const [text, setText] = useState('');
+  //todo 문구 랜더링 에러
+  if (!detailRoom)
+    return (
+      <ItemContainer>
+        <ErrorContainer>
+          <IoChatbubblesSharp />
+          채팅 상대를 선택해 주세요.
+        </ErrorContainer>
+      </ItemContainer>
+    );
+  if (!detailRoom.data.result.messageDtoList.length)
+    return (
+      <ItemContainer>
+        <ErrorContainer>
+          <IoChatbubblesSharp />
+          채팅 기록이 없습니다.
+        </ErrorContainer>
+      </ItemContainer>
+    );
   return (
     <ItemContainer>
       <ItemTitleContainer>
@@ -18,8 +40,27 @@ export default function MessengerItem() {
         <Text regular>{'성인'}</Text>
       </ItemTitleContainer>
       <ItemBodyContainer>
-        <OpponentContainer>12312312</OpponentContainer>
-        <MeContainer>12312312</MeContainer>
+        {detailRoom.data.result.messageDtoList.map(v =>
+          v.sender !== userName ? (
+            <OpponentContainer key={uuidv4()}>
+              <Content>
+                <Text large_medium>
+                  <FaUserCircle />
+                </Text>
+                <NickName>{v.sender}</NickName>
+              </Content>
+              <SpeechBubbleLeft>
+                <MessageLeft>{v.message}</MessageLeft>
+              </SpeechBubbleLeft>
+            </OpponentContainer>
+          ) : (
+            <MeContainer key={uuidv4()}>
+              <SpeechBubbleRight>
+                <Message>{v.message}</Message>
+              </SpeechBubbleRight>
+            </MeContainer>
+          )
+        )}
       </ItemBodyContainer>
       <TextInput>
         <Input
@@ -48,6 +89,19 @@ const ItemContainer = styled.div`
   height: 100%;
 `;
 
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  gap: 1rem;
+
+  svg {
+    color: ${props => props.theme.color.messenger};
+    font-size: ${props => props.theme.fontSize.xxlarge};
+  }
+`;
+
 const ItemTitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -72,14 +126,91 @@ const ItemBodyContainer = styled.div`
 
 const OpponentContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: start;
   margin-top: 1.5rem;
   margin-left: 3rem;
+  gap: 0.5rem;
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    color: ${props => props.theme.color.messenger};
+  }
 `;
 
 const MeContainer = styled(OpponentContainer)`
-  justify-content: end;
+  align-items: flex-end;
   margin-right: 3rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const NickName = styled.div`
+  font-size: ${props => props.theme.fontSize.large_regular};
+`;
+
+const Message = styled.div`
+  margin: 0 1rem;
+  padding: 0.3rem;
+  font-size: ${props => props.theme.fontSize.large_regular};
+`;
+
+const MessageLeft = styled(Message)`
+  margin: 0 1rem;
+`;
+
+const SpeechBubbleLeft = styled.div`
+  max-width: 17.5rem;
+  position: relative;
+  background: #ff9500;
+  border-radius: 0.4em;
+  word-wrap: break-word;
+
+  ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 0.719em solid transparent;
+    border-right-color: #ff9500;
+    border-left: 0;
+    border-top: 0;
+    margin-top: -0.359em;
+    margin-left: -0.719em;
+  }
+`;
+
+const SpeechBubbleRight = styled.div`
+  max-width: 17.5rem;
+  position: relative;
+  background: #ff9500;
+  border-radius: 0.4em;
+  word-wrap: break-word;
+
+  ::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 0.719em solid transparent;
+    border-left-color: #ff9500;
+    border-right: 0;
+    border-top: 0;
+    margin-top: -0.359em;
+    margin-right: -0.719em;
+  }
 `;
 
 const TextInput = styled.div`

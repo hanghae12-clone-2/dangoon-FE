@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Img from '../../elements/Img';
 import Text from '../../elements/Text';
 
 import { FaUserCircle } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
+import useGetQuery from '../../hooks/useGetQuery';
 
-export default function MessengerList({ rooms }) {
+export default function MessengerList({ rooms, userName, onChatRoom }) {
   return (
     <MessegeListContainer>
       <ListTitleContainer>
-        <Text regular>{'nickname'}</Text>
+        <Text regular>{userName}</Text>
       </ListTitleContainer>
       <MessegeList>
         {rooms.map(v => (
-          <Li key={uuidv4()}>
+          <Li key={uuidv4()} onClick={() => onChatRoom(v.roomId)}>
             <ContentContainer>
               <Text large_medium>
                 <FaUserCircle />
@@ -31,12 +32,7 @@ export default function MessengerList({ rooms }) {
                 </Content>
               </Information>
             </ContentContainer>
-            <Img
-              src={
-                'https://dnvefa72aowie.cloudfront.net/origin/article/202303/69cf19b2c2eb5e55fa5d041bf0f87fcb71c1c9763e8f6bcef92a71d5d96a6022.webp?q=95&s=1440x1440&t=inside'
-              }
-              small
-            />
+            <Img src={v.imageUrl} small />
           </Li>
         ))}
       </MessegeList>
