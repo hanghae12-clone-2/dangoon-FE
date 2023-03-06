@@ -4,16 +4,18 @@ import Img from '../../elements/Img';
 import Text from '../../elements/Text';
 
 import { FaUserCircle } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function MessengerList({ list }) {
+export default function MessengerList({ rooms }) {
+  console.log(rooms);
   return (
     <MessegeListContainer>
       <ListTitleContainer>
         <Text regular>{'nickname'}</Text>
       </ListTitleContainer>
       <MessegeList>
-        {list.map(v => (
-          <Li>
+        {rooms.map(v => (
+          <Li key={uuidv4()}>
             <ContentContainer>
               <Text large_medium>
                 <FaUserCircle />

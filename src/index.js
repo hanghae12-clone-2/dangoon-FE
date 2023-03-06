@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: ROUTER.PATH.MESSENGER,
+        path: `${ROUTER.PATH.MESSENGER}/:postId`,
         element: <Messenger />,
       },
       {
@@ -58,12 +58,12 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
+  </Provider>
+  // </React.StrictMode>
 );

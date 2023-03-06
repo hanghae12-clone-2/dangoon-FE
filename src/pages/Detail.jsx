@@ -35,11 +35,12 @@ export default function Detail() {
   );
 
   useEffect(() => {
-    refetch();
-    // scrollRef.current.scrollIntoView({
-    //   block: 'start',
-    // });
-  }, [postId, refetch]);
+    if (postDetail && postHot) {
+      scrollRef.current.scrollIntoView({
+        block: 'start',
+      });
+    }
+  }, [postId]);
 
   return (
     <>
@@ -49,7 +50,10 @@ export default function Detail() {
         <DetailWrapper>
           <DetailContainer ref={scrollRef}>
             <PostDetailImg imageUrlList={postDetail.data.result.imageUrlList} />
-            <PostDetailContent detail={postDetail.data.result} />
+            <PostDetailContent
+              detail={postDetail.data.result}
+              postId={postId}
+            />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>
                 <ContentContainer>

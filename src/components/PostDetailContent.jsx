@@ -7,7 +7,7 @@ import Button from '../elements/Button';
 import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
 
-export default function PostDetailContent({ detail }) {
+export default function PostDetailContent({ detail, postId }) {
   const { title, content, price, nickName, wishCount, location, createdAt } =
     detail;
 
@@ -40,7 +40,7 @@ export default function PostDetailContent({ detail }) {
           <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
           <UserTouch>
             <Button like />
-            <Link to={ROUTER.PATH.MESSENGER}>
+            <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
               <Button outline>채팅하기</Button>
             </Link>
           </UserTouch>

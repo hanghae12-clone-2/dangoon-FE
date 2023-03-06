@@ -10,22 +10,35 @@ import styled from 'styled-components';
 // let sockJS = new SockJS('http://13.209.11.12/ws/chat/');
 // let stompClient = Stomp.over(sockJS);
 
-const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
+// const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
 
 export default function ChatContainer() {
+  const sockJs = useRef(null);
   const [contentCnt, setContentCnt] = useState(0);
   const [contents, setContents] = useState([]);
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    sockJs.connect('79d8f51f-7a6a-4bd5-9649-cbbda78075ca', newMessage => {
-      addMessage(newMessage.message);
-    });
+    sockJs.current = new SockJs('http://13.209.11.12/ws/chat/');
+    sockJs.current.connect('79d8f51f-7a6a-4bd5-9649-cbbda78075ca');
+  }, []);
+
+  useEffect(() => {
+    sockJs.current.connect(
+      '79d8f51f-7a6a-4bd5-9649-cbbda78075ca',
+      newMessage => {
+        addMessage(newMessage.message);
+      }
+    );
   }, [contentCnt]);
 
   const handleEnter = (username, content) => {
-    sockJs.send('79d8f51f-7a6a-4bd5-9649-cbbda78075ca', username, message);
+    sockJs.current.send(
+      '79d8f51f-7a6a-4bd5-9649-cbbda78075ca',
+      username,
+      message
+    );
     setMessage('');
     setContentCnt(state => state + 1);
     // addMessage(content);

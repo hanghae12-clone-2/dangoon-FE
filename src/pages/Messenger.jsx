@@ -7,24 +7,39 @@ import ChatContainer from '../components/chat/ChatContainer';
 
 import Axios from '../api/axios';
 import QUERY from '../constants/query';
+import useGetQuery from '../hooks/useGetQuery';
+import { useParams } from 'react-router-dom';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
-const messege = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 export default function Messenger() {
-  // useEffect(() => {
-  //   axios.post('/chat/room/1');
-  // }, []);
+  const { postId } = useParams();
+
+  useEffect(() => {
+    axios.post('/chat/room/1');
+  }, []);
+
+  const {
+    isLoading,
+    isError,
+    data: rooms,
+  } = useGetQuery(['rooms'], QUERY.AXIOS_PATH.SEVER, '/chat/rooms');
+  console.log(postId);
   return (
-    <ChatContainer />
-    // <MessengerWrapper>
-    //   <NavbarContainer>
-    //     <FaUserCircle />
-    //   </NavbarContainer>
-    //   <MessengerList list={messege} />
-    //   <MessengerItem />
-    // </MessengerWrapper>
+    <>
+      {isLoading && <p>로딩중</p>}
+      {isError && <p>에러</p>}
+      {rooms && (
+        // <ChatContainer />
+        <MessengerWrapper>
+          <NavbarContainer>
+            <FaUserCircle />
+          </NavbarContainer>
+          <MessengerList rooms={rooms.data.result} />
+          <MessengerItem />
+        </MessengerWrapper>
+      )}
+    </>
   );
 }
 
