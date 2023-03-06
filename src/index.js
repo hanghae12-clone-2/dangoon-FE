@@ -14,6 +14,8 @@ import Detail from './pages/Detail';
 import ROUTER from './constants/router';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Messenger from './pages/Messenger';
+import Search from './pages/Search';
 
 const queryClient = new QueryClient();
 
@@ -31,30 +33,37 @@ const router = createBrowserRouter([
         element: <HotArticles />,
       },
       {
-        path: ROUTER.PATH.DETAIL,
+        path: `${ROUTER.PATH.DETAIL}/:postId`,
         element: <Detail />,
       },
       {
         path: ROUTER.PATH.LOGIN,
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: ROUTER.PATH.SIGNUP,
-        element: <Signup/>,
-      }
-      
+        element: <Signup />,
+      },
+      {
+        path: `${ROUTER.PATH.MESSENGER}/:postId`,
+        element: <Messenger />,
+      },
+      {
+        path: `${ROUTER.PATH.SEARCH}/:keyWord`,
+        element: <Search />,
+      },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
+  </Provider>
+  // </React.StrictMode>
 );

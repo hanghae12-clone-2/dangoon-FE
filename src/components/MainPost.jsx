@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import PostItem from './PostItem';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
+import ROUTER from '../constants/router';
+import Post from './post/Post';
 
 export default function MainPost() {
   const {
@@ -13,8 +13,9 @@ export default function MainPost() {
     data: posts,
   } = useGetQuery(
     [QUERY.KEY.POSTS],
-    QUERY.AXIOS_PATH.LOCAL,
-    QUERY.AXIOS_PATH.MAIN_POST
+    QUERY.AXIOS_PATH.SEVER,
+    QUERY.AXIOS_PATH.MAIN_POST,
+    true
   );
   return (
     <>
@@ -22,14 +23,9 @@ export default function MainPost() {
       {isError && <p>에러</p>}
       {posts && (
         <PostWrapper>
-          <PostTitle>중고거래 인기매물</PostTitle>
-          <PostList>
-            {posts.data.map(data => (
-              <Li key={uuidv4()}>
-                <PostItem post={data} />
-              </Li>
-            ))}
-          </PostList>
+          <Post posts={posts} path={ROUTER.PATH.DETAIL}>
+            <PostTitle>중고거래 인기매물</PostTitle>
+          </Post>
         </PostWrapper>
       )}
     </>
@@ -46,17 +42,6 @@ const PostWrapper = styled.div`
 `;
 
 const PostTitle = styled.h1`
-  margin: 128px 0;
+  margin: 8rem 0;
   font-size: ${props => props.theme.fontSize.large};
-`;
-
-const PostList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 1040px;
-`;
-
-const Li = styled.li`
-  margin-bottom: 80px;
 `;

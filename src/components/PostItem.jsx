@@ -4,16 +4,21 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 export default function PostItem({
-  post: { img, title, money, address, like, chat },
+  post: { imageUrlList, title, price, location, wishCount, chat },
+  imgRegular,
 }) {
   return (
     <ItemContainer>
-      <Img src={img} medium />
+      {imgRegular ? (
+        <Img src={imageUrlList[0]} largeRegular />
+      ) : (
+        <Img src={imageUrlList[0]} medium />
+      )}
       <Content>
         <Text bold>{title}</Text>
-        <Text bold>{money}</Text>
-        <Text>{address}</Text>
-        <Text gery>{`${like} ∙ ${chat}`}</Text>
+        <Text bold>{price}</Text>
+        <Text>{location}</Text>
+        <Text gery>{`관심${wishCount} ∙ 채팅${chat}`}</Text>
       </Content>
     </ItemContainer>
   );

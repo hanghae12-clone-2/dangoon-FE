@@ -5,9 +5,19 @@ const COOKIE = {
 
 const AXIOS_PATH = {
   LOCAL: 'http://localhost:4000',
-  HOST: 'http://localhost:4000',
-  MAIN_POST: '/post?_page=1&_limit=8',
-  HOT_POST: '/post',
+  SEVER: 'http://13.209.11.12',
+  LOGIN: '/api/users/login',
+  SGIN_UP: '/api/users/signup',
+  MAIN_POST: '/api/posts?page=1&size=8',
+  HOT_POST(pageNum) {
+    return `/api/posts?page=${pageNum}&size=16`;
+  },
+  DETAIL(postId) {
+    return `/api/posts/${postId}`;
+  },
+  SERCH(pageNum, keyWord) {
+    return `/api/search/posts?page=${pageNum}&size=10&sortBy=wishCount&keyword=${keyWord}`;
+  },
 };
 
 const STALETIME = {

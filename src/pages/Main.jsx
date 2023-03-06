@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MainInfo from '../components/MainIntro';
 import MainPost from '../components/MainPost';
 import ROUTER from '../constants/router';
-import Text from '../elements/Text';
+import Footer from '../components/Footer';
 
 export default function Main() {
   return (
@@ -13,10 +13,8 @@ export default function Main() {
       <MainPost />
       <LinkContainer>
         <Link to={ROUTER.PATH.HOT_ARTICLES}>인기매물 더 보기</Link>
-        <Text regular grey>
-          ⓒ 2023 by hanghae99 2jo
-        </Text>
       </LinkContainer>
+      <Footer />
     </MainWrapper>
   );
 }
