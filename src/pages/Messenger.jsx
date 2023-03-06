@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import MessengerList from '../components/messenger/MessengerList';
 import MessengerItem from '../components/messenger/MessengerItem';
+import ChatContainer from '../components/chat/ChatContainer';
+
+import Axios from '../api/axios';
+import QUERY from '../constants/query';
+
+const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
-  const messege = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  // useEffect(() => {
+  //   axios.post('/chat/room/1');
+  // }, []);
   return (
-    <MessengerWrapper>
-      <NavbarContainer>
-        <FaUserCircle />
-      </NavbarContainer>
-      <MessengerList list={messege} />
-      <MessengerItem />
-    </MessengerWrapper>
+    <ChatContainer />
+    // <MessengerWrapper>
+    //   <NavbarContainer>
+    //     <FaUserCircle />
+    //   </NavbarContainer>
+    //   <MessengerList list={messege} />
+    //   <MessengerItem />
+    // </MessengerWrapper>
   );
 }
 

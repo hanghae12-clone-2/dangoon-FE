@@ -23,6 +23,10 @@ export default class Axios {
           Storage.setUserName(userName.sub);
         }
 
+        const token1 =
+          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTcwOTYxNjI1NCwiaWF0IjoxNjc4MDgwMjU0fQ.ZiwCOu0_N1PeAqvwlera_8puxHkNkPSJtfyhcjExxkI';
+        setCookie(QUERY.COOKIE.COOKIE_NAME, token1);
+
         return response;
       },
       error => {
@@ -33,7 +37,7 @@ export default class Axios {
   }
 
   async get(path) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -43,7 +47,7 @@ export default class Axios {
   }
 
   async post(path, payload) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -53,7 +57,7 @@ export default class Axios {
   }
 
   async delete(path) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -63,7 +67,7 @@ export default class Axios {
   }
 
   async put(path, payload) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
