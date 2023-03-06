@@ -9,12 +9,14 @@ import Axios from '../api/axios';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
   const { postId } = useParams();
   const createRoom = useRef(null);
+  const { messenger } = useSelector(state => state.messenger);
 
   useEffect(() => {
     axios.post(`/chat/room/${postId}`).then(response => {

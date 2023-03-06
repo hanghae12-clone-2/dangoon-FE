@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -8,11 +9,12 @@ import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import useGetQuery from '../hooks/useGetQuery';
+import { setMessenger } from '../redux/modules/messenger';
 
 export default function Detail() {
   const { postId } = useParams();
   const scrollRef = useRef();
-
+  const dispatch = useDispatch();
   const {
     isLoading,
     isError,
@@ -21,7 +23,10 @@ export default function Detail() {
     [QUERY.KEY.POSTS, { postId }],
     QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.DETAIL(postId),
-    true
+    true,
+    detail => {
+      dispatch(setMessenger({ detail: detail.data.result }));
+    }
   );
 
   const {
