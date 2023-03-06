@@ -16,7 +16,6 @@ export default function Detail() {
   const {
     isLoading,
     isError,
-    refetch,
     data: postDetail,
   } = useGetQuery(
     [QUERY.KEY.POSTS, { postId }],
