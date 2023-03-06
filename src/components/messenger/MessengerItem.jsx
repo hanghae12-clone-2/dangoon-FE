@@ -10,8 +10,14 @@ import { IoChatbubblesSharp } from 'react-icons/io5';
 
 import Button from '../../elements/Button';
 
-export default function MessengerItem({ detailRoom, userName }) {
-  const [text, setText] = useState('');
+export default function MessengerItem({
+  detailRoom,
+  userName,
+  contents,
+  message,
+  setMessage,
+  handleEnter,
+}) {
   //todo 문구 랜더링 에러
   if (!detailRoom)
     return (
@@ -19,15 +25,6 @@ export default function MessengerItem({ detailRoom, userName }) {
         <ErrorContainer>
           <IoChatbubblesSharp />
           채팅 상대를 선택해 주세요.
-        </ErrorContainer>
-      </ItemContainer>
-    );
-  if (!detailRoom.data.result.messageDtoList.length)
-    return (
-      <ItemContainer>
-        <ErrorContainer>
-          <IoChatbubblesSharp />
-          채팅 기록이 없습니다.
         </ErrorContainer>
       </ItemContainer>
     );
@@ -40,7 +37,7 @@ export default function MessengerItem({ detailRoom, userName }) {
         <Text regular>{'성인'}</Text>
       </ItemTitleContainer>
       <ItemBodyContainer>
-        {detailRoom.data.result.messageDtoList.map(v =>
+        {contents.map(v =>
           v.sender !== userName ? (
             <OpponentContainer key={uuidv4()}>
               <Content>
@@ -66,14 +63,16 @@ export default function MessengerItem({ detailRoom, userName }) {
         <Input
           multiLine
           placeholder='메세지를 입력해주세요.'
-          value={text}
-          onChange={e => setText(e.target.value)}
+          value={message}
+          onChange={e => setMessage(e.target.value)}
         />
         <UnderBar>
           <AiFillPicture />
           <BtnContainer>
-            <span>{`${text.length}/1000`}</span>
-            <Button full>전송</Button>
+            <span>{`${message.length}/1000`}</span>
+            <Button full onClick={handleEnter}>
+              전송
+            </Button>
           </BtnContainer>
         </UnderBar>
       </TextInput>
@@ -122,6 +121,7 @@ const ItemBodyContainer = styled.div`
   justify-content: end;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 `;
 
 const OpponentContainer = styled.div`

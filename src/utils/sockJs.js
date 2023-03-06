@@ -10,16 +10,28 @@ export default class SockJs {
     this.stompClient = Stomp.over(this.sockJS);
   }
 
-  connect(roomId, callbackFn) {
-    this.stompClient.connect({}, () => {
-      this.stompClient.subscribe(`/topic/chat/room/${roomId}`, data => {
-        const newMessage = JSON.parse(data.body);
-        callbackFn(newMessage);
-      });
-    });
+  async connect(roomId, callbackFn) {
+    this.stompClient.connect(
+      {},
+      () => {
+        this.stompClient.subscribe(`/topic/chat/room/${roomId}`, data => {
+          const newMessage = JSON.parse(data.body);
+          callbackFn(newMessage);
+        });
+      },
+      () => {
+        this.disconnect();
+        window.location.reload();
+      }
+    );
+  }
+
+  async disconnect() {
+    this.stompClient.disconnect();
   }
 
   send(roomId, sender, message) {
+    console.log(roomId, sender, message);
     this.stompClient.send(
       '/app/chat/message',
       {},

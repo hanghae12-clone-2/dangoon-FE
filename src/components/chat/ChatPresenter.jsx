@@ -17,7 +17,7 @@ export default function ChatPresenter({
       </ChatHeader>
       <ChatContent>
         {contents.map(message => (
-          <div> {contents} </div>
+          <div> {message} </div>
         ))}
       </ChatContent>
       <div>

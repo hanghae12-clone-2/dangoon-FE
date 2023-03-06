@@ -9,6 +9,7 @@ import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import { useParams } from 'react-router-dom';
 import Storage from '../utils/localStorage';
+import ChatContainer from '../components/chat/ChatContainer';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
@@ -47,9 +48,9 @@ export default function Messenger() {
   );
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
+    refetch();
     setRoomId(roomId);
     setHandleQuery(true);
-    refetch();
   };
 
   return (
@@ -57,7 +58,6 @@ export default function Messenger() {
       {isLoading && <p>로딩중</p>}
       {isError && <p>에러</p>}
       {rooms && (
-        // <ChatContainer />
         <MessengerWrapper>
           <NavbarContainer>
             <FaUserCircle />
@@ -67,7 +67,16 @@ export default function Messenger() {
             userName={userName}
             onChatRoom={handleChatRoom}
           />
-          <MessengerItem detailRoom={detailRoom} userName={userName} />
+          {!detailRoom && (
+            <MessengerItem detailRoom={detailRoom} userName={userName} />
+          )}
+          {detailRoom && (
+            <ChatContainer
+              roomId={roomId}
+              userName={userName}
+              detailRoom={detailRoom}
+            />
+          )}
         </MessengerWrapper>
       )}
     </>

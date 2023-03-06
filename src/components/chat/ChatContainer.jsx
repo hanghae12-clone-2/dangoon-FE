@@ -6,64 +6,60 @@ import ChatPresenter from './ChatPresenter';
 // import Stomp from 'stompjs';
 // import * as SockJS from 'sockjs-client';
 import styled from 'styled-components';
+import MessengerItem from '../messenger/MessengerItem';
 
 // let sockJS = new SockJS('http://13.209.11.12/ws/chat/');
 // let stompClient = Stomp.over(sockJS);
 
 // const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
 
-export default function ChatContainer() {
+export default function ChatContainer({ roomId, userName, detailRoom }) {
   const sockJs = useRef(null);
   const [contentCnt, setContentCnt] = useState(0);
   const [contents, setContents] = useState([]);
-  const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
     sockJs.current = new SockJs('http://13.209.11.12/ws/chat/');
-    sockJs.current.connect('79d8f51f-7a6a-4bd5-9649-cbbda78075ca');
-  }, []);
+    sockJs.current.connect(roomId);
+    setContents([...detailRoom.data.result.messageDtoList]);
+
+    return () => {
+      sockJs.current.disconnect();
+    };
+  }, [detailRoom.data.result.messageDtoList, roomId]);
 
   useEffect(() => {
-    sockJs.current.connect(
-      '79d8f51f-7a6a-4bd5-9649-cbbda78075ca',
-      newMessage => {
-        addMessage(newMessage.message);
-      }
-    );
+    sockJs.current.connect(roomId, newMessage => {
+      addMessage(newMessage.message);
+    });
   }, [contentCnt]);
 
-  const handleEnter = (username, content) => {
-    sockJs.current.send(
-      '79d8f51f-7a6a-4bd5-9649-cbbda78075ca',
-      username,
-      message
-    );
+  const handleEnter = () => {
+    sockJs.current.send(roomId, userName, message);
     setMessage('');
     setContentCnt(state => state + 1);
-    // addMessage(content);
   };
 
   const addMessage = message => {
-    setContents(prev => [...prev, message]);
+    setContents(prev => [...prev, { sender: userName, message }]);
   };
 
   return (
     <ChatWrapper>
-      <ChatPresenter
+      <MessengerItem
+        detailRoom={detailRoom}
+        userName={userName}
         contents={contents}
-        handleEnter={handleEnter}
         message={message}
         setMessage={setMessage}
-        username={username}
-        setUsername={setUsername}
+        handleEnter={handleEnter}
       />
     </ChatWrapper>
   );
 }
 
 const ChatWrapper = styled.div`
-  display: flex;
   width: 100%;
   height: 100%;
 `;
