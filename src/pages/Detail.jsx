@@ -10,11 +10,12 @@ import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import useGetQuery from '../hooks/useGetQuery';
 import { setMessenger } from '../redux/modules/messenger';
+import Storage from '../utils/localStorage';
 
 export default function Detail() {
   const { postId } = useParams();
   const scrollRef = useRef();
-  const dispatch = useDispatch();
+
   const {
     isLoading,
     isError,
@@ -23,10 +24,7 @@ export default function Detail() {
     [QUERY.KEY.POSTS, { postId }],
     QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.DETAIL(postId),
-    true,
-    detail => {
-      dispatch(setMessenger({ detail: detail.data.result }));
-    }
+    true
   );
 
   const {

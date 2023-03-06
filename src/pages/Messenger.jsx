@@ -1,26 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import MessengerList from '../components/messenger/MessengerList';
 import MessengerItem from '../components/messenger/MessengerItem';
-import ChatContainer from '../components/chat/ChatContainer';
 
 import Axios from '../api/axios';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import Storage from '../utils/localStorage';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
   const { postId } = useParams();
-  const createRoom = useRef(null);
-  const { messenger } = useSelector(state => state.messenger);
+  const [createRoomCheck, setCreateRoomCheck] = useState(false);
+  const detailData = useRef(Storage.getDetail());
 
   useEffect(() => {
-    axios.post(`/chat/room/${postId}`).then(response => {
-      createRoom.current = response.status;
+    axios.post(`/chat/room/${postId}`).then(() => {
+      setCreateRoomCheck(true);
     });
   }, [postId]);
 
@@ -32,9 +31,9 @@ export default function Messenger() {
     ['rooms'],
     QUERY.AXIOS_PATH.SEVER,
     '/chat/rooms',
-    createRoom.current
+    createRoomCheck
   );
-  console.log(isLoading, isError, rooms, createRoom);
+
   return (
     <>
       {isLoading && <p>로딩중</p>}
@@ -45,7 +44,7 @@ export default function Messenger() {
           <NavbarContainer>
             <FaUserCircle />
           </NavbarContainer>
-          <MessengerList rooms={rooms.data.result} />
+          <MessengerList rooms={rooms.data.result} detailData={detailData} />
           <MessengerItem />
         </MessengerWrapper>
       )}
