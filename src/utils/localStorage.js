@@ -4,21 +4,12 @@ const Storage = {
     setlocalStorage('userName', name);
   },
 
-  setDetail(data) {
-    removeLocalStorage('detail');
-    setLocalStorageJSON('detail', data);
-  },
-
   removeUserName() {
     removeLocalStorage('userName');
   },
 
   getUserName() {
     return window.localStorage.getItem('userName');
-  },
-
-  getDetail() {
-    return getLocalStorageJSON('detail');
   },
 };
 

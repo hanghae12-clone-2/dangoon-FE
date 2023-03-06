@@ -15,7 +15,6 @@ const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 export default function Messenger() {
   const { postId } = useParams();
   const [createRoomCheck, setCreateRoomCheck] = useState(false);
-  const detailData = useRef(Storage.getDetail());
 
   useEffect(() => {
     axios.post(`/chat/room/${postId}`).then(() => {
@@ -44,7 +43,7 @@ export default function Messenger() {
           <NavbarContainer>
             <FaUserCircle />
           </NavbarContainer>
-          <MessengerList rooms={rooms.data.result} detailData={detailData} />
+          <MessengerList rooms={rooms.data.result} />
           <MessengerItem />
         </MessengerWrapper>
       )}
