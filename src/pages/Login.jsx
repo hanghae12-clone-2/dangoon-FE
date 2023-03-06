@@ -14,11 +14,11 @@ export default function Login() {
 
   const onSubmit = async e => {
     e.preventDefault();
-
-    axios
+    console.log(userName, passWord);
+    await axios
       .post(QUERY.AXIOS_PATH.LOGIN, {
-        userName,
-        passWord,
+        username: userName,
+        password: passWord,
       })
       .then(() => navigate(ROUTER.PATH.MAIN));
   };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -11,10 +11,12 @@ import useGetQuery from '../hooks/useGetQuery';
 
 export default function Detail() {
   const { postId } = useParams();
+  const scrollRef = useRef();
 
   const {
     isLoading,
     isError,
+    refetch,
     data: postDetail,
   } = useGetQuery(
     [QUERY.KEY.POSTS, { postId }],
@@ -32,13 +34,20 @@ export default function Detail() {
     QUERY.AXIOS_PATH.MAIN_POST
   );
 
+  useEffect(() => {
+    refetch();
+    // scrollRef.current.scrollIntoView({
+    //   block: 'start',
+    // });
+  }, [postId, refetch]);
+
   return (
     <>
       {isLoading && isHotLoding && <p>로딩중</p>}
       {isError && isHotError && <p>에러</p>}
       {postDetail && postHot && (
         <DetailWrapper>
-          <DetailContainer>
+          <DetailContainer ref={scrollRef}>
             <PostDetailImg imageUrlList={postDetail.data.result.imageUrlList} />
             <PostDetailContent detail={postDetail.data.result} />
             <PostContainer>

@@ -4,7 +4,7 @@ import Axios from '../api/axios';
 
 export default function useGetQuery(queryKey, baseUrl, path) {
   const axios = new Axios(baseUrl);
-  const { isLoading, isError, data } = useQuery(
+  const { isLoading, isError, refetch, data } = useQuery(
     [queryKey],
     async () => await axios.get(path),
     {
@@ -13,5 +13,5 @@ export default function useGetQuery(queryKey, baseUrl, path) {
     }
   );
 
-  return { isLoading, isError, data };
+  return { isLoading, isError, refetch, data };
 }

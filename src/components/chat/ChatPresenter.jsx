@@ -17,10 +17,7 @@ export default function ChatPresenter({
       </ChatHeader>
       <ChatContent>
         {contents.map(message => (
-          <div>
-            {' '}
-            {message.username} : {message.content}{' '}
-          </div>
+          <div> {contents} </div>
         ))}
       </ChatContent>
       <div>
@@ -29,7 +26,7 @@ export default function ChatPresenter({
           value={message}
           onChange={e => setMessage(e.target.value)}
         />
-        <button onClick={value => handleEnter(username, value)}>send</button>
+        <button onClick={() => handleEnter(username, message)}>send</button>
       </div>
     </ChatContainer>
   );
