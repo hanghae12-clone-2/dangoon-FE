@@ -21,7 +21,8 @@ export default function Detail() {
   } = useGetQuery(
     [QUERY.KEY.POSTS, { postId }],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.DETAIL(postId)
+    QUERY.AXIOS_PATH.DETAIL(postId),
+    true
   );
 
   const {
@@ -31,7 +32,8 @@ export default function Detail() {
   } = useGetQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.MAIN_POST
+    QUERY.AXIOS_PATH.MAIN_POST,
+    true
   );
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import getEx from '../modules/getEx';
+import messenger from '../modules/messenger';
 
 const store = configureStore({
   reducer: {
-    getEx,
+    messenger,
   },
 });
 

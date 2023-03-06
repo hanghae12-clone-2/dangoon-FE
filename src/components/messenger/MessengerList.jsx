@@ -7,7 +7,6 @@ import { FaUserCircle } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function MessengerList({ rooms }) {
-  console.log(rooms);
   return (
     <MessegeListContainer>
       <ListTitleContainer>
@@ -24,11 +23,11 @@ export default function MessengerList({ rooms }) {
                 <Title>
                   <Text small>
                     <span>성인</span>
-                    {`${'부평'}`}
+                    {`${v.location}`}
                   </Text>
                 </Title>
                 <Content>
-                  <Text small>주말에 연락 드릴게요ddddd.....</Text>
+                  <Text small>{v.lastChat}</Text>
                 </Content>
               </Information>
             </ContentContainer>

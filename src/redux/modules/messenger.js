@@ -1,22 +1,22 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
-  getEx: [],
+  messenger: [],
   isLoading: false,
   isError: false,
   error: null,
 };
 
-const getExSlice = createSlice({
-  name: 'getEx',
+const messengerSlice = createSlice({
+  name: 'messenger',
   initialState,
   reducers: {
     setEx: (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      state.getHome = action.payload;
+      state.messenger = action.payload;
     },
   },
 });
-export const { setEx } = getExSlice.actions;
-export default getExSlice.reducer;
+export const { setEx } = messengerSlice.actions;
+export default messengerSlice.reducer;

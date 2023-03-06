@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import MessengerList from '../components/messenger/MessengerList';
@@ -14,17 +14,25 @@ const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
   const { postId } = useParams();
+  const createRoom = useRef(null);
 
   useEffect(() => {
-    axios.post('/chat/room/1');
-  }, []);
+    axios.post(`/chat/room/${postId}`).then(response => {
+      createRoom.current = response.status;
+    });
+  }, [postId]);
 
   const {
     isLoading,
     isError,
     data: rooms,
-  } = useGetQuery(['rooms'], QUERY.AXIOS_PATH.SEVER, '/chat/rooms');
-  console.log(postId);
+  } = useGetQuery(
+    ['rooms'],
+    QUERY.AXIOS_PATH.SEVER,
+    '/chat/rooms',
+    createRoom.current
+  );
+  console.log(isLoading, isError, rooms, createRoom);
   return (
     <>
       {isLoading && <p>로딩중</p>}

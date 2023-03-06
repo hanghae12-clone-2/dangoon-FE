@@ -14,7 +14,8 @@ export default function MainPost() {
   } = useGetQuery(
     [QUERY.KEY.POSTS],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.MAIN_POST
+    QUERY.AXIOS_PATH.MAIN_POST,
+    true
   );
   return (
     <>
