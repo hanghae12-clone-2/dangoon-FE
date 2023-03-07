@@ -13,12 +13,7 @@ import MessengerItem from '../messenger/MessengerItem';
 
 // const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
 
-export default function ChatContainer({
-  roomId,
-  userName,
-  detailRoom,
-  onRefetch,
-}) {
+export default function ChatContainer({ roomId, userName, detailRoom }) {
   const sockJs = useRef(null);
   const [contentCnt, setContentCnt] = useState(0);
   const [contents, setContents] = useState([]);
@@ -36,7 +31,8 @@ export default function ChatContainer({
 
   useEffect(() => {
     sockJs.current.connect(roomId, newMessage => {
-      addMessage(newMessage.message);
+      console.log(newMessage);
+      addMessage(newMessage);
     });
   }, [contentCnt]);
 
@@ -44,11 +40,13 @@ export default function ChatContainer({
     sockJs.current.send(roomId, userName, message);
     setMessage('');
     setContentCnt(state => state + 1);
-    onRefetch();
   };
 
-  const addMessage = message => {
-    setContents(prev => [...prev, { sender: userName, message }]);
+  const addMessage = newMessage => {
+    setContents(prev => [
+      ...prev,
+      { sender: newMessage.sender, message: newMessage.message },
+    ]);
   };
 
   return (

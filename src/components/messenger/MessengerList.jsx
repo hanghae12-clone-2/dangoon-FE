@@ -32,7 +32,9 @@ export default function MessengerList({ rooms, userName, onChatRoom }) {
                 </Content>
               </Information>
             </ContentContainer>
-            <UnreadMessageCount>{v.unreadMessageCount}</UnreadMessageCount>
+            {v.unreadMessageCount !== 0 && (
+              <UnreadMessageCount>{v.unreadMessageCount}</UnreadMessageCount>
+            )}
             <Img src={v.imageUrl} small />
           </Li>
         ))}

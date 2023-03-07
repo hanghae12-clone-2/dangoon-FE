@@ -19,7 +19,7 @@ export default function Messenger() {
   const [roomId, setRoomId] = useState(null);
   const { postId } = useParams();
   const userName = Storage.getUserName();
-  console.log(postId);
+
   useEffect(() => {
     if (postId !== '-1') {
       axios.post(`/chat/room/${postId}`).then(() => {
@@ -39,34 +39,37 @@ export default function Messenger() {
     ['rooms'],
     QUERY.AXIOS_PATH.SEVER,
     '/chat/rooms',
-    createRoomCheck
+    createRoomCheck,
+    date => {
+      console.log(date);
+    }
   );
 
   const { data: detailRoom, refetch } = useGetQuery(
     ['room', roomId],
     QUERY.AXIOS_PATH.SEVER,
     `/chat/room/${roomId}`,
-    HandleQuery,
-    data => {
-      console.log(data);
-    }
+    HandleQuery
   );
 
   // useEffect(() => {
+  //   setCreateRoomCheck(true);
   //   roomsRefetch();
   // }, [roomsRefetch]);
 
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
     roomsRefetch();
-    refetch();
+    roomsRefetch();
+    // refetch();
     setRoomId(roomId);
     setHandleQuery(true);
   };
 
-  const handleRefetch = () => {
-    roomsRefetch();
-  };
+  // const handleRefetch = () => {
+  //   setCreateRoomCheck(true);
+  //   roomsRefetch();
+  // };
 
   return (
     <>
@@ -90,7 +93,6 @@ export default function Messenger() {
               roomId={roomId}
               userName={userName}
               detailRoom={detailRoom}
-              onRefetch={handleRefetch}
             />
           )}
         </MessengerWrapper>

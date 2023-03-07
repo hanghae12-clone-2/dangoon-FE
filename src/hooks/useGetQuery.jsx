@@ -17,6 +17,7 @@ export default function useGetQuery(
       onSuccess: successFn,
       staleTime: QUERY.STALETIME.FIVE_MIN,
       refetchOnWindowFocus: false,
+      refetchOnMount: true,
       keepPreviousData: true,
       enabled: !!enableValue,
     }
