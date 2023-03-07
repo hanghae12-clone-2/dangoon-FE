@@ -39,11 +39,20 @@ export default function PostDetailContent({ detail, postId, userName }) {
         <LikeAndChat>
           <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
           <UserTouch>
-            <Button like />
-            {nickname !== userName && (
-              <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
-                <Button outline>채팅하기</Button>
-              </Link>
+            {nickname !== userName ? (
+              <>
+                <Button like />
+                <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
+                  <Button outline>채팅하기</Button>
+                </Link>
+              </>
+            ) : (
+              <EditContainer>
+                <Link to={''}>
+                  <Button outline>수정</Button>
+                </Link>
+                <Button outline>삭제</Button>
+              </EditContainer>
             )}
           </UserTouch>
         </LikeAndChat>
@@ -94,4 +103,13 @@ const LikeAndChat = styled.div`
 const UserTouch = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const EditContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    width: 5rem;
+  }
 `;

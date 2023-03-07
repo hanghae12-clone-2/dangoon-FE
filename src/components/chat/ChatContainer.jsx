@@ -1,17 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import QUERY from '../../constants/query';
 import SockJs from '../../utils/sockJs';
-import ChatPresenter from './ChatPresenter';
-
-// import Stomp from 'stompjs';
-// import * as SockJS from 'sockjs-client';
 import styled from 'styled-components';
 import MessengerItem from '../messenger/MessengerItem';
-
-// let sockJS = new SockJS('http://13.209.11.12/ws/chat/');
-// let stompClient = Stomp.over(sockJS);
-
-// const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
 
 export default function ChatContainer({ roomId, userName, detailRoom }) {
   const sockJs = useRef(null);

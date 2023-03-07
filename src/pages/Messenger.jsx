@@ -52,10 +52,10 @@ export default function Messenger() {
     HandleQuery
   );
 
-  // useEffect(() => {
-  //   setCreateRoomCheck(true);
-  //   roomsRefetch();
-  // }, [roomsRefetch]);
+  useEffect(() => {
+    setCreateRoomCheck(true);
+    roomsRefetch();
+  }, []);
 
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
