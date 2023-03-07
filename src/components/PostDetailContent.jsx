@@ -48,10 +48,12 @@ export default function PostDetailContent({ detail, postId, userName }) {
               </>
             ) : (
               <EditContainer>
-                <Link to={''}>
+                <Link to={`${ROUTER.PATH.EDIT}/${postId}`} state={{ detail }}>
                   <Button outline>수정</Button>
                 </Link>
-                <Button outline>삭제</Button>
+                <Link to={ROUTER.PATH.BACK}>
+                  <Button outline>삭제</Button>
+                </Link>
               </EditContainer>
             )}
           </UserTouch>

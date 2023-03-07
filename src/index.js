@@ -52,6 +52,14 @@ const router = createBrowserRouter([
         path: `${ROUTER.PATH.SEARCH}/:keyWord`,
         element: <Search />,
       },
+      {
+        path: `${ROUTER.PATH.ADD}`,
+        element: '',
+      },
+      {
+        path: `${ROUTER.PATH.EDIT}/:postId`,
+        element: '',
+      },
     ],
   },
 ]);
