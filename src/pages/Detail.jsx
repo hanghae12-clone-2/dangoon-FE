@@ -15,6 +15,7 @@ import Storage from '../utils/localStorage';
 export default function Detail() {
   const { postId } = useParams();
   const scrollRef = useRef();
+  const userName = Storage.getUserName();
 
   const {
     isLoading,
@@ -57,6 +58,7 @@ export default function Detail() {
             <PostDetailContent
               detail={postDetail.data.result}
               postId={postId}
+              userName={userName}
             />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>

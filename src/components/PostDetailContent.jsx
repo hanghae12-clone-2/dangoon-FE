@@ -7,12 +7,12 @@ import Button from '../elements/Button';
 import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
 
-export default function PostDetailContent({ detail, postId }) {
+export default function PostDetailContent({ detail, postId, userName }) {
   const { title, content, price, nickname, wishCount, location, createdAt } =
     detail;
 
   const setFormatDate = date => formatAgo(date);
-
+  console.log(userName);
   return (
     <DetailContainer>
       <UserContainer>
@@ -40,9 +40,11 @@ export default function PostDetailContent({ detail, postId }) {
           <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
           <UserTouch>
             <Button like />
-            <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
-              <Button outline>채팅하기</Button>
-            </Link>
+            {nickname !== userName && (
+              <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
+                <Button outline>채팅하기</Button>
+              </Link>
+            )}
           </UserTouch>
         </LikeAndChat>
       </UserContent>
