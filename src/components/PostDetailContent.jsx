@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BiUserCircle, BiTimeFive } from 'react-icons/bi';
 import {
   AiOutlineSmile,
   AiOutlineFrown,
   AiFillLike,
   AiFillDislike,
+  AiFillHeart,
 } from 'react-icons/ai';
 import Text from '../elements/Text';
 import formatAgo from '../utils/formatDate';
@@ -17,6 +18,7 @@ export default function PostDetailContent({
   detail,
   postId,
   userName,
+  temperatureServer,
   onLikeUp,
   onLikeDown,
 }) {
@@ -25,12 +27,14 @@ export default function PostDetailContent({
     content,
     price,
     nickname,
+    isWish,
     wishCount,
     location,
     createdAt,
     temperature,
   } = detail;
-
+  console.log(detail);
+  const temp = temperatureServer ? temperatureServer : temperature;
   const setFormatDate = date => formatAgo(date);
 
   return (
@@ -45,14 +49,14 @@ export default function PostDetailContent({
             <Text userLocation>{location}</Text>
           </UserTextContainer>
         </UserImgTitle>
-        <ProgressContainer>
+        <ProgressContainer temp={temp}>
           <span>
-            {temperature}°C
+            {temp}°C
             <Progress>
-              <ProgressBar temperature={temperature} />
+              <ProgressBar temp={temp} />
             </Progress>
           </span>
-          {temperature >= 36.5 ? <AiOutlineSmile /> : <AiOutlineFrown />}
+          {temp >= 36.5 ? <AiOutlineSmile /> : <AiOutlineFrown />}
           <LikeContainer>
             <Like>
               <AiFillLike onClick={onLikeUp} />
@@ -80,7 +84,11 @@ export default function PostDetailContent({
           <UserTouch>
             {nickname !== userName ? (
               <>
-                <Button like />
+                <LikeBtn isWish={false}>
+                  <Button>
+                    <AiFillHeart />
+                  </Button>
+                </LikeBtn>
                 <Link to={`${ROUTER.PATH.MESSENGER}/${postId}`}>
                   <Button outline>채팅하기</Button>
                 </Link>
@@ -164,7 +172,8 @@ const ProgressContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  color: ${props => props.theme.color.dark_mint};
+  color: ${props =>
+    props.temp >= 36.5 ? props.theme.color.dark_mint : props.theme.color.red};
 
   svg {
     font-size: ${props => props.theme.fontSize.medium};
@@ -180,11 +189,12 @@ const Progress = styled.div`
 `;
 
 const ProgressBar = styled.div`
-  width: ${props => props.ProgressBar};
+  width: ${props => `${props.temp}%`};
   height: 0.5rem;
   padding: 0;
   text-align: center;
-  background-color: ${props => props.theme.color.dark_mint};
+  background-color: ${props =>
+    props.temp >= 36.5 ? props.theme.color.dark_mint : props.theme.color.red};
   color: #111;
 `;
 
@@ -199,13 +209,47 @@ const LikeContainer = styled.div`
 `;
 
 const Like = styled.div`
-  color: ${props => props.theme.color.dark_mint};
+  color: ${props => props.theme.color.carrot_orange};
   cursor: pointer;
   :hover {
     transform: scale(1.05);
   }
 `;
 
-const DisLike = styled(Like)`
-  color: ${props => props.theme.color.red};
+const DisLike = styled(Like)``;
+
+const LikeBtn = styled.div`
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 2.3rem;
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
+    transition: all 600ms ease-in-out;
+    ${props =>
+      props.isWish
+        ? css`
+            color: #e74133;
+            background-color: white;
+          `
+        : css`
+            color: white;
+            background-color: #e74133;
+          `}
+  }
+
+  ${props =>
+    props.isWish
+      ? css`
+          svg {
+            transform: rotate(1turn);
+          }
+        `
+      : css`
+          svg {
+            transform: rotate(1turn);
+          }
+        `}
 `;

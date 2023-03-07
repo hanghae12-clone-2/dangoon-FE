@@ -9,6 +9,9 @@ const AXIOS_PATH = {
   LOGIN: '/api/users/login',
   SGIN_UP: '/api/users/signup',
   MAIN_POST: '/api/posts?page=1&size=8',
+  LIKE_POST: '/api/like',
+  HATE_POST: '/api/hate',
+
   HOT_POST(pageNum) {
     return `/api/posts?page=${pageNum}&size=8`;
   },
