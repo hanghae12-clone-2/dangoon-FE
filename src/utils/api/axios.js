@@ -45,7 +45,7 @@ export default class Axios {
   }
 
   async get(path) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -55,7 +55,7 @@ export default class Axios {
   }
 
   async post(path, payload) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -65,7 +65,7 @@ export default class Axios {
   }
 
   async delete(path) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,
@@ -75,7 +75,7 @@ export default class Axios {
   }
 
   async put(path, payload) {
-    const cookie = getCookie();
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
     const option = {
       headers: {
         Authorization: `Bearer ${cookie ? cookie : ''}`,

@@ -14,6 +14,7 @@ import Detail from './pages/Detail';
 import ROUTER from './constants/router';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import WritePage from './pages/WritePage';
 
 const queryClient = new QueryClient();
 
@@ -41,8 +42,11 @@ const router = createBrowserRouter([
       {
         path: ROUTER.PATH.SIGNUP,
         element: <Signup/>,
+      },
+      {
+        path:ROUTER.PATH.WRITEPAGE,
+        element:<WritePage/>
       }
-      
     ],
   },
 ]);
