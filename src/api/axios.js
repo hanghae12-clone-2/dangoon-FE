@@ -14,7 +14,7 @@ export default class Axios {
       response => {
         console.log(response);
         const token = response.headers.authorization;
-
+        console.log(getCookie(QUERY.COOKIE.COOKIE_NAME));
         if (token) {
           const [, parseToken] = token.split(' ');
           setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
@@ -22,10 +22,6 @@ export default class Axios {
           const userName = jwt_decode(parseToken);
           Storage.setUserName(userName.sub);
         }
-
-        const token1 =
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTcwOTYxNjI1NCwiaWF0IjoxNjc4MDgwMjU0fQ.ZiwCOu0_N1PeAqvwlera_8puxHkNkPSJtfyhcjExxkI';
-        setCookie(QUERY.COOKIE.COOKIE_NAME, token1);
 
         return response;
       },

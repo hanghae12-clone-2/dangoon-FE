@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import ROUTER from '../constants/router';
 
 export default function PostDetailContent({ detail, postId }) {
-  const { title, content, price, nickName, wishCount, location, createdAt } =
+  const { title, content, price, nickname, wishCount, location, createdAt } =
     detail;
 
   const setFormatDate = date => formatAgo(date);
@@ -20,7 +20,7 @@ export default function PostDetailContent({ detail, postId }) {
           <BiUserCircle />
         </Icon>
         <UserTextContainer>
-          <Text userTitle>{nickName}</Text>
+          <Text userTitle>{nickname}</Text>
           <Text userLocation>{location}</Text>
         </UserTextContainer>
       </UserContainer>
