@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PostItem from '../PostItem';
 
 export default function Post({ posts, path, imgRegular, children }) {
+  console.log(posts);
   return (
     <>
       {children}

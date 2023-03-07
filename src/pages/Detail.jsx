@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Axios from '../api/axios';
 import Footer from '../components/Footer';
 import Post from '../components/post/Post';
 import PostDetailContent from '../components/PostDetailContent';
@@ -12,9 +13,13 @@ import useGetQuery from '../hooks/useGetQuery';
 import { setMessenger } from '../redux/modules/messenger';
 import Storage from '../utils/localStorage';
 
+const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
+
 export default function Detail() {
+  const [temperatureServer, setTemperatureServer] = useState(null);
   const { postId } = useParams();
   const scrollRef = useRef();
+  const userName = Storage.getUserName();
 
   const {
     isLoading,
@@ -46,6 +51,18 @@ export default function Detail() {
     }
   }, [postId]);
 
+  const handleLikeUp = () => {
+    axios
+      .post(`${QUERY.AXIOS_PATH.LIKE_POST}/${postId}`)
+      .then(response => setTemperatureServer(response.data.result.temperature));
+  };
+
+  const handleLikeDown = () => {
+    axios
+      .post(`${QUERY.AXIOS_PATH.HATE_POST}/${postId}`)
+      .then(response => setTemperatureServer(response.data.result.temperature));
+  };
+
   return (
     <>
       {isLoading && isHotLoding && <p>로딩중</p>}
@@ -57,6 +74,10 @@ export default function Detail() {
             <PostDetailContent
               detail={postDetail.data.result}
               postId={postId}
+              userName={userName}
+              temperatureServer={temperatureServer}
+              onLikeUp={handleLikeUp}
+              onLikeDown={handleLikeDown}
             />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>

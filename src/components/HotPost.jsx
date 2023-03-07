@@ -15,7 +15,7 @@ export default function HotPost() {
     hasNextPage,
     data: posts,
   } = useInfiniteScrollQuery(
-    [QUERY.KEY.POSTS],
+    ['HotPost'],
     QUERY.AXIOS_PATH.SEVER,
     QUERY.AXIOS_PATH.HOT_POST,
     16

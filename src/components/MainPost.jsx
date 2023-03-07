@@ -17,6 +17,7 @@ export default function MainPost() {
     QUERY.AXIOS_PATH.MAIN_POST,
     true
   );
+
   return (
     <>
       {isLoading && <p>로딩중</p>}

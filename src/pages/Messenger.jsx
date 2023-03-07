@@ -15,20 +15,24 @@ const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
   const [createRoomCheck, setCreateRoomCheck] = useState(false);
-  const [HandleQuery, setHandleQuery] = useState(false);
   const [roomId, setRoomId] = useState(null);
   const { postId } = useParams();
   const userName = Storage.getUserName();
 
   useEffect(() => {
-    axios.post(`/chat/room/${postId}`).then(() => {
+    if (postId !== '-1') {
+      axios.post(`/chat/room/${postId}`).then(() => {
+        setCreateRoomCheck(true);
+      });
+    } else {
       setCreateRoomCheck(true);
-    });
+    }
   }, [postId]);
 
   const {
     isLoading,
     isError,
+    refetch: roomsRefetch,
     data: rooms,
   } = useGetQuery(
     ['rooms'],
@@ -37,20 +41,25 @@ export default function Messenger() {
     createRoomCheck
   );
 
-  const { data: detailRoom, refetch } = useGetQuery(
+  const { data: detailRoom } = useGetQuery(
     ['room', roomId],
     QUERY.AXIOS_PATH.SEVER,
     `/chat/room/${roomId}`,
-    HandleQuery,
-    data => {
-      console.log(data);
+    roomId,
+    undefined,
+    () => {
+      roomsRefetch();
     }
   );
+
+  useEffect(() => {
+    setCreateRoomCheck(true);
+    roomsRefetch();
+  }, []);
+
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
-    refetch();
     setRoomId(roomId);
-    setHandleQuery(true);
   };
 
   return (
@@ -67,10 +76,10 @@ export default function Messenger() {
             userName={userName}
             onChatRoom={handleChatRoom}
           />
-          {!detailRoom && (
+          {!detailRoom && rooms && (
             <MessengerItem detailRoom={detailRoom} userName={userName} />
           )}
-          {detailRoom && (
+          {detailRoom && rooms && (
             <ChatContainer
               roomId={roomId}
               userName={userName}

@@ -22,11 +22,7 @@ export default class Axios {
           const userName = jwt_decode(parseToken);
           Storage.setUserName(userName.sub);
         }
-
-        const token1 =
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTcwOTYxNjI1NCwiaWF0IjoxNjc4MDgwMjU0fQ.ZiwCOu0_N1PeAqvwlera_8puxHkNkPSJtfyhcjExxkI';
-        setCookie(QUERY.COOKIE.COOKIE_NAME, token1);
-
+        console.log(getCookie(QUERY.COOKIE.COOKIE_NAME));
         return response;
       },
       error => {

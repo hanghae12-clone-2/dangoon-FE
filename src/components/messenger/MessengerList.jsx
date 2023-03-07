@@ -23,7 +23,7 @@ export default function MessengerList({ rooms, userName, onChatRoom }) {
               <Information>
                 <Title>
                   <Text small>
-                    <span>성인</span>
+                    <span>{v.partner}</span>
                     {`${v.location}`}
                   </Text>
                 </Title>
@@ -32,6 +32,9 @@ export default function MessengerList({ rooms, userName, onChatRoom }) {
                 </Content>
               </Information>
             </ContentContainer>
+            {v.unreadMessageCount !== 0 && (
+              <UnreadMessageCount>{v.unreadMessageCount}</UnreadMessageCount>
+            )}
             <Img src={v.imageUrl} small />
           </Li>
         ))}
@@ -54,6 +57,7 @@ const ListTitleContainer = styled.ul`
 `;
 
 const MessegeList = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   overflow-y: auto;
@@ -101,3 +105,18 @@ const Title = styled.div`
 `;
 
 const Content = styled(Title)``;
+
+const UnreadMessageCount = styled.div`
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  color: ${props => props.theme.color.white};
+  background-color: ${props => props.theme.color.carrot_orange};
+  border-radius: 50%;
+  font-size: 0.9rem;
+  transform: translate(-0.5rem, 1.3rem);
+`;

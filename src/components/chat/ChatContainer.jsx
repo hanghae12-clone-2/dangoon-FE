@@ -1,17 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import QUERY from '../../constants/query';
 import SockJs from '../../utils/sockJs';
-import ChatPresenter from './ChatPresenter';
-
-// import Stomp from 'stompjs';
-// import * as SockJS from 'sockjs-client';
 import styled from 'styled-components';
 import MessengerItem from '../messenger/MessengerItem';
-
-// let sockJS = new SockJS('http://13.209.11.12/ws/chat/');
-// let stompClient = Stomp.over(sockJS);
-
-// const sockJs = new SockJs('http://13.209.11.12/ws/chat/');
 
 export default function ChatContainer({ roomId, userName, detailRoom }) {
   const sockJs = useRef(null);
@@ -30,9 +20,7 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   }, [detailRoom.data.result.messageDtoList, roomId]);
 
   useEffect(() => {
-    sockJs.current.connect(roomId, newMessage => {
-      addMessage(newMessage.message);
-    });
+    sockJs.current.connect(roomId, addMessage);
   }, [contentCnt]);
 
   const handleEnter = () => {
@@ -41,8 +29,11 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
     setContentCnt(state => state + 1);
   };
 
-  const addMessage = message => {
-    setContents(prev => [...prev, { sender: userName, message }]);
+  const addMessage = newMessage => {
+    setContents(prev => [
+      ...prev,
+      { sender: newMessage.sender, message: newMessage.message },
+    ]);
   };
 
   return (
