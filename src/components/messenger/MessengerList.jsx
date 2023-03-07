@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import useGetQuery from '../../hooks/useGetQuery';
 
 export default function MessengerList({ rooms, userName, onChatRoom }) {
-  console.log(rooms);
   return (
     <MessegeListContainer>
       <ListTitleContainer>

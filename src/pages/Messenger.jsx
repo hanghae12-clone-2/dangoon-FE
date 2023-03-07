@@ -25,13 +25,15 @@ export default function Messenger() {
       axios.post(`/chat/room/${postId}`).then(() => {
         setCreateRoomCheck(true);
       });
+    } else {
+      setCreateRoomCheck(true);
     }
-    setCreateRoomCheck(true);
   }, [postId]);
 
   const {
     isLoading,
     isError,
+    refetch: roomsRefetch,
     data: rooms,
   } = useGetQuery(
     ['rooms'],
@@ -49,11 +51,21 @@ export default function Messenger() {
       console.log(data);
     }
   );
+
+  // useEffect(() => {
+  //   roomsRefetch();
+  // }, [roomsRefetch]);
+
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
+    roomsRefetch();
     refetch();
     setRoomId(roomId);
     setHandleQuery(true);
+  };
+
+  const handleRefetch = () => {
+    roomsRefetch();
   };
 
   return (
@@ -70,14 +82,15 @@ export default function Messenger() {
             userName={userName}
             onChatRoom={handleChatRoom}
           />
-          {!detailRoom && (
+          {!detailRoom && rooms && (
             <MessengerItem detailRoom={detailRoom} userName={userName} />
           )}
-          {detailRoom && (
+          {detailRoom && rooms && (
             <ChatContainer
               roomId={roomId}
               userName={userName}
               detailRoom={detailRoom}
+              onRefetch={handleRefetch}
             />
           )}
         </MessengerWrapper>

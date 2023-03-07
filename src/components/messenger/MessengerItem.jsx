@@ -18,7 +18,6 @@ export default function MessengerItem({
   setMessage,
   handleEnter,
 }) {
-  console.log(detailRoom);
   //todo 문구 랜더링 에러
   if (!detailRoom)
     return (

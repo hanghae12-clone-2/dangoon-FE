@@ -14,7 +14,7 @@ export default class Axios {
       response => {
         console.log(response);
         const token = response.headers.authorization;
-        console.log(getCookie(QUERY.COOKIE.COOKIE_NAME));
+
         if (token) {
           const [, parseToken] = token.split(' ');
           setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
@@ -22,7 +22,7 @@ export default class Axios {
           const userName = jwt_decode(parseToken);
           Storage.setUserName(userName.sub);
         }
-
+        console.log(getCookie(QUERY.COOKIE.COOKIE_NAME));
         return response;
       },
       error => {
