@@ -18,6 +18,7 @@ export default function MessengerItem({
   setMessage,
   handleEnter,
 }) {
+  console.log(detailRoom);
   //todo 문구 랜더링 에러
   if (!detailRoom)
     return (
@@ -34,7 +35,7 @@ export default function MessengerItem({
         <Text large_medium>
           <FaUserCircle />
         </Text>
-        <Text regular>{'성인'}</Text>
+        <Text regular>{detailRoom.data.result.partner}</Text>
       </ItemTitleContainer>
       <ItemBodyContainer>
         {contents.map(v =>

@@ -12,9 +12,8 @@ import Storage from '../utils/localStorage';
 import { removeCookie } from '../utils/cookie';
 import QUERY from '../constants/query';
 
-export default function Navbar() {
+export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
   const [keyWord, setKeyWord] = useState('');
-  const [showMyMenu, setShowMyMenu] = useState(false);
 
   const navigate = useNavigate();
   const userName = Storage.getUserName();
@@ -23,16 +22,6 @@ export default function Navbar() {
     e.preventDefault();
     if (!keyWord) return;
     navigate(`/search/${keyWord}`);
-  };
-
-  const handleShowMyMenu = () => {
-    setShowMyMenu(state => !state);
-  };
-
-  const handleLogOut = () => {
-    Storage.removeUserName();
-    removeCookie(QUERY.COOKIE.COOKIE_NAME);
-    setShowMyMenu(false);
   };
 
   return (
@@ -53,11 +42,14 @@ export default function Navbar() {
           {userName ? (
             <ShowMyMenuContainer>
               <Text large_medium>
-                <FaUserCircle onClick={handleShowMyMenu} />
+                <FaUserCircle id='MyMenu' onClick={onShowMyMenu} />
               </Text>
               {showMyMenu ? (
                 <ShowMyMenu>
-                  <span onClick={handleLogOut}>로그아웃</span>
+                  <Link to={`${ROUTER.PATH.MESSENGER}/${-1}`}>
+                    <span>채팅</span>
+                  </Link>
+                  <span onClick={onLogOut}>로그아웃</span>
                 </ShowMyMenu>
               ) : (
                 ''

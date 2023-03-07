@@ -19,11 +19,14 @@ export default function Messenger() {
   const [roomId, setRoomId] = useState(null);
   const { postId } = useParams();
   const userName = Storage.getUserName();
-
+  console.log(postId);
   useEffect(() => {
-    axios.post(`/chat/room/${postId}`).then(() => {
-      setCreateRoomCheck(true);
-    });
+    if (postId !== '-1') {
+      axios.post(`/chat/room/${postId}`).then(() => {
+        setCreateRoomCheck(true);
+      });
+    }
+    setCreateRoomCheck(true);
   }, [postId]);
 
   const {
