@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import Axios from '../utils/api/axios';
+import Axios from '../api/axios'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import {BsCameraFill} from 'react-icons/bs';
