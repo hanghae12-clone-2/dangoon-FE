@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Text from '../../elements/Text';
 import Input from '../../elements/Input';
@@ -18,7 +18,16 @@ export default function MessengerItem({
   setMessage,
   handleEnter,
 }) {
-  //todo 문구 랜더링 에러
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    if (contents) {
+      scrollRef.current.scrollIntoView({
+        block: 'end',
+      });
+    }
+  }, [contents]);
+
   if (!detailRoom)
     return (
       <ItemContainer>
@@ -58,6 +67,7 @@ export default function MessengerItem({
             </MeContainer>
           )
         )}
+        <Scroll ref={scrollRef} />
       </ItemBodyContainer>
       <TextInput>
         <Input
@@ -116,11 +126,9 @@ const ItemTitleContainer = styled.div`
 `;
 
 const ItemBodyContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
   width: 100%;
   height: 100%;
+  padding: 1rem 0;
   overflow-y: scroll;
 `;
 
@@ -146,6 +154,8 @@ const MeContainer = styled(OpponentContainer)`
   align-items: flex-end;
   margin-right: 3rem;
 `;
+
+const Scroll = styled.div``;
 
 const Content = styled.div`
   display: flex;
