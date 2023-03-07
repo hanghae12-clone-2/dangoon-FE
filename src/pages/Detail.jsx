@@ -47,6 +47,10 @@ export default function Detail() {
     }
   }, [postId]);
 
+  const handleLikeUp = () => {};
+
+  const handleLikeDown = () => {};
+
   return (
     <>
       {isLoading && isHotLoding && <p>로딩중</p>}
@@ -59,6 +63,8 @@ export default function Detail() {
               detail={postDetail.data.result}
               postId={postId}
               userName={userName}
+              onLikeUp={handleLikeUp}
+              onLikeDown={handleLikeDown}
             />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>

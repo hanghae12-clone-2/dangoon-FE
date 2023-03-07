@@ -21,7 +21,7 @@ export const useInfiniteScrollQuery = (queryKey, baseUrl, path, keyWord) => {
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
-        return lastPage.data.length ? nextPage : undefined;
+        return lastPage.data.result.length ? nextPage : undefined;
       },
       refetchOnWindowFocus: false,
       staleTime: QUERY.STALETIME.FIVE_MIN,

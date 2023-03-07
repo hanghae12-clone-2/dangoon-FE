@@ -15,7 +15,6 @@ const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
 export default function Messenger() {
   const [createRoomCheck, setCreateRoomCheck] = useState(false);
-  const [HandleQuery, setHandleQuery] = useState(false);
   const [roomId, setRoomId] = useState(null);
   const { postId } = useParams();
   const userName = Storage.getUserName();
@@ -39,17 +38,18 @@ export default function Messenger() {
     ['rooms'],
     QUERY.AXIOS_PATH.SEVER,
     '/chat/rooms',
-    createRoomCheck,
-    date => {
-      console.log(date);
-    }
+    createRoomCheck
   );
 
-  const { data: detailRoom, refetch } = useGetQuery(
+  const { data: detailRoom } = useGetQuery(
     ['room', roomId],
     QUERY.AXIOS_PATH.SEVER,
     `/chat/room/${roomId}`,
-    HandleQuery
+    roomId,
+    undefined,
+    () => {
+      roomsRefetch();
+    }
   );
 
   useEffect(() => {
@@ -59,17 +59,8 @@ export default function Messenger() {
 
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
-    roomsRefetch();
-    roomsRefetch();
-    // refetch();
     setRoomId(roomId);
-    setHandleQuery(true);
   };
-
-  // const handleRefetch = () => {
-  //   setCreateRoomCheck(true);
-  //   roomsRefetch();
-  // };
 
   return (
     <>

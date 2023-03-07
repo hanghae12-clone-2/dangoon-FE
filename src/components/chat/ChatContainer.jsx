@@ -20,10 +20,7 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   }, [detailRoom.data.result.messageDtoList, roomId]);
 
   useEffect(() => {
-    sockJs.current.connect(roomId, newMessage => {
-      console.log(newMessage);
-      addMessage(newMessage);
-    });
+    sockJs.current.connect(roomId, addMessage);
   }, [contentCnt]);
 
   const handleEnter = () => {

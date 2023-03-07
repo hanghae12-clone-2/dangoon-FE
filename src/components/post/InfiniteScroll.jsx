@@ -14,12 +14,13 @@ export default function InfiniteScroll({
   hasNextPage,
   children,
 }) {
+  console.log(posts);
   return (
     <>
       <PostTitle>{children}</PostTitle>
       <PostList>
         {posts?.pages.map(post =>
-          post.data.result.map(data => (
+          post?.data.result.map(data => (
             <Li key={uuidv4()}>
               <Link to={`${path}/${data.postid}`}>
                 <PostItem post={data} />

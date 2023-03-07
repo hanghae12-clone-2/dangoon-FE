@@ -10,18 +10,20 @@ export default class SockJs {
     this.stompClient = Stomp.over(this.sockJS);
   }
 
-  async connect(roomId, callbackFn) {
+  async connect(roomId, addMessage) {
     this.stompClient.connect(
       {},
       () => {
         this.stompClient.subscribe(`/topic/chat/room/${roomId}`, data => {
           const newMessage = JSON.parse(data.body);
-          callbackFn(newMessage);
+          addMessage(newMessage);
         });
       },
       () => {
-        this.disconnect();
-        window.location.reload();
+        const reload = window.confirm(
+          '서버가 불안정 합니다. 새로고침 하시겠습니까?'
+        );
+        reload && window.location.reload();
       }
     );
   }

@@ -10,7 +10,7 @@ const AXIOS_PATH = {
   SGIN_UP: '/api/users/signup',
   MAIN_POST: '/api/posts?page=1&size=8',
   HOT_POST(pageNum) {
-    return `/api/posts?page=${pageNum}&size=16`;
+    return `/api/posts?page=${pageNum}&size=8`;
   },
   DETAIL(postId) {
     return `/api/posts/${postId}`;
