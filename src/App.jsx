@@ -24,6 +24,7 @@ function App() {
   const hadlePageClick = e => {
     if (e.target.id === 'MyMenu') return;
     if (e.target.innerText === '채팅') return;
+    if (e.target.innerText === '게시글 작성') return;
     if (e.target.innerText === '로그아웃') return;
 
     setShowMyMenu(false);
