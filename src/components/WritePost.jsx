@@ -43,7 +43,7 @@ export default function WritePost({ children, axiosFn, detail }) {
       post = {
         title,
         content,
-        price,
+        price: price.replace(/[,]/g, ''),
         location: locationRef.current.value,
         remainingImagesUrlList: parsePreviewData,
       };
@@ -53,7 +53,7 @@ export default function WritePost({ children, axiosFn, detail }) {
       post = {
         title,
         content,
-        price,
+        price: price.replace(/[,]/g, ''),
         location: locationRef.current.value,
       };
     }
@@ -81,6 +81,13 @@ export default function WritePost({ children, axiosFn, detail }) {
   const handleDeleteImg = index => {
     setImage([...image].filter((_, i) => i !== index));
     setPreview([...preview].filter((_, i) => i !== index));
+  };
+
+  const handlePrice = e => {
+    let number = e.target.value;
+    number = Number(number.replace(/[,]/g, ''));
+    if (Number.isNaN(Number(number))) return;
+    setPrice(number.toLocaleString('ko-KR'));
   };
 
   return (
@@ -121,7 +128,7 @@ export default function WritePost({ children, axiosFn, detail }) {
         <InputText
           type='text'
           value={price}
-          onChange={e => setPrice(e.target.value)}
+          onChange={e => handlePrice(e)}
           placeholder='가격'
         />
         <InputLocation ref={locationRef} as='select'>
