@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -21,7 +22,7 @@ export default function Detail() {
   const scrollRef = useRef();
   const userName = Storage.getUserName();
   const navigate = useNavigate();
-
+  const query = useQueryClient();
   const {
     isLoading,
     isError,
@@ -65,9 +66,10 @@ export default function Detail() {
   };
 
   const handleDeletePost = () => {
-    axios
-      .delete(QUERY.AXIOS_PATH.DETAIL(postId))
-      .then(() => navigate(ROUTER.PATH.MY));
+    axios.delete(QUERY.AXIOS_PATH.DETAIL(postId)).then(() => {
+      query.invalidateQueries(['mypost']);
+      navigate(ROUTER.PATH.MY);
+    });
   };
 
   return (

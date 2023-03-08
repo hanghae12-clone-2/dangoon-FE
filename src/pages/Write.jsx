@@ -7,6 +7,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ROUTER from '../constants/router';
+import { useQueryClient } from '@tanstack/react-query';
 
 const axios = new Axios('http://13.209.11.12');
 
@@ -19,6 +20,7 @@ export default function WritePage() {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const navigate = useNavigate();
+  const query = useQueryClient();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -41,7 +43,8 @@ export default function WritePage() {
 
     axios.post('/api/posts', formData, {}).then(response => {
       console.log(response.data);
-      navigate('/');
+      query.invalidateQueries(['mypost']);
+      navigate(ROUTER.PATH.MY);
     });
   };
 
