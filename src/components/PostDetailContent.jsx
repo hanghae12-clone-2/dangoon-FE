@@ -60,12 +60,16 @@ export default function PostDetailContent({
           </span>
           {temp >= 36.5 ? <AiOutlineSmile /> : <AiOutlineFrown />}
           <LikeContainer>
-            <Like>
-              <AiFillLike onClick={onLikeUp} />
-            </Like>
-            <DisLike>
-              <AiFillDislike onClick={onLikeDown} />
-            </DisLike>
+            {nickname !== userName && (
+              <>
+                <Like>
+                  <AiFillLike onClick={onLikeUp} />
+                </Like>
+                <DisLike>
+                  <AiFillDislike onClick={onLikeDown} />
+                </DisLike>
+              </>
+            )}
           </LikeContainer>
         </ProgressContainer>
       </UserContainer>
