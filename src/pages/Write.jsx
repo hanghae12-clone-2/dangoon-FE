@@ -18,7 +18,7 @@ export default function WritePage() {
   const axios = new Axios('http://13.209.11.12');
   const navigate = useNavigate();
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -36,13 +36,10 @@ export default function WritePage() {
     formData.append('multipartFiles', image);
     console.log(image);
 
-    try {
-      const response = await axios.post('/api/posts', formData, {});
+    axios.post('/api/posts', formData, {}).then(response => {
       console.log(response.data);
       navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
+    });
   };
 
   const handleImageChange = event => {
@@ -67,7 +64,7 @@ export default function WritePage() {
           </FormTitle>
           <FormButton type='submit'>완료 </FormButton>
         </FormHeader>
-        <LableBorder>
+        <LableBorder preview={preview}>
           {preview &&
             preview.map(url => (
               <ImgConatiner>
@@ -130,7 +127,7 @@ export default function WritePage() {
         <TextArea
           value={content}
           onChange={e => setContent(e.target.value)}
-          placeholder='  내용'
+          placeholder='내용'
         />
       </FormBorder>
     </Form>
@@ -166,17 +163,16 @@ const FormHeader = styled.div`
 
 const LableBorder = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${props => (props.preview ? 'flex-start' : 'center')};
   align-items: center;
   width: 100%;
-  height: 45rem;
+  height: 100%;
   border-radius: 5px;
-  padding: 0 3rem;
+  padding: 5rem 1rem;
   margin-bottom: 10px;
   background-color: #f5f5f5;
   gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: scroll hidden;
 `;
 
 const ImgConatiner = styled.div`
