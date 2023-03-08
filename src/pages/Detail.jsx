@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../api/axios';
 import Footer from '../components/Footer';
@@ -20,6 +20,7 @@ export default function Detail() {
   const { postId } = useParams();
   const scrollRef = useRef();
   const userName = Storage.getUserName();
+  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -63,6 +64,12 @@ export default function Detail() {
       .then(response => setTemperatureServer(response.data.result.temperature));
   };
 
+  const handleDeletePost = () => {
+    axios
+      .delete(QUERY.AXIOS_PATH.DETAIL(postId))
+      .then(() => navigate(ROUTER.PATH.MY));
+  };
+
   return (
     <>
       {isLoading && isHotLoding && <p>로딩중</p>}
@@ -78,6 +85,7 @@ export default function Detail() {
               temperatureServer={temperatureServer}
               onLikeUp={handleLikeUp}
               onLikeDown={handleLikeDown}
+              onDeletePost={handleDeletePost}
             />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>

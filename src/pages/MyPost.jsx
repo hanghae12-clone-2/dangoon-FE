@@ -10,7 +10,12 @@ export default function MyPost() {
     isLoading,
     isError,
     data: posts,
-  } = useGetQuery([], QUERY.AXIOS_PATH.SEVER, QUERY.AXIOS_PATH.MY_POST, true);
+  } = useGetQuery(
+    ['mypost'],
+    QUERY.AXIOS_PATH.SEVER,
+    QUERY.AXIOS_PATH.MY_POST,
+    true
+  );
 
   return (
     <>

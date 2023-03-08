@@ -21,6 +21,7 @@ export default function PostDetailContent({
   temperatureServer,
   onLikeUp,
   onLikeDown,
+  onDeletePost,
 }) {
   const {
     title,
@@ -33,7 +34,7 @@ export default function PostDetailContent({
     createdAt,
     temperature,
   } = detail;
-  console.log(detail);
+
   const temp = temperatureServer ? temperatureServer : temperature;
   const setFormatDate = date => formatAgo(date);
 
@@ -98,9 +99,9 @@ export default function PostDetailContent({
                 <Link to={`${ROUTER.PATH.EDIT}/${postId}`} state={{ detail }}>
                   <Button outline>수정</Button>
                 </Link>
-                <Link to={ROUTER.PATH.BACK}>
-                  <Button outline>삭제</Button>
-                </Link>
+                <Button outline onClick={onDeletePost}>
+                  삭제
+                </Button>
               </EditContainer>
             )}
           </UserTouch>
