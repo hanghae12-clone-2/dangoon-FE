@@ -28,7 +28,9 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
     <NavbarWrapper>
       <NavbarContainer>
         <LogoContainer>
-          <Logo>{logo()}</Logo>
+          <Logo>
+            <img src='/img/dangun.png' alt='' srcset='' />
+          </Logo>
           <Text large_regular>중고거래</Text>
         </LogoContainer>
         <FormContainer onSubmit={handleSubmit}>
@@ -108,9 +110,9 @@ const LogoContainer = styled.nav`
 `;
 
 const Logo = styled.div`
-  svg {
+  img {
     width: 8rem;
-    height: 5rem;
+    height: 2.5rem;
   }
 `;
 
