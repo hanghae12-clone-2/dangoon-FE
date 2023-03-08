@@ -5,24 +5,25 @@ import { useNavigate } from 'react-router-dom';
 import { BsCameraFill } from 'react-icons/bs';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import ROUTER from '../constants/router';
+
+const axios = new Axios('http://13.209.11.12');
 
 export default function WritePage() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [price, setPrice] = useState('');
-  // const [location, setLocation] = useState('');
+
   const ref = useRef();
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
-  const axios = new Axios('http://13.209.11.12');
   const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
 
     const formData = new FormData();
-
     const post = {
       title,
       content,
@@ -33,8 +34,10 @@ export default function WritePage() {
       'postRequestDto',
       new Blob([JSON.stringify(post)], { type: 'application/json' })
     );
-    formData.append('multipartFiles', image);
-    console.log(image);
+
+    image.forEach(multipartFiles =>
+      formData.append('multipartFiles', multipartFiles)
+    );
 
     axios.post('/api/posts', formData, {}).then(response => {
       console.log(response.data);
@@ -45,15 +48,12 @@ export default function WritePage() {
   const handleImageChange = event => {
     const files = event.target.files;
     const urlList = [...files].map(url => URL.createObjectURL(url));
-    console.log(urlList, [...files]);
-    setImage(event.target.files[0]);
-
+    setImage([...files]);
     setPreview(urlList);
-    console.log(event.target.files);
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} encType='multipart/form-data'>
       <FormBorder>
         <FormHeader>
           <FormTitle>
@@ -67,7 +67,7 @@ export default function WritePage() {
         <LableBorder preview={preview}>
           {preview &&
             preview.map(url => (
-              <ImgConatiner>
+              <ImgConatiner key={uuidv4()}>
                 <Img srcImg={url} alt='preview' />
               </ImgConatiner>
             ))}
