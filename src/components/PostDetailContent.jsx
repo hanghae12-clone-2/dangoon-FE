@@ -55,7 +55,7 @@ export default function PostDetailContent({
           <span>
             {temp}°C
             <Progress>
-              <ProgressBar temp={temp} />
+              <ProgressBar temp={temp > 100 ? 100 : temp} />
             </Progress>
           </span>
           {temp >= 36.5 ? <AiOutlineSmile /> : <AiOutlineFrown />}
