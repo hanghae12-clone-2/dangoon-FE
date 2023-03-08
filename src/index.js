@@ -18,6 +18,7 @@ import Messenger from './pages/Messenger';
 import Search from './pages/Search';
 import Write from './pages/Write';
 import MyPost from './pages/MyPost';
+import Edit from './pages/Edit';
 
 const queryClient = new QueryClient();
 
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${ROUTER.PATH.EDIT}/:postId`,
-        element: '',
+        element: <Edit />,
       },
     ],
   },

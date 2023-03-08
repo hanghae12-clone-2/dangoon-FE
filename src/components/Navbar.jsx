@@ -29,7 +29,7 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
       <NavbarContainer>
         <LogoContainer>
           <Logo>
-            <img src='/img/dangun.png' alt='' srcset='' />
+            <img src='/img/dangun.png' alt='' />
           </Logo>
           <Text large_regular>중고거래</Text>
         </LogoContainer>
