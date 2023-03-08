@@ -12,8 +12,7 @@ const PATH = {
   BACK: -1,
   FRONT: 1,
   SIGNUP: '/signup',
-  WRITEPAGE: `/writepage`
- 
+  WRITE: `/write`,
 };
 
 const NAME = {

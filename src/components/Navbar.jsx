@@ -49,7 +49,7 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
                   <Link to={`${ROUTER.PATH.MESSENGER}/${-1}`}>
                     <span>채팅</span>
                   </Link>
-                  <Link to={ROUTER.PATH.ADD}>
+                  <Link to={ROUTER.PATH.WRITE}>
                     <span>게시글 작성</span>
                   </Link>
                   <Link to={ROUTER.PATH.MAIN}>

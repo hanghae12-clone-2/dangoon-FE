@@ -16,7 +16,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Messenger from './pages/Messenger';
 import Search from './pages/Search';
-import WritePage from './pages/WritePage';
+import Write from './pages/Write';
 
 const queryClient = new QueryClient();
 
@@ -54,17 +54,13 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: `${ROUTER.PATH.ADD}`,
-        element: '',
+        path: ROUTER.PATH.WRITE,
+        element: <Write />,
       },
       {
         path: `${ROUTER.PATH.EDIT}/:postId`,
         element: '',
       },
-      {
-        path:ROUTER.PATH.WRITEPAGE,
-        element:<WritePage/>
-      }
     ],
   },
 ]);
