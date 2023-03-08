@@ -30,6 +30,7 @@ export default function PostDetailContent({
     nickname,
     isWish,
     wishCount,
+    chatCount,
     location,
     createdAt,
     temperature,
@@ -81,7 +82,7 @@ export default function PostDetailContent({
         <Text regular>{price}원</Text>
         <Text userContent>{content}</Text>
         <LikeAndChat>
-          <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
+          <Text grey>{`관심 ${wishCount} · 채팅${chatCount}`}</Text>
           <UserTouch>
             {nickname !== userName ? (
               <>
