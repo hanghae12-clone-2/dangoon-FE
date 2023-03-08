@@ -4,7 +4,7 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 export default function PostItem({
-  post: { thumbnailUrl, title, price, location, wishCount, chat },
+  post: { thumbnailUrl, title, price, location, wishCount, chatCount },
   imgRegular,
 }) {
   return (
@@ -18,7 +18,7 @@ export default function PostItem({
         <Text bold>{title}</Text>
         <Text bold>{price}</Text>
         <Text>{location}</Text>
-        <Text gery>{`관심${wishCount} ∙ 채팅${chat}`}</Text>
+        <Text gery>{`관심${wishCount} ∙ 채팅${chatCount}`}</Text>
       </Content>
     </ItemContainer>
   );
