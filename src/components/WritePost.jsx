@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react';
-import Axios from '../api/axios';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+
 import { BsCameraFill } from 'react-icons/bs';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
@@ -9,45 +8,67 @@ import { RiDeleteBack2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ROUTER from '../constants/router';
-import { useQueryClient } from '@tanstack/react-query';
 
-const axios = new Axios('http://13.209.11.12');
-
-export default function WritePost({ children }) {
+export default function WritePost({ children, axiosFn, detail }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [price, setPrice] = useState('');
 
   const [image, setImage] = useState([]);
   const [preview, setPreview] = useState([]);
+  const locationRef = useRef();
 
-  const ref = useRef();
-  const navigate = useNavigate();
-  const query = useQueryClient();
+  useEffect(() => {
+    if (detail) {
+      setTitle(detail.title);
+      setContent(detail.content);
+      setPrice(detail.price);
+      locationRef.current.value = detail.location;
+      setImage(detail.imageUrlList);
+      setPreview(detail.imageUrlList);
+    }
+  }, []);
 
   const handleSubmit = event => {
     event.preventDefault();
 
     const formData = new FormData();
-    const post = {
-      title,
-      content,
-      price,
-      location: ref.current.value,
-    };
+    let post = {};
+    let imageData = [];
+    let contentKey = '';
+    if (detail) {
+      const parsePreviewData = preview.filter(v => v[0] === 'h');
+      imageData = image.filter(v => v.name);
+      contentKey = 'postUpdateRequestDto';
+      post = {
+        title,
+        content,
+        price,
+        location: locationRef.current.value,
+        remainingImagesUrlList: parsePreviewData,
+      };
+    } else {
+      imageData = image;
+      contentKey = 'postRequestDto';
+      post = {
+        title,
+        content,
+        price,
+        location: locationRef.current.value,
+      };
+    }
+
     formData.append(
-      'postRequestDto',
+      contentKey,
       new Blob([JSON.stringify(post)], { type: 'application/json' })
     );
 
-    image.forEach(multipartFiles =>
-      formData.append('multipartFiles', multipartFiles)
-    );
+    imageData &&
+      imageData.forEach(multipartFiles =>
+        formData.append('multipartFiles', multipartFiles)
+      );
 
-    axios.post('/api/posts', formData, {}).then(() => {
-      query.invalidateQueries(['mypost']);
-      navigate(ROUTER.PATH.MY);
-    });
+    axiosFn(formData);
   };
 
   const handleImageChange = event => {
@@ -74,8 +95,8 @@ export default function WritePost({ children }) {
           </FormTitle>
           <FormButton type='submit'>완료 </FormButton>
         </FormHeader>
-        <LableBorder preview={preview.length ? true : false}>
-          {preview.length !== 0 &&
+        <LableBorder preview={preview ? true : false}>
+          {preview &&
             preview.map((url, index) => (
               <ImgConatiner key={uuidv4()}>
                 <Delete onClick={() => handleDeleteImg(index)}>
@@ -103,8 +124,8 @@ export default function WritePost({ children }) {
           onChange={e => setPrice(e.target.value)}
           placeholder='가격'
         />
-        <InputLocation ref={ref} as='select'>
-          <option value=''>거래 희망 장소를 선택해주세요</option>
+        <InputLocation ref={locationRef} as='select'>
+          <option value='서울특별시'>거래 희망 장소를 선택해주세요</option>
           <option value='강남구'>강남구</option>
           <option value='강동구'>강동구</option>
           <option value='강북구'>강북구</option>
