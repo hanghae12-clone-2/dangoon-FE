@@ -8,6 +8,7 @@ import { RiDeleteBack2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ROUTER from '../constants/router';
+import Valid from '../validation/validation';
 
 export default function WritePost({ children, axiosFn, detail }) {
   const [title, setTitle] = useState('');
@@ -31,11 +32,22 @@ export default function WritePost({ children, axiosFn, detail }) {
 
   const handleSubmit = event => {
     event.preventDefault();
+    if (
+      !Valid.emptyPostAddCheck(
+        image,
+        title,
+        content,
+        price,
+        locationRef.current.value
+      )
+    )
+      return;
 
     const formData = new FormData();
     let post = {};
     let imageData = [];
     let contentKey = '';
+
     if (detail) {
       const parsePreviewData = preview.filter(v => v[0] === 'h');
       imageData = image.filter(v => v.name);
