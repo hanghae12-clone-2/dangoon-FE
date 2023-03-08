@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import Messenger from './pages/Messenger';
 import Search from './pages/Search';
 import Write from './pages/Write';
+import MyPost from './pages/MyPost';
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: `${ROUTER.PATH.SEARCH}/:keyWord`,
         element: <Search />,
+      },
+      {
+        path: ROUTER.PATH.MY,
+        element: <MyPost />,
       },
       {
         path: ROUTER.PATH.WRITE,

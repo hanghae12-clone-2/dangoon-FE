@@ -27,9 +27,9 @@ const PostList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 1040px;
+  width: 65rem;
 `;
 
 const Li = styled.li`
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
 `;

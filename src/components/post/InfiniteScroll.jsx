@@ -14,7 +14,6 @@ export default function InfiniteScroll({
   hasNextPage,
   children,
 }) {
-  console.log(posts);
   return (
     <>
       <PostTitle>{children}</PostTitle>
