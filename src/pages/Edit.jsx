@@ -17,8 +17,8 @@ export default function Edit() {
 
   const handleAxiosCallback = formData => {
     axios.put(QUERY.AXIOS_PATH.DETAIL(detail.postid), formData, {}).then(() => {
-      query.invalidateQueries(['posts', { postId: detail.postid }]);
       navigate(ROUTER.PATH.BACK);
+      query.invalidateQueries(['posts', { postId: `${detail.postid}` }]);
     });
   };
 

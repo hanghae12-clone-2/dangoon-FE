@@ -32,7 +32,7 @@ export default class SockJs {
     this.stompClient.disconnect();
   }
 
-  send(roomId, sender, message) {
+  send(roomId, sender, message, image) {
     console.log(roomId, sender, message);
     this.stompClient.send(
       '/app/chat/message',
@@ -42,6 +42,7 @@ export default class SockJs {
         roomId: roomId,
         sender: sender,
         message: message,
+        image,
       })
     );
   }

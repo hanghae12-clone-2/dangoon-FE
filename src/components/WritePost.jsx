@@ -47,7 +47,7 @@ export default function WritePost({ children, axiosFn, detail }) {
     let post = {};
     let imageData = [];
     let contentKey = '';
-
+    const parsePrice = /[,]/g.test(price) ? price.replace(/[,]/g, '') : price;
     if (detail) {
       const parsePreviewData = preview.filter(v => v[0] === 'h');
       imageData = image.filter(v => v.name);
@@ -55,7 +55,7 @@ export default function WritePost({ children, axiosFn, detail }) {
       post = {
         title,
         content,
-        price: price.replace(/[,]/g, ''),
+        price: parsePrice,
         location: locationRef.current.value,
         remainingImagesUrlList: parsePreviewData,
       };
@@ -65,7 +65,7 @@ export default function WritePost({ children, axiosFn, detail }) {
       post = {
         title,
         content,
-        price: price.replace(/[,]/g, ''),
+        price: parsePrice,
         location: locationRef.current.value,
       };
     }
