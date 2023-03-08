@@ -65,6 +65,12 @@ export default function Detail() {
       .then(response => setTemperatureServer(response.data.result.temperature));
   };
 
+  const handleSetWish = () => {
+    axios
+      .post(QUERY.AXIOS_PATH.WISH_POST(postId))
+      .then(() => query.invalidateQueries(['posts', { postId: postId }]));
+  };
+
   const handleDeletePost = () => {
     axios.delete(QUERY.AXIOS_PATH.DETAIL(postId)).then(() => {
       query.invalidateQueries(['mypost']);
@@ -87,6 +93,7 @@ export default function Detail() {
               temperatureServer={temperatureServer}
               onLikeUp={handleLikeUp}
               onLikeDown={handleLikeDown}
+              onSetWish={handleSetWish}
               onDeletePost={handleDeletePost}
             />
             <PostContainer>

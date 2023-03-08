@@ -12,6 +12,9 @@ const AXIOS_PATH = {
   LIKE_POST: '/api/like',
   HATE_POST: '/api/hate',
   MY_POST: '/api/posts/my',
+  WISH_POST(postId) {
+    return `/api/wishes/${postId}`;
+  },
   HOT_POST(pageNum) {
     return `/api/posts?page=${pageNum}&size=8`;
   },

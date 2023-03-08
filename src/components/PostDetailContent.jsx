@@ -21,6 +21,7 @@ export default function PostDetailContent({
   temperatureServer,
   onLikeUp,
   onLikeDown,
+  onSetWish,
   onDeletePost,
 }) {
   const {
@@ -90,7 +91,7 @@ export default function PostDetailContent({
           <UserTouch>
             {nickname !== userName ? (
               <>
-                <LikeBtn isWish={false}>
+                <LikeBtn isWish={isWish} onClick={onSetWish}>
                   <Button>
                     <AiFillHeart />
                   </Button>
@@ -233,29 +234,18 @@ const LikeBtn = styled.div`
     height: 2.3rem;
     margin: 0 0.5rem;
     font-size: 1.3rem;
-    transition: all 600ms ease-in-out;
+    transition: all 300ms ease-in-out;
+
     ${props =>
       props.isWish
         ? css`
             color: #e74133;
             background-color: white;
+            border: 1px solid #e74133;
           `
         : css`
             color: white;
             background-color: #e74133;
           `}
   }
-
-  ${props =>
-    props.isWish
-      ? css`
-          svg {
-            transform: rotate(1turn);
-          }
-        `
-      : css`
-          svg {
-            transform: rotate(1turn);
-          }
-        `}
 `;
