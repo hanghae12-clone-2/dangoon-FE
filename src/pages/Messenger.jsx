@@ -10,6 +10,7 @@ import useGetQuery from '../hooks/useGetQuery';
 import { useParams } from 'react-router-dom';
 import Storage from '../utils/localStorage';
 import ChatContainer from '../components/chat/ChatContainer';
+import { useQueryClient } from '@tanstack/react-query';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
@@ -18,6 +19,11 @@ export default function Messenger() {
   const [roomId, setRoomId] = useState(null);
   const { postId } = useParams();
   const userName = Storage.getUserName();
+  const query = useQueryClient();
+
+  useEffect(() => {
+    query.invalidateQueries(['rooms']);
+  }, []);
 
   useEffect(() => {
     if (postId !== '-1') {
@@ -51,11 +57,6 @@ export default function Messenger() {
       roomsRefetch();
     }
   );
-
-  useEffect(() => {
-    setCreateRoomCheck(true);
-    roomsRefetch();
-  }, []);
 
   // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {

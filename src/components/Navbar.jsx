@@ -11,17 +11,24 @@ import ROUTER from '../constants/router';
 import Storage from '../utils/localStorage';
 import { removeCookie } from '../utils/cookie';
 import QUERY from '../constants/query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
   const [keyWord, setKeyWord] = useState('');
 
   const navigate = useNavigate();
   const userName = Storage.getUserName();
+  const query = useQueryClient();
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!keyWord) return;
     navigate(`/search/${keyWord}`);
+  };
+
+  const handleChatMenu = () => {
+    query.invalidateQueries(['rooms']);
+    navigate(`${ROUTER.PATH.MESSENGER}/${-1}`);
   };
 
   return (
@@ -48,9 +55,7 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
               </Text>
               {showMyMenu ? (
                 <ShowMyMenu>
-                  <Link to={`${ROUTER.PATH.MESSENGER}/${-1}`}>
-                    <span>채팅</span>
-                  </Link>
+                  <span onClick={handleChatMenu}>채팅</span>
                   <Link to={ROUTER.PATH.MY}>
                     <span>내 게시글</span>
                   </Link>
