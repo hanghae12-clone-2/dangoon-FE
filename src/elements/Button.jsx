@@ -63,7 +63,6 @@ const BtnBx = styled.button`
 `;
 
 const LikeBtn = styled.button`
-  /* padding: 0 10px 0 10px; */
   border-radius: 10px;
   background-color: #e74133;
   color: white;

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import ROUTER from '../constants/router';
 
 import Img from '../elements/Img';
 
@@ -24,9 +26,11 @@ export default function PostDetailImg({ imageUrlList }) {
   return (
     <ImgContainer>
       {imageUrlList.map(url => (
-        <Imgs key={uuidv4()} imgPage={imgPage}>
-          <Img large src={url} />
-        </Imgs>
+        <Link to={`${ROUTER.PATH.IMG}${url.split('image')[1]}`} state={{ url }}>
+          <Imgs key={uuidv4()} imgPage={imgPage}>
+            <Img large src={url} />
+          </Imgs>
+        </Link>
       ))}
       <ArrowContainer>
         <Arrow onClick={handleImgPrevious}>

@@ -16,7 +16,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Messenger from './pages/Messenger';
 import Search from './pages/Search';
-import WritePage from './pages/WritePage';
+import Write from './pages/Write';
+import MyPost from './pages/MyPost';
+import Edit from './pages/Edit';
+import ImgZoom from './pages/ImgZoom';
 
 const queryClient = new QueryClient();
 
@@ -54,29 +57,31 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: `${ROUTER.PATH.ADD}`,
-        element: '',
+        path: ROUTER.PATH.MY,
+        element: <MyPost />,
+      },
+      {
+        path: ROUTER.PATH.WRITE,
+        element: <Write />,
       },
       {
         path: `${ROUTER.PATH.EDIT}/:postId`,
-        element: '',
+        element: <Edit />,
       },
       {
-        path:ROUTER.PATH.WRITEPAGE,
-        element:<WritePage/>
-      }
+        path: `${ROUTER.PATH.IMG}/:imgUrl`,
+        element: <ImgZoom />,
+      },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   </Provider>
-  // </React.StrictMode>
 );

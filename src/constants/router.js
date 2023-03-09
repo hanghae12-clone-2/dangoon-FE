@@ -8,12 +8,12 @@ const PATH = {
   HOT_ARTICLES: '/hot_articles',
   MESSENGER: '/messenger',
   SEARCH: '/search',
+  IMG: '/img',
   MAIN: '/',
   BACK: -1,
   FRONT: 1,
   SIGNUP: '/signup',
-  WRITEPAGE: `/writepage`
- 
+  WRITE: `/write`,
 };
 
 const NAME = {

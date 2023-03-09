@@ -3,20 +3,19 @@ import styled from 'styled-components';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Text from '../elements/Text';
-import logo from '../styles/logo';
 import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import ROUTER from '../constants/router';
 import Storage from '../utils/localStorage';
-import { removeCookie } from '../utils/cookie';
-import QUERY from '../constants/query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
   const [keyWord, setKeyWord] = useState('');
 
   const navigate = useNavigate();
   const userName = Storage.getUserName();
+  const query = useQueryClient();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -24,12 +23,33 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
     navigate(`/search/${keyWord}`);
   };
 
+  const handleChatMenu = () => {
+    query.invalidateQueries(['rooms']);
+    navigate(`${ROUTER.PATH.MESSENGER}/${-1}`);
+  };
+
+  const handleLogoClick = () => {
+    query.invalidateQueries(['posts']);
+  };
+
+  const handlTransaction = () => {
+    query.invalidateQueries(['HotPost']);
+  };
+
   return (
     <NavbarWrapper>
       <NavbarContainer>
         <LogoContainer>
-          <Logo>{logo()}</Logo>
-          <Text large_regular>중고거래</Text>
+          <Link to={ROUTER.PATH.MAIN}>
+            <Logo onClick={handleLogoClick}>
+              <img src='/img/dangun.png' alt='' />
+            </Logo>
+          </Link>
+          <Link to={ROUTER.PATH.HOT_ARTICLES}>
+            <Text large_regular onClick={handlTransaction}>
+              중고거래
+            </Text>
+          </Link>
         </LogoContainer>
         <FormContainer onSubmit={handleSubmit}>
           <Input
@@ -46,15 +66,21 @@ export default function Navbar({ showMyMenu, onShowMyMenu, onLogOut }) {
               </Text>
               {showMyMenu ? (
                 <ShowMyMenu>
-                  <Link to={`${ROUTER.PATH.MESSENGER}/${-1}`}>
-                    <span>채팅</span>
-                  </Link>
-                  <Link to={ROUTER.PATH.ADD}>
-                    <span>게시글 작성</span>
-                  </Link>
-                  <Link to={ROUTER.PATH.MAIN}>
-                    <span onClick={onLogOut}>로그아웃</span>
-                  </Link>
+                  <span onClick={handleChatMenu}>채팅</span>
+
+                  <span>
+                    <Link to={ROUTER.PATH.MY}>내 게시글 </Link>
+                  </span>
+
+                  <span>
+                    {' '}
+                    <Link to={ROUTER.PATH.WRITE}>게시글 작성 </Link>
+                  </span>
+
+                  <span onClick={onLogOut}>
+                    {' '}
+                    <Link to={ROUTER.PATH.MAIN}>로그아웃 </Link>
+                  </span>
                 </ShowMyMenu>
               ) : (
                 ''
@@ -99,15 +125,16 @@ const LogoContainer = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
   p {
     color: ${props => props.theme.color.carrot_orange};
   }
 `;
 
 const Logo = styled.div`
-  svg {
+  img {
     width: 8rem;
-    height: 5rem;
+    height: 2.5rem;
   }
 `;
 
@@ -136,7 +163,7 @@ const ShowMyMenu = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${props => props.theme.color.messenger};
+  border: 0.25px solid ${props => props.theme.color.messenger};
   border-radius: 0.5rem;
   background-color: ${props => props.theme.color.white};
   transform: translate(0, 4rem);
@@ -146,18 +173,28 @@ const ShowMyMenu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 7rem;
+    width: 8rem;
     height: 1.5rem;
     padding: 1rem;
-    border-bottom: none;
+    border-bottom: 0.25px solid ${props => props.theme.color.messenger};
+    font-size: 100%;
     cursor: pointer;
 
     :hover {
       background-color: ${props => props.theme.color.messenger};
     }
+
+    &:first-child {
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    &:last-child {
+      border: none;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
   }
 
-  span:not(:last-child) {
-    border-bottom: 1px solid ${props => props.theme.color.messenger};
+  a {
+    font-size: 100%;
   }
 `;

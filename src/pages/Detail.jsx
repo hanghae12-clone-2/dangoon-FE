@@ -1,16 +1,17 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../api/axios';
+import Error from '../components/Error';
 import Footer from '../components/Footer';
+import Loading from '../components/Loading';
 import Post from '../components/post/Post';
 import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import useGetQuery from '../hooks/useGetQuery';
-import { setMessenger } from '../redux/modules/messenger';
 import Storage from '../utils/localStorage';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
@@ -20,7 +21,8 @@ export default function Detail() {
   const { postId } = useParams();
   const scrollRef = useRef();
   const userName = Storage.getUserName();
-
+  const navigate = useNavigate();
+  const query = useQueryClient();
   const {
     isLoading,
     isError,
@@ -63,10 +65,23 @@ export default function Detail() {
       .then(response => setTemperatureServer(response.data.result.temperature));
   };
 
+  const handleSetWish = () => {
+    axios
+      .post(QUERY.AXIOS_PATH.WISH_POST(postId))
+      .then(() => query.invalidateQueries(['posts', { postId: postId }]));
+  };
+
+  const handleDeletePost = () => {
+    axios.delete(QUERY.AXIOS_PATH.DETAIL(postId)).then(() => {
+      query.invalidateQueries(['mypost']);
+      navigate(ROUTER.PATH.MY);
+    });
+  };
+
   return (
     <>
-      {isLoading && isHotLoding && <p>로딩중</p>}
-      {isError && isHotError && <p>에러</p>}
+      {isLoading && isHotLoding && <Loading />}
+      {isError && isHotError && <Error />}
       {postDetail && postHot && (
         <DetailWrapper>
           <DetailContainer ref={scrollRef}>
@@ -78,11 +93,13 @@ export default function Detail() {
               temperatureServer={temperatureServer}
               onLikeUp={handleLikeUp}
               onLikeDown={handleLikeDown}
+              onSetWish={handleSetWish}
+              onDeletePost={handleDeletePost}
             />
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>
                 <ContentContainer>
-                  <Title>당근마켓 인기중고</Title>
+                  <Title>단군마켓 인기중고</Title>
                   <Link to={ROUTER.PATH.HOT_ARTICLES}>
                     <Linkto>더 구경하기</Linkto>
                   </Link>

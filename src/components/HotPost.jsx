@@ -5,6 +5,8 @@ import { useInfiniteScrollQuery } from '../hooks/useInfiniteScrollQuery';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import InfiniteScroll from './post/InfiniteScroll';
+import Loading from './Loading';
+import Error from './Error';
 
 export default function HotPost() {
   const {
@@ -22,8 +24,8 @@ export default function HotPost() {
   );
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
+      {isLoading && <Loading />}
+      {isError && <Error />}
       {posts && (
         <PostContainer>
           <InfiniteScroll

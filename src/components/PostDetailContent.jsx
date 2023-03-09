@@ -21,6 +21,8 @@ export default function PostDetailContent({
   temperatureServer,
   onLikeUp,
   onLikeDown,
+  onSetWish,
+  onDeletePost,
 }) {
   const {
     title,
@@ -29,11 +31,12 @@ export default function PostDetailContent({
     nickname,
     isWish,
     wishCount,
+    chatCount,
     location,
     createdAt,
     temperature,
   } = detail;
-  console.log(detail);
+
   const temp = temperatureServer ? temperatureServer : temperature;
   const setFormatDate = date => formatAgo(date);
 
@@ -53,17 +56,21 @@ export default function PostDetailContent({
           <span>
             {temp}°C
             <Progress>
-              <ProgressBar temp={temp} />
+              <ProgressBar temp={temp > 100 ? 100 : temp} />
             </Progress>
           </span>
           {temp >= 36.5 ? <AiOutlineSmile /> : <AiOutlineFrown />}
           <LikeContainer>
-            <Like>
-              <AiFillLike onClick={onLikeUp} />
-            </Like>
-            <DisLike>
-              <AiFillDislike onClick={onLikeDown} />
-            </DisLike>
+            {nickname !== userName && (
+              <>
+                <Like>
+                  <AiFillLike onClick={onLikeUp} />
+                </Like>
+                <DisLike>
+                  <AiFillDislike onClick={onLikeDown} />
+                </DisLike>
+              </>
+            )}
           </LikeContainer>
         </ProgressContainer>
       </UserContainer>
@@ -78,13 +85,13 @@ export default function PostDetailContent({
           </Text>
         </Date>
         <Text regular>{price}원</Text>
-        <Text userContent>{content}</Text>
+        <Pre>{content}</Pre>
         <LikeAndChat>
-          <Text grey>{`관심 ${wishCount} · 채팅`}</Text>
+          <Text grey>{`관심 ${wishCount} · 채팅${chatCount}`}</Text>
           <UserTouch>
             {nickname !== userName ? (
               <>
-                <LikeBtn isWish={false}>
+                <LikeBtn isWish={isWish} onClick={onSetWish}>
                   <Button>
                     <AiFillHeart />
                   </Button>
@@ -98,9 +105,9 @@ export default function PostDetailContent({
                 <Link to={`${ROUTER.PATH.EDIT}/${postId}`} state={{ detail }}>
                   <Button outline>수정</Button>
                 </Link>
-                <Link to={ROUTER.PATH.BACK}>
-                  <Button outline>삭제</Button>
-                </Link>
+                <Button outline onClick={onDeletePost}>
+                  삭제
+                </Button>
               </EditContainer>
             )}
           </UserTouch>
@@ -227,29 +234,24 @@ const LikeBtn = styled.div`
     height: 2.3rem;
     margin: 0 0.5rem;
     font-size: 1.3rem;
-    transition: all 600ms ease-in-out;
+    transition: all 300ms ease-in-out;
+
     ${props =>
       props.isWish
         ? css`
             color: #e74133;
             background-color: white;
+            border: 1px solid #e74133;
           `
         : css`
             color: white;
             background-color: #e74133;
           `}
   }
+`;
 
-  ${props =>
-    props.isWish
-      ? css`
-          svg {
-            transform: rotate(1turn);
-          }
-        `
-      : css`
-          svg {
-            transform: rotate(1turn);
-          }
-        `}
+const Pre = styled.pre`
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
 `;

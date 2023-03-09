@@ -20,7 +20,7 @@ export default function Footer() {
             <Anchor url='https://team.daangn.com/jobs/'>인재 채용</Anchor>
           </QuestionUrl>
           <DownLoadContainer>
-            <h4>당근마켓 앱 다운로드</h4>
+            <h4>단군마켓 앱 다운로드</h4>
             <DownLoadBtn>
               <Anchor url='https://apps.apple.com/kr/app/%EB%8B%B9%EA%B7%BC%EB%A7%88%EC%BC%93-%EC%A4%91%EA%B3%A0%EA%B1%B0%EB%9E%98-%ED%95%84%EC%88%98%EC%95%B1/id1018769995'>
                 <Apple>

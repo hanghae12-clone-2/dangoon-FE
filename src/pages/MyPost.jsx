@@ -1,22 +1,21 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
+import Post from '../components/post/Post';
 import ROUTER from '../constants/router';
-import Post from './post/Post';
-import Loading from './Loading';
-import Error from './Error';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
-export default function MainPost() {
+export default function MyPost() {
   const {
     isLoading,
     isError,
     data: posts,
   } = useGetQuery(
-    [QUERY.KEY.POSTS],
+    ['mypost'],
     QUERY.AXIOS_PATH.SEVER,
-    QUERY.AXIOS_PATH.MAIN_POST,
+    QUERY.AXIOS_PATH.MY_POST,
     true
   );
 
@@ -25,23 +24,31 @@ export default function MainPost() {
       {isLoading && <Loading />}
       {isError && <Error />}
       {posts && (
-        <PostWrapper>
-          <Post posts={posts} path={ROUTER.PATH.DETAIL}>
-            <PostTitle>중고거래 인기매물</PostTitle>
-          </Post>
-        </PostWrapper>
+        <MyPostWrapper>
+          <MyPostContainer>
+            <Post posts={posts} path={ROUTER.PATH.DETAIL}>
+              <PostTitle>내 게시물</PostTitle>
+            </Post>
+          </MyPostContainer>
+        </MyPostWrapper>
       )}
     </>
   );
 }
 
-const PostWrapper = styled.div`
+const MyPostWrapper = styled.main`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+`;
+
+const MyPostContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: ${props => props.theme.color.sky_white};
 `;
 
 const PostTitle = styled.h1`

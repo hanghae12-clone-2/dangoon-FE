@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Text from '../../elements/Text';
 import Input from '../../elements/Input';
@@ -6,9 +6,12 @@ import Input from '../../elements/Input';
 import { v4 as uuidv4 } from 'uuid';
 import { FaUserCircle } from 'react-icons/fa';
 import { AiFillPicture } from 'react-icons/ai';
+import { BiTimeFive } from 'react-icons/bi';
+import { RiDeleteBack2Fill } from 'react-icons/ri';
 import { IoChatbubblesSharp } from 'react-icons/io5';
 
 import Button from '../../elements/Button';
+import formatAgo from '../../utils/formatDate';
 
 export default function MessengerItem({
   detailRoom,
@@ -17,6 +20,10 @@ export default function MessengerItem({
   message,
   setMessage,
   handleEnter,
+  onSubmit,
+  onImageChange,
+  onImgDelete,
+  srcImg,
 }) {
   const scrollRef = useRef();
 
@@ -28,6 +35,9 @@ export default function MessengerItem({
     }
   }, [contents]);
 
+  const setFormatDate = date => {
+    return formatAgo(date);
+  };
   if (!detailRoom)
     return (
       <ItemContainer>
@@ -46,7 +56,7 @@ export default function MessengerItem({
         <Text regular>{detailRoom.data.result.partner}</Text>
       </ItemTitleContainer>
       <ItemBodyContainer>
-        {contents.map(v =>
+        {contents.map((v, i, arr) =>
           v.sender !== userName ? (
             <OpponentContainer key={uuidv4()}>
               <Content>
@@ -56,14 +66,42 @@ export default function MessengerItem({
                 <NickName>{v.sender}</NickName>
               </Content>
               <SpeechBubbleLeft>
-                <MessageLeft>{v.message}</MessageLeft>
+                <MessageLeft>
+                  <Message>
+                    {v.message}
+                    {v.image && (
+                      <ImgLeft regular srcImg={v.image} alt='preview' />
+                    )}
+                  </Message>
+                </MessageLeft>
               </SpeechBubbleLeft>
+              <Date>
+                <Text userLocation grey>
+                  <BiTimeFive />
+                </Text>
+                <Text userLocation grey>
+                  {setFormatDate(v.createdAt)}
+                </Text>
+              </Date>
             </OpponentContainer>
           ) : (
             <MeContainer key={uuidv4()}>
               <SpeechBubbleRight>
-                <Message>{v.message}</Message>
+                <Message>
+                  {v.message}
+                  {v.image && (
+                    <ImgRight regular srcImg={v.image} alt='preview' />
+                  )}
+                </Message>
               </SpeechBubbleRight>
+              <Date>
+                <Text userLocation grey>
+                  <BiTimeFive />
+                </Text>
+                <Text userLocation grey>
+                  {setFormatDate(v.createdAt)}
+                </Text>
+              </Date>
             </MeContainer>
           )
         )}
@@ -76,14 +114,30 @@ export default function MessengerItem({
           value={message}
           onChange={e => setMessage(e.target.value)}
         />
+        {srcImg && (
+          <SrcImg>
+            <Img regular srcImg={srcImg} alt='preview' />
+            <RiDeleteBack2Fill onClick={onImgDelete} />
+          </SrcImg>
+        )}
         <UnderBar>
-          <AiFillPicture />
-          <BtnContainer>
-            <span>{`${message.length}/1000`}</span>
-            <Button full onClick={handleEnter}>
-              전송
-            </Button>
-          </BtnContainer>
+          <Form onSubmit={onSubmit} encType='multipart/form-data'>
+            <Label htmlFor='file-upload'>
+              <AiFillPicture />
+              <InputImg
+                id='file-upload'
+                type='file'
+                accept='image/*'
+                onChange={onImageChange}
+              />
+            </Label>
+            <BtnContainer>
+              <span>{`${message.length}/1000`}</span>
+              <Button type='button' full onClick={handleEnter}>
+                전송
+              </Button>
+            </BtnContainer>
+          </Form>
         </UnderBar>
       </TextInput>
     </ItemContainer>
@@ -168,7 +222,8 @@ const NickName = styled.div`
 `;
 
 const Message = styled.div`
-  margin: 0 1rem;
+  width: 100%;
+  height: 100%;
   padding: 0.3rem;
   font-size: ${props => props.theme.fontSize.large_regular};
 `;
@@ -179,10 +234,13 @@ const MessageLeft = styled(Message)`
 
 const SpeechBubbleLeft = styled.div`
   max-width: 17.5rem;
+  min-width: 35px;
+  min-height: 35px;
   position: relative;
-  background: #ff9500;
+  background: ${props => props.theme.color.messenger};
   border-radius: 0.4em;
   word-wrap: break-word;
+  line-height: 1.6;
 
   ::after {
     content: '';
@@ -192,7 +250,7 @@ const SpeechBubbleLeft = styled.div`
     width: 0;
     height: 0;
     border: 0.719em solid transparent;
-    border-right-color: #ff9500;
+    border-right-color: ${props => props.theme.color.messenger};
     border-left: 0;
     border-top: 0;
     margin-top: -0.359em;
@@ -202,15 +260,19 @@ const SpeechBubbleLeft = styled.div`
 
 const SpeechBubbleRight = styled.div`
   max-width: 17.5rem;
+  min-width: 35px;
+  min-height: 35px;
   position: relative;
+  color: ${props => props.theme.color.white};
   background: #ff9500;
   border-radius: 0.4em;
   word-wrap: break-word;
+  line-height: 1.6;
 
   ::after {
     content: '';
     position: absolute;
-    right: 0;
+    right: 2px;
     top: 50%;
     width: 0;
     height: 0;
@@ -233,6 +295,7 @@ const TextInput = styled.div`
 
   textarea {
     height: 8rem;
+    padding-right: 7rem;
     overflow: hidden;
   }
 
@@ -285,4 +348,74 @@ const BtnContainer = styled.div`
     color: ${props => props.theme.color.messenger};
     transform: translate(-5.5rem);
   }
+`;
+
+const Date = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const Label = styled.label`
+  color: black;
+  cursor: pointer;
+`;
+
+const Form = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const InputImg = styled.input`
+  display: none;
+`;
+
+const Img = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 6rem;
+  width: 6rem;
+  /* padding-bottom: 100%; */
+  border: none !important;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  background-image: url(${props => props.srcImg});
+  background-size: 100% 100%;
+  transform: translate(-1.5rem, 2rem);
+`;
+
+const ImgRight = styled.div`
+  height: 6rem;
+  width: 6rem;
+  margin: 0;
+  /* padding-bottom: 100%; */
+  border: none !important;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  background-image: url(${props => props.srcImg});
+  background-size: 100% 100%;
+`;
+
+const SrcImg = styled.div`
+  svg {
+    position: absolute;
+    top: 0;
+    color: ${props => props.theme.color.red};
+    transform: translate(-1.5rem, 2rem);
+  }
+`;
+
+const ImgLeft = styled.div`
+  height: 6rem;
+  width: 6rem;
+  margin: 0;
+  /* padding-bottom: 100%; */
+  border: none !important;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  background-image: url(${props => props.srcImg});
+  background-size: 100% 100%;
 `;

@@ -6,6 +6,8 @@ import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import InfiniteScroll from './post/InfiniteScroll';
 import { useParams } from 'react-router-dom';
+import Loading from './Loading';
+import Error from './Error';
 
 export default function SearchPost() {
   const { keyWord } = useParams();
@@ -30,8 +32,8 @@ export default function SearchPost() {
 
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
+      {isLoading && <Loading />}
+      {isError && <Error />}
       {posts && (
         <PostContainer>
           <InfiniteScroll
