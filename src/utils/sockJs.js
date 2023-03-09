@@ -17,7 +17,9 @@ export default class SockJs {
       {},
       () => {
         this.stompClient.subscribe(`/topic/chat/room/${roomId}`, data => {
-          this.addMessage(JSON.parse(data.body));
+          const jsonData = JSON.parse(data.body);
+          console.log(jsonData);
+          this.addMessage(jsonData);
         });
       },
       () => {

@@ -42,14 +42,14 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   };
 
   const addMessage = newMessage => {
-    console.log(imgData.current, image);
+    console.log(newMessage);
     setContents(prev => [
       ...prev,
       {
         sender: newMessage.sender,
         message: newMessage.message,
-        createdAt: Date.now(),
-        image: imgData.current,
+        createdAt: newMessage.createdAt,
+        image: newMessage.image,
       },
     ]);
     setImage('');

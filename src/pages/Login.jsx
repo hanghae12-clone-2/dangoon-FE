@@ -5,6 +5,8 @@ import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import Axios from '../api/axios';
 
+import { RiKakaoTalkFill } from 'react-icons/ri';
+
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +21,18 @@ export default function Login() {
         password,
       })
       .then(() => navigate(ROUTER.PATH.MAIN));
+  };
+
+  const handleKakaoLogin = () => {
+    axios
+      .get('/api/kakao-key')
+      .then(
+        response =>
+          (window.location.href =
+            'https://kauth.kakao.com/oauth/authorize?client_id=' +
+            response.data.result +
+            '&redirect_uri=http://13.209.11.12/api/users/kakao/callback&response_type=code')
+      );
   };
 
   return (
@@ -43,6 +57,12 @@ export default function Login() {
         <Link to={ROUTER.PATH.SIGNUP}>
           <Button type='button'>회원 가입</Button>
         </Link>
+        <KakaoBtn>
+          <Button type='button' onClick={handleKakaoLogin}>
+            <RiKakaoTalkFill />
+            Kakao
+          </Button>
+        </KakaoBtn>
       </Form>
     </LoginContainer>
   );
@@ -50,6 +70,7 @@ export default function Login() {
 
 const LoginContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -105,5 +126,23 @@ const Button = styled.button`
 
   &:hover {
     background-color: #ffad6d;
+  }
+`;
+
+const KakaoBtn = styled.div`
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: #f6d900;
+    gap: 0.5rem;
+    :hover {
+      background-color: #ffe83b;
+    }
+
+    svg {
+      font-size: 2rem;
+    }
   }
 `;

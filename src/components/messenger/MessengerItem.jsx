@@ -38,7 +38,7 @@ export default function MessengerItem({
   const setFormatDate = date => {
     return formatAgo(date);
   };
-
+  console.log(contents);
   if (!detailRoom)
     return (
       <ItemContainer>
@@ -67,7 +67,14 @@ export default function MessengerItem({
                 <NickName>{v.sender}</NickName>
               </Content>
               <SpeechBubbleLeft>
-                <MessageLeft>{v.message}</MessageLeft>
+                <MessageLeft>
+                  <Message>
+                    {v.message}
+                    {v.image && (
+                      <ImgLeft regular srcImg={v.image} alt='preview' />
+                    )}
+                  </Message>
+                </MessageLeft>
               </SpeechBubbleLeft>
               <Date>
                 <Text userLocation grey>
@@ -400,4 +407,16 @@ const SrcImg = styled.div`
     color: ${props => props.theme.color.red};
     transform: translate(-1.5rem, 2rem);
   }
+`;
+
+const ImgLeft = styled.div`
+  height: 6rem;
+  width: 6rem;
+  margin: 0;
+  /* padding-bottom: 100%; */
+  border: none !important;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  background-image: url(${props => props.srcImg});
+  background-size: 100% 100%;
 `;
