@@ -173,11 +173,11 @@ const ShowMyMenu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 7rem;
+    width: 8rem;
     height: 1.5rem;
     padding: 1rem;
     border-bottom: 0.25px solid ${props => props.theme.color.messenger};
-
+    font-size: 100%;
     cursor: pointer;
 
     :hover {
@@ -192,5 +192,9 @@ const ShowMyMenu = styled.div`
       border: none;
       border-radius: 0 0 0.5rem 0.5rem;
     }
+  }
+
+  a {
+    font-size: 100%;
   }
 `;

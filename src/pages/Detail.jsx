@@ -99,7 +99,7 @@ export default function Detail() {
             <PostContainer>
               <Post posts={postHot} path={ROUTER.PATH.DETAIL} imgRegular={true}>
                 <ContentContainer>
-                  <Title>당근마켓 인기중고</Title>
+                  <Title>단군마켓 인기중고</Title>
                   <Link to={ROUTER.PATH.HOT_ARTICLES}>
                     <Linkto>더 구경하기</Linkto>
                   </Link>
