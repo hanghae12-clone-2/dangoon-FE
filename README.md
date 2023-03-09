@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+### 당근마켓 클론 코딩 - 단군마켓
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![단군마켓](https://user-images.githubusercontent.com/51226340/223760078-70f65846-8f3d-44fd-899e-947fb61e9d7d.png)
 
-## Available Scripts
 
-In the project directory, you can run:
+## 단군마켓 배포 링크
 
-### `yarn start`
+링크
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 깃허브 레포
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> FE :
+https://github.com/hanghae12-clone-2/front-end.git
+> 
 
-### `yarn test`
+> BE :
+https://github.com/hanghae12-clone-2/dangoon-BE.git
+> 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 프로젝트 기능
 
-### `yarn build`
+### 😊 회원가입  / 소셜 로그인
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 회원가입 후 같은 정보로 로그인을 할 수 있습니다. 
+> 로그인에 성공하여 토큰을 발급 받아야만 모든 페이지를 정상적으로 이용할 수 있습니다.
+> 카카오 로그인을 구현하여 회원가입 없이도 카카오 정보로 바로 로그인 할 수 있습니다.
+> 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ✏️ 판매글 작성
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 단군마켓 회원은 판매하고자 하는 물품에 대한 판매글을 작성할 수 있습니다. 
+> 판매 상품의 상세 정보를 위해 사진을 여러 장 첨부할 수 있고, 상세 설명 및 가격을 입력합니다.
+> 게시된 판매글에는 판매자의 닉네임 및 매너온도가 노출됩니다.
+> 
 
-### `yarn eject`
+### ❤️ 관심 상품 등록
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> 구매 희망자는 게시된 판매글에 대하여 관심 상품을 등록할 수 있습니다.
+> 판매글에 관심 상품으로 등록된 횟수가 노출됩니다.
+> 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 😍 인기 매물
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> 메인 페이지에 관심 상품 횟수 순으로 인기 매물 상위 8개가 노출됩니다.
+> 더보기를 눌러 인기순으로 정렬된 매물을 무한 스크롤로 조회할 수 있습니다.
+> 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🔍 판매글 검색
 
-## Learn More
+> 단군마켓 회원은 희망하는 매물이 있는지 확인하기 위해 상품명 등으로 판매글을 검색할 수 있습니다.
+> 또한, 판매글 종류에 상관 없이 지역명으로 검색하여 지역 내 매물을 확인할 수 있습니다.
+> 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 💬 채팅 기능
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> 구매 희망자는 판매글을 통해 판매자에게 거래를 위한 채팅을 시도할 수 있습니다.
+> 채팅 내역은 휘발되지 않습니다.
+> 이미 채팅을 걸었던 판매글에서 또 다시 채팅을 시도하면,
+> 이전에 개설되어 대화가 진행되었던 채팅창이 반환됩니다.
+> 
 
-### Code Splitting
+### 🌡️ 매너온도
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+> 판매글마다 해당 판매자에게 좋아요 및 싫어요를 등록할 수 있습니다.
+받은 좋아요/싫어요의 개수에 따라 판매자의 매너온도가 갱신됩니다.
+> 
 
-### Analyzing the Bundle Size
+## FE적용 기술
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### ◻ React-Query
 
-### Making a Progressive Web App
+> axios 통신을 관리 하기 위해 사용했습니다.
+> 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### ◻ Router
 
-### Advanced Configuration
+> 컴포넌트 페이지 전환을 위해 사용했습니다.
+> 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### ◻ sockjs-client
 
-### Deployment
+> 백엔드 서버의 stomp와 연동 하기 위해 sockjs를 사용했습니다.
+> 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## BE적용 기술
 
-### `yarn build` fails to minify
+### ◻ Swagger
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 프론트엔드와 정확하고 원활한 소통을 위해 스웨거를 도입하여 적용하였습니다.
+> 
+
+### ◻ Spring Security
+
+> 사용자 인증, 인가 기능 구현을 위해 Spring Security를 사용하였습니다.
+> 
+
+### ◻ ec2 연결
+
+> AWS ec2 서버를 열어 제공하였습니다.
+> 
+
+### ◻ rds db 연결
+
+> 공통적으로 db를 사용 할 수 있게 활용 하였습니다
+> 
+
+## ⚙ Development Environment
+
+`Java 17` `SpringBoot 2.7.9` `Ubuntu 20.04.5 LTS`
+
+## 🚨 Trouble Shooting FE
+
+- 1 실시간 채팅에서 채팅 리스트 클릭 시 읽지 않은 메세지 초기화 되지 않는 문제 (쿼리키를 무효화 해서 해결)
+- 2 채팅에 이미지 업로드 시 파일이 전송되지 않는 문제 파일 용량 트러블 (이미지를 압축후 base64로 인코딩해서 문자열로 서버로 전달)
+
+## 🚨 Trouble Shooting BE
+
+- 1 판매글 수정시 이미지 업로드 과정에서 ConcurrentModificationException 발생
+    엔티티를 직접 수정하지 않고 Repo에서 불러와서 수정함으로써 해결
+- 2 MultipartFile 누락시 IOException 발생
+    예외 발생 부분에서 MultipartFile이 null일 경우 로직을 수행하지 않게 변경
+
+## 🌐 Architecture
+
+## 📋 ERD Diagram
+
+![image](https://user-images.githubusercontent.com/51226340/223760157-6ae8eec8-5ca1-4d70-977b-837ba7994dd7.png)
+
+## 📝 Technologies & Tools (BE) 📝
