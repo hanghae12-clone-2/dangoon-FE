@@ -13,7 +13,6 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   const [image, setImage] = useState('');
   const imgData = useRef();
   const query = useQueryClient();
-  // http://1.227.192.121:8080
 
   useEffect(() => {
     query.invalidateQueries(['rooms']);
@@ -42,7 +41,6 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   };
 
   const addMessage = newMessage => {
-    console.log(newMessage);
     setContents(prev => [
       ...prev,
       {
@@ -75,8 +73,6 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   };
 
   const actionImgCompress = async fileSrc => {
-    console.log('압축 시작');
-
     const options = {
       maxSizeMB: 0.04,
       maxWidthOrHeight: 840,
@@ -87,7 +83,6 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
     await encodeFileToBase64(compressedFile).then(data => {
       imgData.current = data;
       setImage();
-      console.log('압축끝');
     });
   };
 
@@ -95,7 +90,6 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
     imgData.current = '';
     setImage(null);
   };
-  // console.log(image);
   return (
     <ChatWrapper>
       <MessengerItem

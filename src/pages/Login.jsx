@@ -23,18 +23,6 @@ export default function Login() {
       .then(() => navigate(ROUTER.PATH.MAIN));
   };
 
-  const handleKakaoLogin = () => {
-    axios
-      .get('/api/kakao-key')
-      .then(
-        response =>
-          (window.location.href =
-            'https://kauth.kakao.com/oauth/authorize?client_id=' +
-            response.data.result +
-            '&redirect_uri=http://13.209.11.12/api/users/kakao/callback&response_type=code')
-      );
-  };
-
   return (
     <LoginContainer>
       <Form onSubmit={onSubmit}>
@@ -57,12 +45,6 @@ export default function Login() {
         <Link to={ROUTER.PATH.SIGNUP}>
           <Button type='button'>회원 가입</Button>
         </Link>
-        {/* <KakaoBtn>
-          <Button type='button' onClick={handleKakaoLogin}>
-            <RiKakaoTalkFill />
-            Kakao
-          </Button>
-        </KakaoBtn> */}
       </Form>
     </LoginContainer>
   );

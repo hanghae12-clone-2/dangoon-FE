@@ -1,9 +1,9 @@
 import styled, { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import GlobalStyle from './styles/globalStyle';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { removeCookie } from './utils/cookie';
 import QUERY from './constants/query';
 import Storage from './utils/localStorage';

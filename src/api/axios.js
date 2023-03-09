@@ -12,7 +12,6 @@ export default class Axios {
 
     this.instance.interceptors.response.use(
       response => {
-        console.log(response);
         const token = response.headers.authorization;
 
         if (token) {
@@ -22,12 +21,10 @@ export default class Axios {
           const userName = jwt_decode(parseToken);
           Storage.setUserName(userName.sub);
         }
-        console.log(getCookie(QUERY.COOKIE.COOKIE_NAME));
         return response;
       },
       error => {
         alert(error.response.data.result);
-        console.log(error);
         return Promise.reject(error);
       }
     );

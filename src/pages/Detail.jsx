@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../api/axios';
@@ -13,7 +12,6 @@ import PostDetailImg from '../components/PostDetailImg';
 import QUERY from '../constants/query';
 import ROUTER from '../constants/router';
 import useGetQuery from '../hooks/useGetQuery';
-import { setMessenger } from '../redux/modules/messenger';
 import Storage from '../utils/localStorage';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);

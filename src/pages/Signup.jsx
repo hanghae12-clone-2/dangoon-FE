@@ -115,6 +115,6 @@ const Button = styled.button`
   border-radius: 8px;
 
   &:hover {
-    background-color: #ffad6d; /* 호버시 배경색 변경 */
+    background-color: #ffad6d;
   }
 `;

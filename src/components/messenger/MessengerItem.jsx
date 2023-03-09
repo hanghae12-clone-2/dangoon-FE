@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Text from '../../elements/Text';
 import Input from '../../elements/Input';
@@ -38,7 +38,6 @@ export default function MessengerItem({
   const setFormatDate = date => {
     return formatAgo(date);
   };
-  console.log(contents);
   if (!detailRoom)
     return (
       <ItemContainer>

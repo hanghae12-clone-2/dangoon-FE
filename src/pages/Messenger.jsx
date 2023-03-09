@@ -60,7 +60,6 @@ export default function Messenger() {
     }
   );
 
-  // todo 클릭할때 roomId에러 해결하기
   const handleChatRoom = roomId => {
     setRoomId(roomId);
   };

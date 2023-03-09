@@ -19,6 +19,7 @@ import Search from './pages/Search';
 import Write from './pages/Write';
 import MyPost from './pages/MyPost';
 import Edit from './pages/Edit';
+import ImgZoom from './pages/ImgZoom';
 
 const queryClient = new QueryClient();
 
@@ -67,18 +68,20 @@ const router = createBrowserRouter([
         path: `${ROUTER.PATH.EDIT}/:postId`,
         element: <Edit />,
       },
+      {
+        path: `${ROUTER.PATH.IMG}/:imgUrl`,
+        element: <ImgZoom />,
+      },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   </Provider>
-  // </React.StrictMode>
 );

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Img from '../../elements/Img';
 import Text from '../../elements/Text';
 
 import { FaUserCircle } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
-import useGetQuery from '../../hooks/useGetQuery';
 
 export default function MessengerList({ rooms, userName, onChatRoom }) {
   return (
