@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom';
 import Storage from '../utils/localStorage';
 import ChatContainer from '../components/chat/ChatContainer';
 import { useQueryClient } from '@tanstack/react-query';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
 
@@ -65,8 +67,8 @@ export default function Messenger() {
 
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
+      {isLoading && <Loading />}
+      {isError && <Error />}
       {rooms && (
         <MessengerWrapper>
           <NavbarContainer>

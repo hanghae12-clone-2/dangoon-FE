@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import QUERY from '../constants/query';
@@ -11,9 +11,8 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const t = useLocation();
   const axios = new Axios(QUERY.AXIOS_PATH.SEVER);
-  console.log(t);
+
   const onSubmit = async e => {
     e.preventDefault();
     await axios

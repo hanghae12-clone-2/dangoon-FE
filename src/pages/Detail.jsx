@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../api/axios';
+import Error from '../components/Error';
 import Footer from '../components/Footer';
+import Loading from '../components/Loading';
 import Post from '../components/post/Post';
 import PostDetailContent from '../components/PostDetailContent';
 import PostDetailImg from '../components/PostDetailImg';
@@ -80,8 +82,8 @@ export default function Detail() {
 
   return (
     <>
-      {isLoading && isHotLoding && <p>로딩중</p>}
-      {isError && isHotError && <p>에러</p>}
+      {isLoading && isHotLoding && <Loading />}
+      {isError && isHotError && <Error />}
       {postDetail && postHot && (
         <DetailWrapper>
           <DetailContainer ref={scrollRef}>

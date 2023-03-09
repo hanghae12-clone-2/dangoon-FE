@@ -5,6 +5,8 @@ import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import ROUTER from '../constants/router';
 import Post from './post/Post';
+import Loading from './Loading';
+import Error from './Error';
 
 export default function MainPost() {
   const {
@@ -20,8 +22,8 @@ export default function MainPost() {
 
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
+      {isLoading && <Loading />}
+      {isError && <Error />}
       {posts && (
         <PostWrapper>
           <Post posts={posts} path={ROUTER.PATH.DETAIL}>

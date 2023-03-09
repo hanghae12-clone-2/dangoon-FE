@@ -4,6 +4,8 @@ import QUERY from '../constants/query';
 import useGetQuery from '../hooks/useGetQuery';
 import Post from '../components/post/Post';
 import ROUTER from '../constants/router';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 export default function MyPost() {
   const {
@@ -19,8 +21,8 @@ export default function MyPost() {
 
   return (
     <>
-      {isLoading && <p>로딩중</p>}
-      {isError && <p>에러</p>}
+      {isLoading && <Loading />}
+      {isError && <Error />}
       {posts && (
         <MyPostWrapper>
           <MyPostContainer>
