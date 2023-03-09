@@ -57,12 +57,12 @@ export default function Login() {
         <Link to={ROUTER.PATH.SIGNUP}>
           <Button type='button'>회원 가입</Button>
         </Link>
-        <KakaoBtn>
+        {/* <KakaoBtn>
           <Button type='button' onClick={handleKakaoLogin}>
             <RiKakaoTalkFill />
             Kakao
           </Button>
-        </KakaoBtn>
+        </KakaoBtn> */}
       </Form>
     </LoginContainer>
   );

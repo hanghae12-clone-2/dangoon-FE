@@ -85,7 +85,7 @@ export default function PostDetailContent({
           </Text>
         </Date>
         <Text regular>{price}원</Text>
-        <Text userContent>{content}</Text>
+        <Pre>{content}</Pre>
         <LikeAndChat>
           <Text grey>{`관심 ${wishCount} · 채팅${chatCount}`}</Text>
           <UserTouch>
@@ -248,4 +248,10 @@ const LikeBtn = styled.div`
             background-color: #e74133;
           `}
   }
+`;
+
+const Pre = styled.pre`
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
 `;

@@ -114,8 +114,8 @@ export default function WritePost({ children, axiosFn, detail }) {
           </FormTitle>
           <FormButton type='submit'>완료 </FormButton>
         </FormHeader>
-        <LableBorder preview={preview ? true : false}>
-          {preview &&
+        <LableBorder preview={preview.length !== 0 ? true : false}>
+          {preview.length !== 0 &&
             preview.map((url, index) => (
               <ImgConatiner key={uuidv4()}>
                 <Delete onClick={() => handleDeleteImg(index)}>
