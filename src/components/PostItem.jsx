@@ -16,7 +16,7 @@ export default function PostItem({
       )}
       <Content>
         <Text bold>{title}</Text>
-        <Text bold>{price}</Text>
+        <Text bold>{price}원</Text>
         <Text>{location}</Text>
         <Text gery>{`관심${wishCount} ∙ 채팅${chatCount}`}</Text>
       </Content>
