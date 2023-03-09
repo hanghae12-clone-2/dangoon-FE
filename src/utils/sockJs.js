@@ -1,13 +1,15 @@
 import Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { useCallback } from 'react';
 
 // let sockJS = new SockJS('http://13.209.11.12/ws/chat/');
 // let stompClient = Stomp.over(sockJS);
 
 export default class SockJs {
-  constructor(url) {
+  constructor(url, addMessage) {
     this.sockJS = new SockJS(url);
     this.stompClient = Stomp.over(this.sockJS);
+    this.addMessage = addMessage;
   }
 
   async connect(roomId, addMessage) {
@@ -15,8 +17,7 @@ export default class SockJs {
       {},
       () => {
         this.stompClient.subscribe(`/topic/chat/room/${roomId}`, data => {
-          const newMessage = JSON.parse(data.body);
-          addMessage(newMessage);
+          this.addMessage(JSON.parse(data.body));
         });
       },
       () => {
@@ -28,12 +29,15 @@ export default class SockJs {
     );
   }
 
+  async unsubscribe(id) {
+    this.stompClient.unsubscribe(id);
+  }
+
   async disconnect() {
     this.stompClient.disconnect();
   }
 
   send(roomId, sender, message, image) {
-    console.log(roomId, sender, message);
     this.stompClient.send(
       '/app/chat/message',
       {},

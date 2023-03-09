@@ -3,6 +3,7 @@ import imageCompression from 'browser-image-compression';
 import SockJs from '../../utils/sockJs';
 import styled from 'styled-components';
 import MessengerItem from '../messenger/MessengerItem';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function ChatContainer({ roomId, userName, detailRoom }) {
   const sockJs = useRef(null);
@@ -11,29 +12,37 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
   const imgData = useRef();
+  const query = useQueryClient();
+  // http://1.227.192.121:8080
 
   useEffect(() => {
-    sockJs.current = new SockJs('http://1.227.192.121:8080/ws/chat/');
+    query.invalidateQueries(['rooms']);
+  }, [contents, contentCnt]);
+
+  useEffect(() => {
+    sockJs.current = new SockJs('http://13.209.11.12/ws/chat/', message =>
+      addMessage(message)
+    );
     sockJs.current.connect(roomId);
     setContents([...detailRoom.data.result.messageDtoList]);
 
     return () => {
       sockJs.current.disconnect();
     };
-  }, [detailRoom.data.result.messageDtoList, roomId]);
+  }, [roomId]);
 
   useEffect(() => {
-    sockJs.current.connect(roomId, addMessage);
-  }, [contentCnt]);
+    sockJs.current.connect(roomId);
+  }, [contentCnt, roomId]);
 
   const handleEnter = () => {
-    sockJs.current.send(roomId, userName, message, image);
+    sockJs.current.send(roomId, userName, message, imgData.current);
     setMessage('');
     setContentCnt(state => state + 1);
   };
 
   const addMessage = newMessage => {
-    console.log(imgData.current);
+    console.log(imgData.current, image);
     setContents(prev => [
       ...prev,
       {
@@ -47,12 +56,13 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   const handleImageChange = e => {
     const file = e.target.files[0];
     actionImgCompress(file);
+    e.target.value = '';
   };
 
   const encodeFileToBase64 = image => {
@@ -76,10 +86,16 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
     const compressedFile = await imageCompression(fileSrc, options);
     await encodeFileToBase64(compressedFile).then(data => {
       imgData.current = data;
-      setImage(data);
+      setImage();
+      console.log('압축끝');
     });
   };
 
+  const handleImageDelete = () => {
+    imgData.current = '';
+    setImage(null);
+  };
+  // console.log(image);
   return (
     <ChatWrapper>
       <MessengerItem
@@ -91,7 +107,8 @@ export default function ChatContainer({ roomId, userName, detailRoom }) {
         handleEnter={handleEnter}
         onSubmit={handleSubmit}
         onImageChange={handleImageChange}
-        srcImg={image}
+        onImgDelete={handleImageDelete}
+        srcImg={imgData.current}
       />
     </ChatWrapper>
   );

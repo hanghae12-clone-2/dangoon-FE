@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FaUserCircle } from 'react-icons/fa';
 import { AiFillPicture } from 'react-icons/ai';
 import { BiTimeFive } from 'react-icons/bi';
+import { RiDeleteBack2Fill } from 'react-icons/ri';
 import { IoChatbubblesSharp } from 'react-icons/io5';
 
 import Button from '../../elements/Button';
@@ -21,6 +22,7 @@ export default function MessengerItem({
   handleEnter,
   onSubmit,
   onImageChange,
+  onImgDelete,
   srcImg,
 }) {
   const scrollRef = useRef();
@@ -36,7 +38,6 @@ export default function MessengerItem({
   const setFormatDate = date => {
     return formatAgo(date);
   };
-  console.log(contents);
 
   if (!detailRoom)
     return (
@@ -107,7 +108,12 @@ export default function MessengerItem({
           value={message}
           onChange={e => setMessage(e.target.value)}
         />
-        {srcImg && <Img regular srcImg={srcImg} alt='preview' />}
+        {srcImg && (
+          <SrcImg>
+            <Img regular srcImg={srcImg} alt='preview' />
+            <RiDeleteBack2Fill onClick={onImgDelete} />
+          </SrcImg>
+        )}
         <UnderBar>
           <Form onSubmit={onSubmit} encType='multipart/form-data'>
             <Label htmlFor='file-upload'>
@@ -385,4 +391,13 @@ const ImgRight = styled.div`
   object-fit: cover;
   background-image: url(${props => props.srcImg});
   background-size: 100% 100%;
+`;
+
+const SrcImg = styled.div`
+  svg {
+    position: absolute;
+    top: 0;
+    color: ${props => props.theme.color.red};
+    transform: translate(-1.5rem, 2rem);
+  }
 `;
